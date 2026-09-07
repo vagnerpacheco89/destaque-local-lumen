@@ -208,7 +208,8 @@
       color: #425c51 !important;
       font-size: 12.5px !important;
       font-weight: 750 !important;
-      letter-spacing: -.01em;
+      letter-spacing: .045em;
+      text-transform: uppercase;
       transition: color .18s ease, padding .22s ease;
     }
 
@@ -338,6 +339,9 @@
       color: #315548;
       border-bottom-color: rgba(16,61,44,.10) !important;
       font-size: 13px;
+      font-weight: 750;
+      letter-spacing: .045em;
+      text-transform: uppercase;
     }
 
     .menu-toggle {
