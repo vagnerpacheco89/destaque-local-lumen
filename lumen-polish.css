@@ -104,7 +104,7 @@ body {
 }
 
 /* Use the higher-definition source derived from the original supplied asset.
-   The old VOLT webp was only ~20 KB and was being visibly enlarged. */
+   The previous VOLT webp was only ~20 KB and was being visibly enlarged. */
 .hero-card::before {
   content: "";
   position: absolute;
@@ -112,7 +112,7 @@ body {
   z-index: 0;
   pointer-events: none;
   border-radius: inherit;
-  background-image: url("./assets/hero-rafael-hd.webp");
+  background-image: url("./assets/hero-rafael-hd-v2.webp");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 58% center;
