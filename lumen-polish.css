@@ -682,3 +682,106 @@ body {
     font-size: 10px;
   }
 }
+
+/* TYPOGRAPHY SYSTEM — standard scale for readability and consistency. */
+body {
+  font-size: 16px;
+}
+
+.eyebrow,
+.hero-contact__kicker {
+  font-size: 11px;
+}
+
+.btn,
+.text-link,
+.work-panel__link {
+  font-size: 13px;
+}
+
+.section-lead,
+.hero-card__lead,
+.services-copy > p:not(.eyebrow),
+.diagnostic-card__head > p,
+.quality-head > p,
+.process-copy > p:not(.eyebrow),
+.about-panel__copy p:not(.eyebrow),
+.reviews-copy > p:not(.eyebrow),
+.area-card__intro > p:last-child,
+.final-cta__content p:not(.eyebrow),
+.demo-dialog p {
+  font-size: 16px;
+}
+
+.service-links p,
+.quality-grid p,
+.process-board p,
+.work-card p,
+.reviews-mini p,
+.area-cities p,
+.faq-list details p,
+.diagnostic-card__action p {
+  font-size: 14px;
+}
+
+.trust-strip strong,
+.diagnostic-features strong,
+.about-metrics strong,
+.review-featured footer strong,
+.reviews-mini footer strong {
+  font-size: 13px;
+}
+
+.hero-proof span,
+.trust-strip small,
+.diagnostic-features small,
+.about-metrics span,
+.review-featured footer span,
+.reviews-mini footer span,
+.footer-grid > div > p,
+.footer-grid a,
+.rating-card span,
+.rating-card small {
+  font-size: 12px;
+}
+
+.service-links span,
+.diagnostic-features span,
+.work-card span,
+.process-board span,
+.area-cities span,
+.about-panel__badge small,
+.footer-bottom,
+.footer-grid h2,
+.nav-demo-tag,
+.services-media figcaption,
+.demo-dialog__badge {
+  font-size: 11px;
+}
+
+@media (max-width: 680px) {
+  .hero-card__lead,
+  .section-lead,
+  .services-copy > p:not(.eyebrow),
+  .diagnostic-card__head > p,
+  .quality-head > p,
+  .process-copy > p:not(.eyebrow),
+  .about-panel__copy p:not(.eyebrow),
+  .reviews-copy > p:not(.eyebrow),
+  .area-card__intro > p:last-child,
+  .final-cta__content p:not(.eyebrow) {
+    font-size: 16px;
+  }
+
+  .hero-proof span {
+    font-size: 12px;
+  }
+
+  .hero-contact__kicker {
+    font-size: 11px;
+  }
+
+  .hero-contact .text-link {
+    font-size: 13px;
+  }
+}
