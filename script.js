@@ -24,9 +24,15 @@
       display: none !important;
     }
 
+    .hero-contact__kicker {
+      width: 100%;
+      text-align: center;
+    }
+
     .hero-contact strong {
-      max-width: 306px !important;
-      margin-bottom: 14px !important;
+      max-width: 100% !important;
+      margin: 0 auto 14px !important;
+      text-align: center;
       white-space: nowrap;
     }
 
@@ -42,7 +48,7 @@
       }
 
       .hero-contact strong {
-        max-width: 286px !important;
+        max-width: 100% !important;
       }
     }
 
@@ -56,6 +62,7 @@
 
       .hero-contact strong {
         max-width: none !important;
+        text-align: center;
         white-space: normal;
       }
 
