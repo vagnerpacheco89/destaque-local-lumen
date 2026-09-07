@@ -45,6 +45,7 @@
   const interfacePolish = document.createElement('style');
   interfacePolish.textContent = `
     .hero {
+      padding-top: 10px !important;
       padding-bottom: 54px !important;
     }
 
@@ -126,7 +127,7 @@
     /* Navigation — premium floating light bar aligned with the hero container. */
     .site-header {
       top: 0 !important;
-      padding: 10px 0 8px !important;
+      padding: 10px 0 0 !important;
       background: transparent !important;
       border-bottom: 0 !important;
       backdrop-filter: none !important;
