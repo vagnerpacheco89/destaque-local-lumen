@@ -103,20 +103,36 @@ body {
   box-shadow: 0 20px 50px rgba(18, 91, 64, .12);
 }
 
+/* Use the higher-definition source derived from the original supplied asset.
+   The old VOLT webp was only ~20 KB and was being visibly enlarged. */
+.hero-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background-image: url("./assets/hero-rafael-hd.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 58% center;
+}
+
 .hero-card__image,
 .hero-card__shade {
   border-radius: inherit;
 }
 
 .hero-card__image {
-  object-position: 58% center;
-  filter: saturate(1.10) contrast(1.04) brightness(1.025);
+  opacity: 0;
+  filter: none;
 }
 
 .hero-card__shade {
+  z-index: 1;
   background:
-    linear-gradient(90deg, rgba(7, 68, 45, .86) 0%, rgba(7, 68, 45, .68) 37%, rgba(7, 68, 45, .20) 70%, rgba(7, 68, 45, .025) 100%),
-    linear-gradient(0deg, rgba(7, 49, 34, .08), transparent 58%);
+    linear-gradient(90deg, rgba(7, 68, 45, .78) 0%, rgba(7, 68, 45, .52) 37%, rgba(7, 68, 45, .11) 70%, rgba(7, 68, 45, 0) 100%),
+    linear-gradient(0deg, rgba(7, 49, 34, .035), transparent 58%);
 }
 
 .hero-card__content {
@@ -277,6 +293,10 @@ body {
     min-height: 600px;
   }
 
+  .hero-card::before {
+    background-position: calc(50% + 80px) center;
+  }
+
   .hero-card__content {
     max-width: 620px;
     padding-right: 42px;
@@ -320,15 +340,14 @@ body {
     border-radius: 22px;
   }
 
-  .hero-card__image {
-    object-position: 62% center;
-    filter: saturate(1.08) contrast(1.035) brightness(1.02);
+  .hero-card::before {
+    background-position: 58% center;
   }
 
   .hero-card__shade {
     background:
-      linear-gradient(180deg, rgba(7, 66, 45, .86) 0%, rgba(7, 66, 45, .68) 46%, rgba(7, 66, 45, .25) 100%),
-      linear-gradient(90deg, rgba(7, 66, 45, .10), transparent 76%);
+      linear-gradient(180deg, rgba(7, 66, 45, .76) 0%, rgba(7, 66, 45, .56) 46%, rgba(7, 66, 45, .18) 100%),
+      linear-gradient(90deg, rgba(7, 66, 45, .08), transparent 76%);
   }
 
   .hero-card__content {
@@ -386,70 +405,15 @@ body {
   }
 }
 
-/* HERO PHOTO — brighter, clearer and shifted so Rafael sits farther to the right. */
-@media (min-width: 981px) {
-  .hero-card__image {
-    object-position: 18% center;
-    filter: saturate(1.18) contrast(1.08) brightness(1.08);
-  }
-
-  .hero-card__shade {
-    background:
-      linear-gradient(90deg, rgba(7, 66, 45, .80) 0%, rgba(7, 66, 45, .58) 35%, rgba(7, 66, 45, .15) 69%, rgba(7, 66, 45, .018) 100%),
-      linear-gradient(0deg, rgba(7, 49, 34, .05), transparent 62%);
-  }
-}
-
-@media (min-width: 681px) and (max-width: 980px) {
-  .hero-card__image {
-    object-position: 32% center;
-    filter: saturate(1.16) contrast(1.07) brightness(1.07);
-  }
-
-  .hero-card__shade {
-    background:
-      linear-gradient(90deg, rgba(7, 66, 45, .82) 0%, rgba(7, 66, 45, .61) 39%, rgba(7, 66, 45, .19) 72%, rgba(7, 66, 45, .025) 100%),
-      linear-gradient(0deg, rgba(7, 49, 34, .05), transparent 62%);
-  }
-}
-
-@media (max-width: 680px) {
-  .hero-card__image {
-    object-position: 58% center;
-    filter: saturate(1.14) contrast(1.06) brightness(1.06);
-  }
-
-  .hero-card__shade {
-    background:
-      linear-gradient(180deg, rgba(7, 66, 45, .80) 0%, rgba(7, 66, 45, .61) 46%, rgba(7, 66, 45, .23) 100%),
-      linear-gradient(90deg, rgba(7, 66, 45, .12), transparent 76%);
-  }
-}
-
-/* HERO PHOTO FRAMING FIX — object-position could not move the subject horizontally
-   because the 3:2 source image is already width-fitted inside the very wide hero.
-   On desktop we therefore paint the same photo as a clipped background and apply
-   a real horizontal offset, preserving scale and proportions. */
+/* Keep Rafael in the approved right-side desktop position, now with the HD source. */
 @media (min-width: 981px) {
   .hero-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    border-radius: inherit;
-    background-image: url("https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-01-hero-quadro.webp");
-    background-repeat: no-repeat;
-    background-size: cover;
     background-position: calc(50% + 185px) center;
-    filter: saturate(1.18) contrast(1.08) brightness(1.08);
-  }
-
-  .hero-card__image {
-    opacity: 0;
   }
 
   .hero-card__shade {
-    z-index: 1;
+    background:
+      linear-gradient(90deg, rgba(7, 66, 45, .76) 0%, rgba(7, 66, 45, .48) 35%, rgba(7, 66, 45, .09) 69%, rgba(7, 66, 45, 0) 100%),
+      linear-gradient(0deg, rgba(7, 49, 34, .025), transparent 62%);
   }
 }
