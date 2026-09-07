@@ -127,17 +127,8 @@ body {
 .hero-card__shade {
   z-index: 1;
   background:
-    radial-gradient(900px 420px at 20% 78%, rgba(255, 210, 63, .10) 0%, rgba(255, 210, 63, .04) 28%, rgba(255, 210, 63, 0) 58%),
-    linear-gradient(90deg,
-      rgba(4, 46, 31, .90) 0%,
-      rgba(5, 58, 39, .84) 18%,
-      rgba(8, 73, 50, .68) 36%,
-      rgba(8, 73, 50, .40) 52%,
-      rgba(8, 73, 50, .16) 66%,
-      rgba(8, 73, 50, .04) 76%,
-      rgba(8, 73, 50, 0) 84%
-    ),
-    linear-gradient(180deg, rgba(6, 38, 27, .12) 0%, rgba(6, 38, 27, .04) 42%, rgba(6, 38, 27, .16) 100%);
+    linear-gradient(90deg, rgba(7, 68, 45, .72) 0%, rgba(7, 68, 45, .40) 36%, rgba(7, 68, 45, .05) 68%, rgba(7, 68, 45, 0) 100%),
+    linear-gradient(0deg, rgba(7, 49, 34, .015), transparent 58%);
 }
 
 .hero-card__content {
@@ -354,14 +345,8 @@ body {
 
   .hero-card__shade {
     background:
-      radial-gradient(520px 280px at 24% 82%, rgba(255, 210, 63, .08) 0%, rgba(255, 210, 63, .03) 30%, rgba(255, 210, 63, 0) 58%),
-      linear-gradient(180deg,
-        rgba(5, 52, 35, .82) 0%,
-        rgba(6, 58, 39, .62) 34%,
-        rgba(6, 58, 39, .34) 58%,
-        rgba(6, 58, 39, .12) 100%
-      ),
-      linear-gradient(90deg, rgba(6, 58, 39, .10), transparent 76%);
+      linear-gradient(180deg, rgba(7, 66, 45, .68) 0%, rgba(7, 66, 45, .44) 46%, rgba(7, 66, 45, .12) 100%),
+      linear-gradient(90deg, rgba(7, 66, 45, .05), transparent 76%);
   }
 
   .hero-card__content {
@@ -426,16 +411,7 @@ body {
 
   .hero-card__shade {
     background:
-      radial-gradient(980px 460px at 18% 78%, rgba(255, 210, 63, .11) 0%, rgba(255, 210, 63, .04) 26%, rgba(255, 210, 63, 0) 56%),
-      linear-gradient(90deg,
-        rgba(4, 44, 30, .92) 0%,
-        rgba(5, 56, 38, .86) 18%,
-        rgba(7, 70, 48, .70) 34%,
-        rgba(7, 70, 48, .44) 50%,
-        rgba(7, 70, 48, .18) 64%,
-        rgba(7, 70, 48, .05) 75%,
-        rgba(7, 70, 48, 0) 83%
-      ),
-      linear-gradient(180deg, rgba(5, 38, 27, .10) 0%, rgba(5, 38, 27, .03) 48%, rgba(5, 38, 27, .14) 100%);
+      linear-gradient(90deg, rgba(5, 55, 37, .90) 0%, rgba(5, 55, 37, .86) 22%, rgba(5, 55, 37, .76) 48%, rgba(5, 55, 37, .30) 62%, rgba(5, 55, 37, .05) 72%, rgba(5, 55, 37, 0) 100%),
+      linear-gradient(0deg, rgba(7, 49, 34, .012), transparent 62%);
   }
 }
