@@ -1,6 +1,70 @@
 /* LUMEN — polishing layer
    Active development only. Consolidate into styles.css when the template is frozen. */
 
+/* COLOR SYSTEM — fresher, clearer and more saturated without turning LUMEN into VOLT. */
+:root {
+  --bg: #f7f2e8;
+  --surface: #fffef9;
+  --soft: #eef4ef;
+  --soft-2: #e8f0ea;
+  --text: #103d2c;
+  --muted: #607169;
+  --line: #d7e0d9;
+  --green: #176b4b;
+  --green-deep: #0c4934;
+  --green-soft: #e2f0e7;
+  --yellow: #ffd23f;
+  --yellow-2: #ffc72b;
+  --shadow: 0 18px 42px rgba(18, 91, 64, .10);
+}
+
+body {
+  background: var(--bg);
+}
+
+.site-header {
+  background: rgba(249, 246, 237, .985);
+  backdrop-filter: none;
+  border-bottom-color: rgba(23, 107, 75, .10);
+}
+
+.brand__mark {
+  background: var(--green);
+  box-shadow: inset 0 0 0 4px rgba(255, 210, 63, .24);
+}
+
+.desktop-nav a {
+  color: #4c6259;
+}
+
+.btn--yellow {
+  background: var(--yellow);
+  color: #103d2c;
+  box-shadow: 0 11px 24px rgba(255, 196, 30, .22);
+}
+
+.btn--yellow:hover {
+  background: var(--yellow-2);
+}
+
+.btn--green {
+  background: var(--green);
+}
+
+.eyebrow--light {
+  color: #ffd94f;
+}
+
+.services-section,
+.quality-section,
+.about-wrap {
+  background: #fffdf8;
+}
+
+.process-section {
+  background: #edf3ee;
+}
+
 /* HEADER — keep the demo disclosure visible without a separate utility bar. */
 .nav {
   gap: 16px;
@@ -12,10 +76,11 @@
   justify-content: center;
   min-height: 27px;
   padding: 0 10px;
-  border: 1px solid rgba(28, 91, 67, .13);
+  border: 1px solid rgba(12, 73, 52, .16);
   border-radius: 8px;
-  background: #f6d65d;
+  background: var(--yellow);
   color: var(--green-deep);
+  box-shadow: 0 6px 14px rgba(255, 199, 43, .13);
   font-size: 8px;
   font-weight: 800;
   letter-spacing: .09em;
@@ -34,7 +99,8 @@
   min-height: 566px;
   overflow: visible;
   border-radius: 28px;
-  box-shadow: 0 20px 50px rgba(20, 65, 48, .09);
+  background: var(--green-deep);
+  box-shadow: 0 20px 50px rgba(18, 91, 64, .12);
 }
 
 .hero-card__image,
@@ -44,12 +110,13 @@
 
 .hero-card__image {
   object-position: 58% center;
+  filter: saturate(1.10) contrast(1.04) brightness(1.025);
 }
 
 .hero-card__shade {
   background:
-    linear-gradient(90deg, rgba(12, 48, 35, .91) 0%, rgba(12, 48, 35, .76) 38%, rgba(12, 48, 35, .23) 72%, rgba(12, 48, 35, .05) 100%),
-    linear-gradient(0deg, rgba(8, 35, 25, .14), transparent 56%);
+    linear-gradient(90deg, rgba(7, 68, 45, .86) 0%, rgba(7, 68, 45, .68) 37%, rgba(7, 68, 45, .20) 70%, rgba(7, 68, 45, .025) 100%),
+    linear-gradient(0deg, rgba(7, 49, 34, .08), transparent 58%);
 }
 
 .hero-card__content {
@@ -72,7 +139,7 @@
 .hero-card__lead {
   max-width: 545px;
   margin-bottom: 0;
-  color: rgba(255, 255, 255, .80);
+  color: rgba(255, 255, 255, .88);
   font-size: 15.5px;
   line-height: 1.66;
 }
@@ -88,12 +155,12 @@
 }
 
 .hero-card__actions .btn--yellow {
-  box-shadow: 0 10px 22px rgba(243, 207, 86, .17);
+  box-shadow: 0 12px 26px rgba(255, 199, 43, .27);
 }
 
 .hero-card__actions .btn--glass {
-  background: rgba(255, 255, 255, .085);
-  border-color: rgba(255, 255, 255, .25);
+  background: rgba(255, 255, 255, .12);
+  border-color: rgba(255, 255, 255, .34);
 }
 
 .hero-proof {
@@ -103,7 +170,7 @@
 
 .hero-proof span {
   padding-left: 13px;
-  color: rgba(255, 255, 255, .72);
+  color: rgba(255, 255, 255, .82);
   font-size: 10.5px;
   font-weight: 650;
 }
@@ -112,7 +179,8 @@
   top: .56em;
   width: 5px;
   height: 5px;
-  background: #f6d65d;
+  background: var(--yellow);
+  box-shadow: 0 0 0 3px rgba(255, 210, 63, .08);
 }
 
 .hero-contact {
@@ -121,7 +189,8 @@
   width: 302px;
   padding: 22px 24px 21px;
   border-radius: 16px;
-  box-shadow: 0 18px 42px rgba(17, 52, 39, .18);
+  background: var(--yellow);
+  box-shadow: 0 18px 42px rgba(14, 75, 53, .20), 0 8px 18px rgba(255, 199, 43, .12);
 }
 
 .hero-contact__kicker {
@@ -149,13 +218,13 @@
   border: 0;
   border-radius: 14px;
   background: var(--surface);
-  box-shadow: 0 10px 30px rgba(20, 65, 48, .045);
+  box-shadow: 0 10px 30px rgba(18, 91, 64, .06);
 }
 
 .trust-strip article {
   min-height: 94px;
   padding: 19px 21px;
-  border-right-color: rgba(28, 91, 67, .10);
+  border-right-color: rgba(23, 107, 75, .11);
   align-items: center;
 }
 
@@ -163,9 +232,10 @@
   width: 30px;
   height: 30px;
   flex-basis: 30px;
-  border: 1px solid rgba(28, 91, 67, .14);
+  border: 1px solid rgba(23, 107, 75, .15);
   border-radius: 9px;
-  background: #f5f8f4;
+  background: var(--green-soft);
+  color: var(--green);
   font-size: 11px;
 }
 
@@ -178,6 +248,24 @@
   max-width: 260px;
   font-size: 10.5px;
   line-height: 1.5;
+}
+
+/* Carry the brighter palette through the large contrast sections. */
+.work-panel,
+.about-panel,
+.area-card,
+.site-footer {
+  background: var(--green);
+}
+
+.work-card {
+  background: var(--green-deep);
+}
+
+.quality-icon,
+.services-media::after,
+.rating-card {
+  background: var(--yellow);
 }
 
 @media (max-width: 980px) {
@@ -234,12 +322,13 @@
 
   .hero-card__image {
     object-position: 62% center;
+    filter: saturate(1.08) contrast(1.035) brightness(1.02);
   }
 
   .hero-card__shade {
     background:
-      linear-gradient(180deg, rgba(10, 43, 31, .91) 0%, rgba(10, 43, 31, .78) 47%, rgba(10, 43, 31, .32) 100%),
-      linear-gradient(90deg, rgba(10, 43, 31, .18), transparent 75%);
+      linear-gradient(180deg, rgba(7, 66, 45, .86) 0%, rgba(7, 66, 45, .68) 46%, rgba(7, 66, 45, .25) 100%),
+      linear-gradient(90deg, rgba(7, 66, 45, .10), transparent 76%);
   }
 
   .hero-card__content {
