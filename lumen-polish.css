@@ -386,10 +386,10 @@ body {
   }
 }
 
-/* HERO PHOTO — brighter, clearer and shifted so Rafael sits farther to the right. */
+/* HERO PHOTO — keep the brighter treatment and move Rafael farther right, closer to VOLT framing. */
 @media (min-width: 981px) {
   .hero-card__image {
-    object-position: 48% center;
+    object-position: 36% center;
     filter: saturate(1.18) contrast(1.08) brightness(1.08);
   }
 
@@ -402,7 +402,7 @@ body {
 
 @media (min-width: 681px) and (max-width: 980px) {
   .hero-card__image {
-    object-position: 52% center;
+    object-position: 42% center;
     filter: saturate(1.16) contrast(1.07) brightness(1.07);
   }
 
@@ -415,7 +415,7 @@ body {
 
 @media (max-width: 680px) {
   .hero-card__image {
-    object-position: 58% center;
+    object-position: 55% center;
     filter: saturate(1.14) contrast(1.06) brightness(1.06);
   }
 
