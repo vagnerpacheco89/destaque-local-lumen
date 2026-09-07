@@ -1,32 +1,25 @@
-# destaque-local-lumen
+# LUMEN — Destaque Local | SITES
 
-Template **LUMEN** — site one-page para eletricistas locais | Destaque Local.
+Template LUMEN para sites one-page de eletricistas locais.
 
 ## Status
+Protótipo em polimento visual.
 
-Protótipo v0.1 em desenvolvimento.
-
-Direção visual dominante:
+## Direção
 - light-first;
-- off-white + verde profundo + amarelo quente;
-- bastante whitespace;
+- off-white / branco como base;
+- verde profundo como contraste;
+- amarelo quente como accent;
 - fotografia forte;
-- cantos suavemente arredondados;
-- linguagem editorial e humana;
-- adaptação do modelo de referência escolhido para a realidade de um eletricista local no Brasil.
+- cantos moderadamente arredondados;
+- bastante respiro;
+- referência visual escolhida como régua estética principal.
 
-## Estrutura atual
+## Hero
+A Hero usa um asset dedicado em alta definição derivado diretamente da imagem original fornecida para o template, mantendo o enquadramento aprovado com Rafael deslocado para a direita e evitando filtros que prejudiquem a nitidez.
 
-Hero → prova rápida → Serviços → Diagnóstico → Trabalhos → Diferenciais → Como funciona → Sobre → Avaliações → Área atendida → FAQ → CTA final → Footer.
+## Produto
+One-page para prestadores locais, com foco atual em eletricistas.
 
-## Arquivos
-
-- `index.html` — estrutura e conteúdo do protótipo;
-- `styles.css` — sistema visual e responsividade;
-- `script.js` — menu mobile, FAQ, modal demonstrativo e voltar ao topo.
-
-## Demo
-
-O conteúdo comercial de Rafael Martins é fictício e usado somente para demonstrar o template. O protótipo permanece `noindex` e os CTAs não abrem um WhatsApp real.
-
-As imagens atuais são placeholders temporários reaproveitados do demo VOLT por URL remota. Assets próprios do LUMEN serão tratados separadamente no fluxo de imagens.
+## Observação
+Este repositório é um template demonstrativo e não representa um prestador real.
