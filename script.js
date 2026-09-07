@@ -7,6 +7,66 @@
     heroLead.textContent = 'Manutenção, instalações e correções elétricas para residências e pequenos comércios, com atendimento direto e serviço explicado com clareza.';
   }
 
+  const heroContactText = document.querySelector('.hero-contact strong');
+  if (heroContactText) {
+    heroContactText.innerHTML = 'Conte o que precisa e envie<br>fotos quando possível.';
+  }
+
+  const heroContactPolish = document.createElement('style');
+  heroContactPolish.textContent = `
+    .hero-contact {
+      width: 350px !important;
+      padding: 22px 22px 18px !important;
+    }
+
+    .hero-contact::before {
+      content: none !important;
+      display: none !important;
+    }
+
+    .hero-contact strong {
+      max-width: 306px !important;
+      margin-bottom: 14px !important;
+      white-space: nowrap;
+    }
+
+    .hero-contact .text-link {
+      width: 100% !important;
+      margin-left: 0 !important;
+    }
+
+    @media (max-width: 980px) {
+      .hero-contact {
+        width: 326px !important;
+        padding: 20px 20px 17px !important;
+      }
+
+      .hero-contact strong {
+        max-width: 286px !important;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .hero-contact {
+        left: 18px !important;
+        right: 18px !important;
+        width: auto !important;
+        padding: 18px 18px 16px !important;
+      }
+
+      .hero-contact strong {
+        max-width: none !important;
+        white-space: normal;
+      }
+
+      .hero-contact .text-link {
+        width: 100% !important;
+        margin-left: 0 !important;
+      }
+    }
+  `;
+  document.head.appendChild(heroContactPolish);
+
   const menuToggle = document.querySelector('.menu-toggle');
   const mobileMenu = document.querySelector('#mobile-menu');
 
