@@ -385,3 +385,43 @@ body {
     padding: 17px 18px;
   }
 }
+
+/* HERO PHOTO — brighter, clearer and shifted so Rafael sits farther to the right. */
+@media (min-width: 981px) {
+  .hero-card__image {
+    object-position: 48% center;
+    filter: saturate(1.18) contrast(1.08) brightness(1.08);
+  }
+
+  .hero-card__shade {
+    background:
+      linear-gradient(90deg, rgba(7, 66, 45, .80) 0%, rgba(7, 66, 45, .58) 35%, rgba(7, 66, 45, .15) 69%, rgba(7, 66, 45, .018) 100%),
+      linear-gradient(0deg, rgba(7, 49, 34, .05), transparent 62%);
+  }
+}
+
+@media (min-width: 681px) and (max-width: 980px) {
+  .hero-card__image {
+    object-position: 52% center;
+    filter: saturate(1.16) contrast(1.07) brightness(1.07);
+  }
+
+  .hero-card__shade {
+    background:
+      linear-gradient(90deg, rgba(7, 66, 45, .82) 0%, rgba(7, 66, 45, .61) 39%, rgba(7, 66, 45, .19) 72%, rgba(7, 66, 45, .025) 100%),
+      linear-gradient(0deg, rgba(7, 49, 34, .05), transparent 62%);
+  }
+}
+
+@media (max-width: 680px) {
+  .hero-card__image {
+    object-position: 58% center;
+    filter: saturate(1.14) contrast(1.06) brightness(1.06);
+  }
+
+  .hero-card__shade {
+    background:
+      linear-gradient(180deg, rgba(7, 66, 45, .80) 0%, rgba(7, 66, 45, .61) 46%, rgba(7, 66, 45, .23) 100%),
+      linear-gradient(90deg, rgba(7, 66, 45, .12), transparent 76%);
+  }
+}
