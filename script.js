@@ -1,4 +1,12 @@
 (() => {
+  const heroTitle = document.querySelector('.hero-card__content h1');
+  const heroLead = document.querySelector('.hero-card__lead');
+
+  if (heroTitle) heroTitle.textContent = 'Eletricista em Palhoça';
+  if (heroLead) {
+    heroLead.textContent = 'Manutenção, instalações e correções elétricas para residências e pequenos comércios, com atendimento direto e serviço explicado com clareza.';
+  }
+
   const menuToggle = document.querySelector('.menu-toggle');
   const mobileMenu = document.querySelector('#mobile-menu');
 
