@@ -425,3 +425,31 @@ body {
       linear-gradient(90deg, rgba(7, 66, 45, .12), transparent 76%);
   }
 }
+
+/* HERO PHOTO FRAMING FIX — object-position could not move the subject horizontally
+   because the 3:2 source image is already width-fitted inside the very wide hero.
+   On desktop we therefore paint the same photo as a clipped background and apply
+   a real horizontal offset, preserving scale and proportions. */
+@media (min-width: 981px) {
+  .hero-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background-image: url("https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-01-hero-quadro.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: calc(50% + 185px) center;
+    filter: saturate(1.18) contrast(1.08) brightness(1.08);
+  }
+
+  .hero-card__image {
+    opacity: 0;
+  }
+
+  .hero-card__shade {
+    z-index: 1;
+  }
+}
