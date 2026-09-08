@@ -463,3 +463,138 @@
     line-height: 1.66;
   }
 }
+
+/* DIAGNOSTIC CONVERSION PASS — recognition -> confidence -> action. */
+.diagnostic-card__head h2::before {
+  content: "Está com algum destes\Aproblemas elétricos?";
+}
+
+.diagnostic-features article:nth-child(1) small,
+.diagnostic-features article:nth-child(2) small,
+.diagnostic-features article:nth-child(3) small,
+.diagnostic-features article:nth-child(4) small {
+  font-size: 0 !important;
+}
+
+.diagnostic-features article:nth-child(1) small::before,
+.diagnostic-features article:nth-child(2) small::before,
+.diagnostic-features article:nth-child(3) small::before,
+.diagnostic-features article:nth-child(4) small::before {
+  display: block;
+  color: #74847c;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.diagnostic-features article:nth-child(1) small::before {
+  content: "Volta a cair mesmo depois de religar.";
+}
+
+.diagnostic-features article:nth-child(2) small::before {
+  content: "Esquenta, escurece ou apresenta mau contato.";
+}
+
+.diagnostic-features article:nth-child(3) small::before {
+  content: "Um cômodo ou circuito deixou de funcionar.";
+}
+
+.diagnostic-features article:nth-child(4) small::before {
+  content: "Sinal de que algo precisa ser avaliado com atenção.";
+}
+
+.diagnostic-card__action {
+  position: relative;
+  margin-top: 24px;
+  padding: 24px 26px;
+  border: 1px solid rgba(255, 210, 63, .24);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 88% 20%, rgba(255, 210, 63, .14), transparent 28%),
+    linear-gradient(135deg, #104d38 0%, #0a3f2e 100%);
+  box-shadow: 0 16px 32px rgba(10, 63, 46, .16);
+}
+
+.diagnostic-card__action p {
+  max-width: 690px;
+  margin: 0;
+  color: transparent;
+  font-size: 0;
+  line-height: 1;
+}
+
+.diagnostic-card__action p::before {
+  content: "Está acontecendo algo parecido?";
+  display: block;
+  margin-bottom: 6px;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -.02em;
+}
+
+.diagnostic-card__action p::after {
+  content: "Conte o que está acontecendo e, se puder, envie uma foto.";
+  display: block;
+  color: rgba(255, 255, 255, .76);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.diagnostic-card__action .btn {
+  min-height: 50px;
+  padding: 0 20px;
+  border: 1px solid rgba(255, 183, 20, .46);
+  border-radius: 13px;
+  background: linear-gradient(180deg, #ffdf61 0%, #ffd23f 100%);
+  color: #103d2c;
+  box-shadow: 0 11px 24px rgba(255, 199, 43, .22);
+  font-size: 0;
+  font-weight: 900;
+  letter-spacing: .01em;
+}
+
+.diagnostic-card__action .btn::before {
+  content: "FALAR COM RAFAEL NO WHATSAPP";
+  font-size: 11px;
+  line-height: 1;
+}
+
+.diagnostic-card__action .btn::after {
+  content: "→";
+  margin-left: 10px;
+  color: #103d2c;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.diagnostic-card__action .btn:hover {
+  background: linear-gradient(180deg, #ffe779 0%, #ffd84c 100%);
+  box-shadow: 0 14px 28px rgba(255, 199, 43, .28);
+}
+
+@media (max-width: 680px) {
+  .diagnostic-features article:nth-child(1) small::before,
+  .diagnostic-features article:nth-child(2) small::before,
+  .diagnostic-features article:nth-child(3) small::before,
+  .diagnostic-features article:nth-child(4) small::before {
+    font-size: 12.5px;
+  }
+
+  .diagnostic-card__action {
+    padding: 20px 16px;
+    gap: 16px;
+  }
+
+  .diagnostic-card__action p::before {
+    font-size: 16px;
+  }
+
+  .diagnostic-card__action p::after {
+    font-size: 12.5px;
+  }
+
+  .diagnostic-card__action .btn::before {
+    font-size: 10.5px;
+  }
+}
