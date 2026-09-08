@@ -2,33 +2,14 @@
 
 /* MOBILE SERVICES FLOW — keep CTA as the final action after the photos. */
 @media (max-width: 680px) {
-  .services-layout {
-    gap: 0 !important;
-  }
-
-  .services-copy {
-    display: contents;
-  }
-
+  .services-layout { gap: 0 !important; }
+  .services-copy { display: contents; }
   .services-copy > .eyebrow { order: 1; }
   .services-copy > h2 { order: 2; }
   .services-copy > p:not(.eyebrow) { order: 3; }
-
-  .service-links {
-    order: 4;
-    margin-bottom: 0 !important;
-  }
-
-  .services-media {
-    order: 5;
-    margin-top: 38px;
-  }
-
-  .services-copy > .btn {
-    order: 6;
-    width: 100%;
-    margin-top: 28px;
-  }
+  .service-links { order: 4; margin-bottom: 0 !important; }
+  .services-media { order: 5; margin-top: 38px; }
+  .services-copy > .btn { order: 6; width: 100%; margin-top: 28px; }
 }
 
 /* SERVICES LIST V2 — semantic icons, discreet numbering and lighter arrows. */
@@ -90,10 +71,7 @@
 .service-links article:nth-child(5) h3::after { content: "05"; }
 .service-links article:nth-child(6) h3::after { content: "06"; }
 
-.service-links p {
-  color: #76867e;
-  line-height: 1.5;
-}
+.service-links p { color: #76867e; line-height: 1.5; }
 
 .service-links article::after {
   width: auto;
@@ -134,17 +112,7 @@
     padding: 14px 2px 14px 0;
   }
 
-  .service-links article > span {
-    width: 38px;
-    height: 38px;
-  }
-
-  .service-links article > span::before {
-    width: 17px;
-    height: 17px;
-  }
-
-  .service-links h3 {
-    font-size: 16px;
-  }
+  .service-links article > span { width: 38px; height: 38px; }
+  .service-links article > span::before { width: 17px; height: 17px; }
+  .service-links h3 { font-size: 16px; }
 }
