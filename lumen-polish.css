@@ -47,19 +47,22 @@
   color: transparent;
   font-size: 0;
   line-height: 0;
+  box-sizing: border-box;
   box-shadow: 0 7px 18px rgba(255, 199, 43, .16), inset 0 1px 0 rgba(255, 255, 255, .52);
 }
 
 .service-links article > span::before {
   content: "";
-  display: block;
-  grid-area: 1 / 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 19px;
   height: 19px;
   margin: 0;
+  transform: translate(-50%, -50%);
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  background-size: 19px 19px;
+  background-size: 100% 100%;
 }
 
 .service-links article:nth-child(1) > span::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d4935' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='3' width='16' height='18' rx='2'/%3E%3Cpath d='M8 7h8M8 11h3M14 11h2M8 15h2M13 15h3'/%3E%3C/svg%3E"); }
@@ -122,7 +125,6 @@
   .service-links article > span::before {
     width: 17px;
     height: 17px;
-    background-size: 17px 17px;
   }
 
   .service-links h3 {
