@@ -434,3 +434,32 @@
   }
   .diagnostic-card__action .btn { width: 100%; }
 }
+
+/* TYPOGRAPHY SCALE — keep section types consistent with Services. */
+.diagnostic-card__head .eyebrow {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+
+.diagnostic-card__head h2::before {
+  font-size: clamp(36px, 3.15vw, 46px);
+  line-height: 1.02;
+  letter-spacing: -.05em;
+}
+
+.diagnostic-card__head > p {
+  font-size: 16px;
+  line-height: 1.66;
+}
+
+@media (max-width: 680px) {
+  .diagnostic-card__head h2::before {
+    font-size: clamp(36px, 3.15vw, 46px);
+  }
+
+  .diagnostic-card__head > p {
+    font-size: 16px;
+    line-height: 1.66;
+  }
+}
