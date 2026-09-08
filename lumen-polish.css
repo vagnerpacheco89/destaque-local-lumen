@@ -175,3 +175,347 @@
     padding-top: 0;
   }
 }
+
+/* DIAGNOSTIC — premium, calm and problem-oriented. */
+.services-section + .section-pad {
+  padding-bottom: 64px;
+}
+
+.diagnostic-card {
+  position: relative;
+  overflow: hidden;
+  padding: 46px;
+  border: 1px solid rgba(20, 83, 59, .08);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(255, 210, 63, .16), transparent 24%),
+    linear-gradient(145deg, #eef5ef 0%, #e9f1eb 52%, #f3f5ef 100%);
+  box-shadow: 0 20px 54px rgba(18, 80, 57, .08);
+}
+
+.diagnostic-card::before {
+  content: "";
+  position: absolute;
+  top: -52px;
+  right: -44px;
+  width: 180px;
+  height: 180px;
+  border: 1px solid rgba(23, 107, 75, .09);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.diagnostic-card::after {
+  content: "";
+  position: absolute;
+  right: 38px;
+  bottom: 30px;
+  width: 76px;
+  height: 2px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(23, 107, 75, .22) 0 66%, #ffc72b 66% 100%);
+  pointer-events: none;
+}
+
+.diagnostic-card__head {
+  display: grid;
+  grid-template-columns: 1.08fr .92fr;
+  gap: 52px;
+  align-items: end;
+  margin-bottom: 28px;
+}
+
+.diagnostic-card__head .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.diagnostic-card__head .eyebrow::before {
+  content: "";
+  width: 38px;
+  height: 2px;
+  flex: 0 0 38px;
+  border-radius: 999px;
+  background: #ffc72b;
+}
+
+.diagnostic-card__head h2 {
+  max-width: 650px;
+  margin: 0;
+  color: transparent;
+  font-size: 0;
+  line-height: 1;
+}
+
+.diagnostic-card__head h2::before {
+  content: "Quando a elétrica dá sinais,\A vale investigar a causa.";
+  display: block;
+  white-space: pre-line;
+  color: #103d2c;
+  font-size: clamp(38px, 3.7vw, 54px);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -.055em;
+}
+
+.diagnostic-card__head > p {
+  max-width: 470px;
+  margin: 0 0 5px;
+  color: #62766c;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.diagnostic-card__media {
+  position: relative;
+  min-height: 380px;
+  overflow: hidden;
+  border: 6px solid rgba(255, 253, 248, .94);
+  border-radius: 24px;
+  background: #d8ddd8;
+  box-shadow: 0 18px 42px rgba(13, 73, 52, .12);
+}
+
+.diagnostic-card__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 65%, rgba(12, 66, 46, .08) 100%);
+  pointer-events: none;
+}
+
+.diagnostic-card__play {
+  display: none !important;
+}
+
+.diagnostic-features {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(20, 83, 59, .09);
+  border-radius: 20px;
+  background: rgba(255, 253, 248, .52);
+}
+
+.diagnostic-features article {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  padding: 18px 18px;
+  border-right: 1px solid rgba(20, 83, 59, .09);
+  transition: background .2s ease, transform .2s ease;
+}
+
+.diagnostic-features article:last-child {
+  border-right: 0;
+}
+
+.diagnostic-features article:hover {
+  background: rgba(255, 255, 255, .58);
+}
+
+.diagnostic-features span {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  border: 1px solid rgba(255, 199, 43, .82);
+  border-radius: 50%;
+  background: linear-gradient(180deg, #ffe16a 0%, #ffd23f 100%);
+  color: transparent;
+  font-size: 0;
+  line-height: 0;
+  box-shadow: 0 7px 16px rgba(255, 199, 43, .14), inset 0 1px 0 rgba(255, 255, 255, .55);
+}
+
+.diagnostic-features span::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translate(-50%, -50%);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.diagnostic-features article:nth-child(1) span::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d4935' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13 2 6.5 13H12l-1 9 6.5-11H12l1-9Z'/%3E%3C/svg%3E");
+}
+
+.diagnostic-features article:nth-child(2) span::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d4935' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 4v5M16 4v5M6 9h12v2a6 6 0 0 1-6 6v3'/%3E%3Cpath d='M18 4c1 1 1 2 0 3M21 3c1.5 1.5 1.5 3.5 0 5'/%3E%3C/svg%3E");
+}
+
+.diagnostic-features article:nth-child(3) span::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d4935' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3Cpath d='M12 4v16M12 12h7'/%3E%3C/svg%3E");
+}
+
+.diagnostic-features article:nth-child(4) span::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d4935' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3 3.8 18h16.4L12 3Z'/%3E%3Cpath d='M12 9v4M12 16h.01'/%3E%3C/svg%3E");
+}
+
+.diagnostic-features strong {
+  display: block;
+  margin: 0 0 4px;
+  color: #123e2f;
+  font-size: 14px;
+  line-height: 1.28;
+}
+
+.diagnostic-features small {
+  display: block;
+  color: #74847c;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.diagnostic-card__action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 20px;
+  padding: 18px 20px;
+  border: 1px solid rgba(20, 83, 59, .08);
+  border-radius: 18px;
+  background: rgba(255, 253, 248, .48);
+}
+
+.diagnostic-card__action p {
+  max-width: 700px;
+  margin: 0;
+  color: #66786f;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.diagnostic-card__action .btn {
+  min-height: 48px;
+  padding: 0 20px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #176b4b 0%, #0f583e 100%);
+  box-shadow: 0 12px 24px rgba(15, 88, 62, .16);
+  white-space: nowrap;
+}
+
+.diagnostic-card__action .btn::after {
+  content: "→";
+  margin-left: 10px;
+  color: #ffd23f;
+  font-size: 16px;
+  line-height: 1;
+}
+
+@media (max-width: 980px) {
+  .services-section + .section-pad {
+    padding-bottom: 56px;
+  }
+
+  .diagnostic-card {
+    padding: 36px;
+  }
+
+  .diagnostic-card__head {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .diagnostic-card__head > p {
+    max-width: 680px;
+  }
+
+  .diagnostic-card__media {
+    min-height: 330px;
+  }
+
+  .diagnostic-features {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .diagnostic-features article:nth-child(2) {
+    border-right: 0;
+  }
+
+  .diagnostic-features article:nth-child(-n+2) {
+    border-bottom: 1px solid rgba(20, 83, 59, .09);
+  }
+}
+
+@media (max-width: 680px) {
+  .services-section + .section-pad {
+    padding-bottom: 48px;
+  }
+
+  .diagnostic-card {
+    padding: 24px 18px 20px;
+    border-radius: 24px;
+  }
+
+  .diagnostic-card::after {
+    display: none;
+  }
+
+  .diagnostic-card__head {
+    margin-bottom: 22px;
+  }
+
+  .diagnostic-card__head h2::before {
+    font-size: clamp(32px, 10vw, 42px);
+  }
+
+  .diagnostic-card__head > p {
+    font-size: 13px;
+    line-height: 1.62;
+  }
+
+  .diagnostic-card__media {
+    min-height: 240px;
+    border-width: 5px;
+    border-radius: 20px;
+  }
+
+  .diagnostic-features {
+    grid-template-columns: 1fr;
+    border-radius: 18px;
+  }
+
+  .diagnostic-features article,
+  .diagnostic-features article:nth-child(2) {
+    grid-template-columns: 40px minmax(0, 1fr);
+    padding: 15px 14px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(20, 83, 59, .09);
+  }
+
+  .diagnostic-features article:last-child {
+    border-bottom: 0;
+  }
+
+  .diagnostic-features span {
+    width: 38px;
+    height: 38px;
+  }
+
+  .diagnostic-card__action {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .diagnostic-card__action .btn {
+    width: 100%;
+  }
+}
