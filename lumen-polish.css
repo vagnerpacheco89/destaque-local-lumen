@@ -1,4 +1,4 @@
-@import url("./lumen-services.css?v=20260907-services-mobile-cta-01");
+@import url("./lumen-services.css?v=20260907-services-mobile-cta-02");
 
 /* MOBILE SERVICES FLOW — keep CTA as the final action after the photos. */
 @media (max-width: 680px) {
@@ -12,32 +12,54 @@
   .services-copy > .btn { order: 6; width: 100%; margin-top: 28px; }
 }
 
-/* SERVICES LIST V2 — semantic icons, discreet numbering and lighter arrows. */
+/* SERVICES — cleaner premium rows. */
+.services-copy h2 {
+  max-width: 740px;
+  font-size: clamp(36px, 3.15vw, 46px);
+  line-height: 1.02;
+  letter-spacing: -.05em;
+  white-space: nowrap;
+}
+
 .service-links article {
-  grid-template-columns: 46px minmax(0, 1fr) 22px;
-  gap: 14px;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 16px;
   min-height: 92px;
   padding: 17px 4px 17px 0;
 }
 
+.service-links article::after,
+.service-links article:hover::after {
+  content: none !important;
+  display: none !important;
+}
+
 .service-links article > span {
   position: relative;
-  width: 42px;
-  height: 42px;
-  border: 1px solid rgba(255, 199, 43, .78);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(255, 199, 43, .82);
+  border-radius: 50%;
   background: linear-gradient(180deg, #ffdc58 0%, #ffd23f 100%);
   color: transparent;
   font-size: 0;
+  line-height: 0;
   box-shadow: 0 7px 18px rgba(255, 199, 43, .16), inset 0 1px 0 rgba(255, 255, 255, .52);
 }
 
 .service-links article > span::before {
   content: "";
+  display: block;
+  grid-area: 1 / 1;
   width: 19px;
   height: 19px;
+  margin: 0;
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
+  background-position: 50% 50%;
+  background-size: 19px 19px;
 }
 
 .service-links article:nth-child(1) > span::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d4935' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='3' width='16' height='18' rx='2'/%3E%3Cpath d='M8 7h8M8 11h3M14 11h2M8 15h2M13 15h3'/%3E%3C/svg%3E"); }
@@ -48,40 +70,23 @@
 .service-links article:nth-child(6) > span::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d4935' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3 19 6v5c0 4.8-2.9 8.1-7 10-4.1-1.9-7-5.2-7-10V6l7-3Z'/%3E%3Cpath d='m9 12 2 2 4-5'/%3E%3C/svg%3E"); }
 
 .service-links h3 {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 5px;
-  font-size: 17px;
+  display: block;
+  margin: 0 0 5px;
+  font-size: 16.5px;
   font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -.025em;
+  white-space: nowrap;
 }
 
 .service-links h3::after {
-  font-size: 9px;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: .10em;
-  color: rgba(23, 107, 75, .48);
+  content: none !important;
+  display: none !important;
 }
 
-.service-links article:nth-child(1) h3::after { content: "01"; }
-.service-links article:nth-child(2) h3::after { content: "02"; }
-.service-links article:nth-child(3) h3::after { content: "03"; }
-.service-links article:nth-child(4) h3::after { content: "04"; }
-.service-links article:nth-child(5) h3::after { content: "05"; }
-.service-links article:nth-child(6) h3::after { content: "06"; }
-
-.service-links p { color: #76867e; line-height: 1.5; }
-
-.service-links article::after {
-  width: auto;
-  height: auto;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  color: rgba(23, 107, 75, .66);
-  font-size: 17px;
-  box-shadow: none;
+.service-links p {
+  color: #76867e;
+  line-height: 1.5;
 }
 
 .service-links article:hover {
@@ -97,22 +102,31 @@
   box-shadow: 0 10px 22px rgba(255, 199, 43, .22), inset 0 1px 0 rgba(255, 255, 255, .58);
 }
 
-.service-links article:hover::after {
-  border: 0;
-  background: transparent;
-  color: #176b4b;
-  transform: translate(3px, -2px);
-}
-
 @media (max-width: 680px) {
+  .services-copy h2 {
+    white-space: normal;
+  }
+
   .service-links article {
-    grid-template-columns: 42px minmax(0, 1fr) 20px;
+    grid-template-columns: 42px minmax(0, 1fr);
     gap: 12px;
     min-height: 84px;
     padding: 14px 2px 14px 0;
   }
 
-  .service-links article > span { width: 38px; height: 38px; }
-  .service-links article > span::before { width: 17px; height: 17px; }
-  .service-links h3 { font-size: 16px; }
+  .service-links article > span {
+    width: 38px;
+    height: 38px;
+  }
+
+  .service-links article > span::before {
+    width: 17px;
+    height: 17px;
+    background-size: 17px 17px;
+  }
+
+  .service-links h3 {
+    font-size: 15px;
+    white-space: nowrap;
+  }
 }
