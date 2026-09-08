@@ -106,31 +106,16 @@
 }
 
 @media (max-width: 680px) {
-  .services-copy h2 {
-    white-space: normal;
-  }
-
+  .services-copy h2 { white-space: normal; }
   .service-links article {
     grid-template-columns: 42px minmax(0, 1fr);
     gap: 12px;
     min-height: 84px;
     padding: 14px 2px 14px 0;
   }
-
-  .service-links article > span {
-    width: 38px;
-    height: 38px;
-  }
-
-  .service-links article > span::before {
-    width: 17px;
-    height: 17px;
-  }
-
-  .service-links h3 {
-    font-size: 15px;
-    white-space: nowrap;
-  }
+  .service-links article > span { width: 38px; height: 38px; }
+  .service-links article > span::before { width: 17px; height: 17px; }
+  .service-links h3 { font-size: 15px; white-space: nowrap; }
 }
 
 /* SECTION TRANSITION — keep the off-white canvas continuous and reduce dead space. */
@@ -155,32 +140,21 @@
 .services-section + .section-pad {
   position: relative;
   padding-top: 0;
+  padding-bottom: 64px;
   background: #f8f3e9;
 }
 
 @media (max-width: 980px) {
-  .services-section {
-    padding-top: 52px;
-    padding-bottom: 52px;
-  }
+  .services-section { padding-top: 52px; padding-bottom: 52px; }
+  .services-section + .section-pad { padding-bottom: 56px; }
 }
 
 @media (max-width: 680px) {
-  .services-section {
-    padding-top: 48px;
-    padding-bottom: 48px;
-  }
-
-  .services-section + .section-pad {
-    padding-top: 0;
-  }
+  .services-section { padding-top: 48px; padding-bottom: 48px; }
+  .services-section + .section-pad { padding-top: 0; padding-bottom: 48px; }
 }
 
 /* DIAGNOSTIC — premium, calm and problem-oriented. */
-.services-section + .section-pad {
-  padding-bottom: 64px;
-}
-
 .diagnostic-card {
   position: relative;
   overflow: hidden;
@@ -218,11 +192,12 @@
   pointer-events: none;
 }
 
+/* Head is intentionally stacked: eyebrow, two-line title, then introduction. */
 .diagnostic-card__head {
   display: grid;
-  grid-template-columns: 1.08fr .92fr;
-  gap: 52px;
-  align-items: end;
+  grid-template-columns: 1fr;
+  gap: 0;
+  align-items: start;
   margin-bottom: 28px;
 }
 
@@ -243,7 +218,7 @@
 }
 
 .diagnostic-card__head h2 {
-  max-width: 650px;
+  max-width: 1100px;
   margin: 0;
   color: transparent;
   font-size: 0;
@@ -251,9 +226,9 @@
 }
 
 .diagnostic-card__head h2::before {
-  content: "Quando a elétrica dá sinais,\A vale investigar a causa.";
+  content: "Quando a elétrica dá sinais,\Avale investigar a causa.";
   display: block;
-  white-space: pre-line;
+  white-space: pre;
   color: #103d2c;
   font-size: clamp(38px, 3.7vw, 54px);
   font-weight: 800;
@@ -262,8 +237,8 @@
 }
 
 .diagnostic-card__head > p {
-  max-width: 470px;
-  margin: 0 0 5px;
+  max-width: 760px;
+  margin: 18px 0 0;
   color: #62766c;
   font-size: 14px;
   line-height: 1.7;
@@ -287,9 +262,7 @@
   pointer-events: none;
 }
 
-.diagnostic-card__play {
-  display: none !important;
-}
+.diagnostic-card__play { display: none !important; }
 
 .diagnostic-features {
   display: grid;
@@ -307,18 +280,13 @@
   grid-template-columns: 42px minmax(0, 1fr);
   gap: 12px;
   align-items: center;
-  padding: 18px 18px;
+  padding: 18px;
   border-right: 1px solid rgba(20, 83, 59, .09);
   transition: background .2s ease, transform .2s ease;
 }
 
-.diagnostic-features article:last-child {
-  border-right: 0;
-}
-
-.diagnostic-features article:hover {
-  background: rgba(255, 255, 255, .58);
-}
+.diagnostic-features article:last-child { border-right: 0; }
+.diagnostic-features article:hover { background: rgba(255, 255, 255, .58); }
 
 .diagnostic-features span {
   position: relative;
@@ -352,15 +320,12 @@
 .diagnostic-features article:nth-child(1) span::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d4935' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13 2 6.5 13H12l-1 9 6.5-11H12l1-9Z'/%3E%3C/svg%3E");
 }
-
 .diagnostic-features article:nth-child(2) span::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d4935' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 4v5M16 4v5M6 9h12v2a6 6 0 0 1-6 6v3'/%3E%3Cpath d='M18 4c1 1 1 2 0 3M21 3c1.5 1.5 1.5 3.5 0 5'/%3E%3C/svg%3E");
 }
-
 .diagnostic-features article:nth-child(3) span::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d4935' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3Cpath d='M12 4v16M12 12h7'/%3E%3C/svg%3E");
 }
-
 .diagnostic-features article:nth-child(4) span::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d4935' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3 3.8 18h16.4L12 3Z'/%3E%3Cpath d='M12 9v4M12 16h.01'/%3E%3C/svg%3E");
 }
@@ -418,79 +383,40 @@
 }
 
 @media (max-width: 980px) {
-  .services-section + .section-pad {
-    padding-bottom: 56px;
-  }
-
-  .diagnostic-card {
-    padding: 36px;
-  }
-
-  .diagnostic-card__head {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    align-items: start;
-  }
-
-  .diagnostic-card__head > p {
-    max-width: 680px;
-  }
-
-  .diagnostic-card__media {
-    min-height: 330px;
-  }
-
-  .diagnostic-features {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .diagnostic-features article:nth-child(2) {
-    border-right: 0;
-  }
-
-  .diagnostic-features article:nth-child(-n+2) {
-    border-bottom: 1px solid rgba(20, 83, 59, .09);
-  }
+  .diagnostic-card { padding: 36px; }
+  .diagnostic-card__head { grid-template-columns: 1fr; gap: 0; align-items: start; }
+  .diagnostic-card__head > p { max-width: 680px; }
+  .diagnostic-card__media { min-height: 330px; }
+  .diagnostic-features { grid-template-columns: 1fr 1fr; }
+  .diagnostic-features article:nth-child(2) { border-right: 0; }
+  .diagnostic-features article:nth-child(-n+2) { border-bottom: 1px solid rgba(20, 83, 59, .09); }
 }
 
 @media (max-width: 680px) {
-  .services-section + .section-pad {
-    padding-bottom: 48px;
-  }
-
   .diagnostic-card {
     padding: 24px 18px 20px;
     border-radius: 24px;
   }
-
-  .diagnostic-card::after {
-    display: none;
-  }
-
-  .diagnostic-card__head {
-    margin-bottom: 22px;
-  }
-
+  .diagnostic-card::after { display: none; }
+  .diagnostic-card__head { margin-bottom: 22px; }
   .diagnostic-card__head h2::before {
-    font-size: clamp(32px, 10vw, 42px);
+    font-size: clamp(24px, 6.8vw, 34px);
+    white-space: pre;
   }
-
   .diagnostic-card__head > p {
+    margin-top: 14px;
     font-size: 13px;
     line-height: 1.62;
   }
-
   .diagnostic-card__media {
     min-height: 240px;
     border-width: 5px;
     border-radius: 20px;
   }
-
   .diagnostic-features {
     grid-template-columns: 1fr;
     border-radius: 18px;
   }
-
   .diagnostic-features article,
   .diagnostic-features article:nth-child(2) {
     grid-template-columns: 40px minmax(0, 1fr);
@@ -498,24 +424,13 @@
     border-right: 0;
     border-bottom: 1px solid rgba(20, 83, 59, .09);
   }
-
-  .diagnostic-features article:last-child {
-    border-bottom: 0;
-  }
-
-  .diagnostic-features span {
-    width: 38px;
-    height: 38px;
-  }
-
+  .diagnostic-features article:last-child { border-bottom: 0; }
+  .diagnostic-features span { width: 38px; height: 38px; }
   .diagnostic-card__action {
     flex-direction: column;
     align-items: stretch;
     gap: 14px;
     padding: 16px;
   }
-
-  .diagnostic-card__action .btn {
-    width: 100%;
-  }
+  .diagnostic-card__action .btn { width: 100%; }
 }
