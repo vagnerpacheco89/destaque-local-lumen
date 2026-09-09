@@ -1,7 +1,7 @@
-/* TRABALHOS — carousel pass based on the selected LUMEN reference.
-   Desktop: 3 cards visible, second set crossfades every 5s.
-   Mobile: 1 card visible, rotating through 6 visual states every 5s.
-   No JS required; reduced-motion keeps the first set static. */
+/* TRABALHOS — real horizontal carousel.
+   Direction: right to left. Autoplay: 5 seconds.
+   Desktop: 3 cards visible. Tablet: 2. Mobile: 1.
+   Cards use real <img> elements to keep edges clean and avoid the prior white seam artifacts. */
 
 .work-wrap {
   padding-top: 34px;
@@ -13,7 +13,7 @@
   position: relative;
   overflow: hidden;
   padding: 54px 46px 44px;
-  border: 1px solid rgba(255, 255, 255, .09);
+  border: 0;
   border-radius: 30px;
   background:
     radial-gradient(circle at 94% 6%, rgba(255,255,255,.035), transparent 20%),
@@ -79,15 +79,6 @@
 .work-panel__head h2 {
   max-width: 720px;
   margin: 0 auto 14px;
-  color: transparent;
-  font-size: 0;
-  line-height: 1;
-}
-
-.work-panel__head h2::before {
-  content: "Trabalhos elétricos para\Adiferentes necessidades.";
-  display: block;
-  white-space: pre;
   color: #fff;
   font-size: clamp(36px, 3.15vw, 46px);
   font-weight: 800;
@@ -98,193 +89,165 @@
 .work-panel__head p:last-child {
   max-width: 620px;
   margin: 0 auto;
-  color: transparent;
-  font-size: 0;
-  line-height: 1;
-}
-
-.work-panel__head p:last-child::before {
-  content: "Alguns exemplos de serviços que podem fazer parte do atendimento.";
-  display: block;
   color: rgba(255,255,255,.72);
   font-size: 16px;
   line-height: 1.66;
 }
 
+/* The old .work-cards grid becomes only the slider host. */
 .work-cards {
   position: relative;
   z-index: 3;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: 1fr;
-  gap: 18px;
-  padding-bottom: 34px;
+  display: block;
+  padding: 0;
+  overflow: visible;
 }
 
-.work-card,
-.work-card:first-child,
-.work-card:nth-child(2),
-.work-card:nth-child(3) {
+.work-cards::before,
+.work-cards::after {
+  content: none !important;
+  display: none !important;
+}
+
+.work-carousel {
+  --work-gap: 20px;
   position: relative;
-  grid-column: auto;
-  grid-row: auto;
-  min-height: 340px;
+  width: 100%;
+}
+
+.work-carousel__viewport {
+  width: 100%;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,.13);
   border-radius: 22px;
-  background-color: #0b3f2e;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  box-shadow: 0 18px 34px rgba(5, 40, 28, .18);
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.work-carousel__viewport:active {
+  cursor: grabbing;
+}
+
+.work-carousel__track {
+  display: flex;
+  align-items: stretch;
+  gap: var(--work-gap);
+  width: 100%;
+  transform: translate3d(0,0,0);
+  will-change: transform;
+}
+
+.work-carousel-card {
+  position: relative;
+  flex: 0 0 calc((100% - 40px) / 3);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 0;
+  border-radius: 22px;
+  background: #0b3f2e;
+  box-shadow: none;
   isolation: isolate;
+  transform: translateZ(0);
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  backface-visibility: hidden;
 }
 
-.work-card:nth-child(1) {
-  --work-title-b: "Chuveiros e circuitos";
-  --work-desc-b: "Instalação, avaliação e correções.";
-  background-image: url("https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-05-chuveiro.webp");
-}
-
-.work-card:nth-child(2) {
-  --work-title-b: "Diagnóstico elétrico";
-  --work-desc-b: "Testes para entender a origem da falha.";
-  background-image: url("https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-10-teste-comercio.webp");
-}
-
-.work-card:nth-child(3) {
-  --work-title-b: "Fiação, DR e DPS";
-  --work-desc-b: "Proteção, melhorias e adequações.";
-  background-image: url("https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-08-dr-dps.webp");
-}
-
-.work-card img,
-.work-card:first-child img {
+.work-carousel-card img {
   position: absolute;
   inset: 0;
   z-index: 0;
+  display: block;
   width: 100%;
   height: 100%;
+  max-width: none;
   object-fit: cover;
-  opacity: 1;
-  animation: lumenWorkImageA 10s ease-in-out infinite;
-  transition: transform .42s cubic-bezier(.22,.61,.36,1);
+  object-position: center;
+  border: 0;
+  border-radius: 0;
+  transform: scale(1.001) translateZ(0);
+  backface-visibility: hidden;
+  image-rendering: auto;
+  transition: transform .48s cubic-bezier(.22,.61,.36,1);
 }
 
-.work-card::after {
-  content: "";
+.work-carousel-card__shade {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(180deg, rgba(4,30,21,.02) 24%, rgba(4,30,21,.18) 52%, rgba(4,30,21,.91) 100%);
+  background:
+    linear-gradient(180deg, rgba(4,30,21,.02) 20%, rgba(4,30,21,.08) 46%, rgba(4,30,21,.84) 100%);
   pointer-events: none;
 }
 
-.work-card::before {
-  content: "";
+.work-carousel-card__content {
   position: absolute;
-  left: 20px;
-  bottom: 91px;
-  z-index: 3;
-  width: 38px;
+  z-index: 2;
+  left: 24px;
+  right: 24px;
+  bottom: 22px;
+}
+
+.work-carousel-card__index {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  margin-bottom: 16px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -.05em;
+}
+
+.work-carousel-card__index::after {
+  content: "";
+  width: 36px;
   height: 2px;
+  margin-left: 12px;
   border-radius: 999px;
   background: #ffd23f;
-  transition: width .2s ease;
 }
 
-.work-card:hover img {
-  transform: scale(1.035);
-}
-
-.work-card:hover::before {
-  width: 58px;
-}
-
-.work-card > div {
-  position: absolute;
-  z-index: 4;
-  left: 20px;
-  right: 20px;
-  bottom: 18px;
-  min-height: 66px;
-}
-
-.work-card span {
-  display: none;
-}
-
-.work-card h3,
-.work-card:first-child h3 {
-  margin: 0 0 5px;
+.work-carousel-card h3 {
+  margin: 0 0 6px;
   color: #fff;
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -.03em;
-  animation: lumenWorkTextA 10s ease-in-out infinite;
 }
 
-.work-card p {
+.work-carousel-card p {
+  max-width: 270px;
   margin: 0;
-  color: rgba(255,255,255,.72);
+  color: rgba(255,255,255,.76);
   font-size: 12px;
-  line-height: 1.48;
-  animation: lumenWorkTextA 10s ease-in-out infinite;
+  line-height: 1.5;
 }
 
-.work-card > div::before,
-.work-card > div::after {
-  position: absolute;
-  left: 0;
-  right: 0;
-  opacity: 0;
-  animation: lumenWorkTextB 10s ease-in-out infinite;
+.work-carousel-card:hover img {
+  transform: scale(1.035) translateZ(0);
 }
 
-.work-card > div::before {
-  content: var(--work-title-b);
-  bottom: 27px;
-  color: #fff;
-  font-size: 19px;
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -.03em;
+.work-carousel__dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 12px;
+  margin-top: 24px;
 }
 
-.work-card > div::after {
-  content: var(--work-desc-b);
-  bottom: 0;
-  color: rgba(255,255,255,.72);
-  font-size: 12px;
-  line-height: 1.48;
-}
-
-/* two-page indicator: 3 cards + 3 cards */
-.work-cards::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 4px;
-  width: 28px;
-  height: 8px;
-  transform: translateX(-50%);
-  background-image: radial-gradient(circle at 4px 4px, rgba(255,255,255,.78) 3px, transparent 3.4px);
-  background-size: 14px 8px;
-  background-repeat: repeat-x;
-}
-
-.work-cards::after {
-  content: "";
-  position: absolute;
-  left: calc(50% - 10px);
-  bottom: 5px;
+.work-carousel__dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
+  background: rgba(255,255,255,.74);
+  transition: width .22s ease, background .22s ease, border-radius .22s ease;
+}
+
+.work-carousel__dot.is-active {
+  width: 17px;
+  border-radius: 999px;
   background: #ffd23f;
-  box-shadow: 0 0 0 1px rgba(255,210,63,.12);
-  animation: lumenWorkDotDesktop 10s steps(1,end) infinite;
 }
 
 .work-panel__link {
@@ -295,7 +258,7 @@
   justify-content: center;
   width: max-content;
   min-height: 44px;
-  margin: 18px auto 0;
+  margin: 14px auto 0;
   padding: 0 18px;
   border: 0;
   background: transparent;
@@ -315,48 +278,18 @@
   color: #fff2b4;
 }
 
-.work-cards:hover .work-card img,
-.work-cards:hover .work-card h3,
-.work-cards:hover .work-card p,
-.work-cards:hover .work-card > div::before,
-.work-cards:hover .work-card > div::after,
-.work-cards:hover::after {
-  animation-play-state: paused;
-}
-
-@keyframes lumenWorkImageA {
-  0%, 46% { opacity: 1; }
-  50%, 96% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-@keyframes lumenWorkTextA {
-  0%, 45% { opacity: 1; transform: translateY(0); }
-  49%, 96% { opacity: 0; transform: translateY(4px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes lumenWorkTextB {
-  0%, 45% { opacity: 0; transform: translateY(4px); }
-  50%, 95% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(4px); }
-}
-
-@keyframes lumenWorkDotDesktop {
-  0%, 49.99% { transform: translateX(0); }
-  50%, 100% { transform: translateX(14px); }
-}
-
 @media (max-width: 980px) {
   .work-panel {
     padding: 46px 34px 38px;
   }
 
-  .work-card,
-  .work-card:first-child,
-  .work-card:nth-child(2),
-  .work-card:nth-child(3) {
-    min-height: 300px;
+  .work-carousel {
+    --work-gap: 18px;
+  }
+
+  .work-carousel-card {
+    flex-basis: calc((100% - 18px) / 2);
+    aspect-ratio: 4 / 5;
   }
 }
 
@@ -387,177 +320,66 @@
     margin-bottom: 22px;
   }
 
-  .work-panel__head h2::before {
-    white-space: normal;
+  .work-panel__head h2 {
+    max-width: 100%;
     font-size: clamp(30px, 9vw, 38px);
   }
 
-  .work-panel__head p:last-child::before {
+  .work-panel__head p:last-child {
+    max-width: 100%;
     font-size: 14px;
     line-height: 1.58;
   }
 
-  .work-cards {
-    display: block;
-    min-height: 336px;
-    padding-bottom: 34px;
+  .work-carousel {
+    --work-gap: 14px;
   }
 
-  .work-card,
-  .work-card:first-child,
-  .work-card:nth-child(2),
-  .work-card:nth-child(3) {
-    position: absolute;
-    inset: 0 0 34px;
-    min-height: 0;
+  .work-carousel__viewport {
     border-radius: 18px;
-    opacity: 0;
-    pointer-events: none;
   }
 
-  .work-card:nth-child(1) { animation: lumenWorkMobileCard1 30s ease-in-out infinite; }
-  .work-card:nth-child(2) { animation: lumenWorkMobileCard2 30s ease-in-out infinite; }
-  .work-card:nth-child(3) { animation: lumenWorkMobileCard3 30s ease-in-out infinite; }
-
-  .work-card img,
-  .work-card:first-child img {
-    animation: lumenWorkMobileImageA 30s ease-in-out infinite;
+  .work-carousel-card {
+    flex-basis: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 18px;
   }
 
-  .work-card h3,
-  .work-card:first-child h3,
-  .work-card p {
-    animation: lumenWorkMobileTextA 30s ease-in-out infinite;
+  .work-carousel-card__content {
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
   }
 
-  .work-card > div::before,
-  .work-card > div::after {
-    animation: lumenWorkMobileTextB 30s ease-in-out infinite;
+  .work-carousel-card__index {
+    margin-bottom: 12px;
+    font-size: 22px;
   }
 
-  .work-card::before {
-    left: 16px;
-    bottom: 82px;
-    width: 34px;
-  }
-
-  .work-card > div {
-    left: 16px;
-    right: 16px;
-    bottom: 15px;
-    min-height: 66px;
-  }
-
-  .work-card h3,
-  .work-card:first-child h3,
-  .work-card > div::before {
+  .work-carousel-card h3 {
     font-size: 18px;
   }
 
-  .work-card p,
-  .work-card > div::after {
+  .work-carousel-card p {
     font-size: 11.5px;
   }
 
-  .work-cards::before {
-    bottom: 7px;
-    width: 84px;
-    background-image: radial-gradient(circle at 4px 4px, rgba(255,255,255,.76) 3px, transparent 3.4px);
-    background-size: 14px 8px;
-  }
-
-  .work-cards::after {
-    left: calc(50% - 38px);
-    bottom: 8px;
-    animation: lumenWorkDotMobile 30s steps(1,end) infinite;
+  .work-carousel__dots {
+    margin-top: 18px;
   }
 
   .work-panel__link {
     width: 100%;
-    margin-top: 12px;
+    margin-top: 10px;
     padding-inline: 8px;
     font-size: 10px;
   }
 }
 
-@keyframes lumenWorkMobileCard1 {
-  0%, 15% { opacity: 1; pointer-events: auto; }
-  16.66%, 48.33% { opacity: 0; pointer-events: none; }
-  50%, 65% { opacity: 1; pointer-events: auto; }
-  66.66%, 100% { opacity: 0; pointer-events: none; }
-}
-
-@keyframes lumenWorkMobileCard2 {
-  0%, 15% { opacity: 0; pointer-events: none; }
-  16.66%, 31.66% { opacity: 1; pointer-events: auto; }
-  33.33%, 65% { opacity: 0; pointer-events: none; }
-  66.66%, 81.66% { opacity: 1; pointer-events: auto; }
-  83.33%, 100% { opacity: 0; pointer-events: none; }
-}
-
-@keyframes lumenWorkMobileCard3 {
-  0%, 31.66% { opacity: 0; pointer-events: none; }
-  33.33%, 48.33% { opacity: 1; pointer-events: auto; }
-  50%, 81.66% { opacity: 0; pointer-events: none; }
-  83.33%, 98.33% { opacity: 1; pointer-events: auto; }
-  100% { opacity: 0; pointer-events: none; }
-}
-
-@keyframes lumenWorkMobileImageA {
-  0%, 48.33% { opacity: 1; }
-  50%, 98.33% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-@keyframes lumenWorkMobileTextA {
-  0%, 48.33% { opacity: 1; transform: translateY(0); }
-  50%, 98.33% { opacity: 0; transform: translateY(4px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes lumenWorkMobileTextB {
-  0%, 48.33% { opacity: 0; transform: translateY(4px); }
-  50%, 98.33% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(4px); }
-}
-
-@keyframes lumenWorkDotMobile {
-  0%, 16.65% { transform: translateX(0); }
-  16.66%, 33.32% { transform: translateX(14px); }
-  33.33%, 49.99% { transform: translateX(28px); }
-  50%, 66.65% { transform: translateX(42px); }
-  66.66%, 83.32% { transform: translateX(56px); }
-  83.33%, 100% { transform: translateX(70px); }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .work-card img,
-  .work-card h3,
-  .work-card p,
-  .work-card > div::before,
-  .work-card > div::after,
-  .work-card:nth-child(1),
-  .work-card:nth-child(2),
-  .work-card:nth-child(3),
-  .work-cards::after {
-    animation: none !important;
-  }
-
-  .work-card img,
-  .work-card h3,
-  .work-card p {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  .work-card > div::before,
-  .work-card > div::after {
-    opacity: 0 !important;
-  }
-
-  @media (max-width: 680px) {
-    .work-card:nth-child(1) { opacity: 1 !important; pointer-events: auto !important; }
-    .work-card:nth-child(2),
-    .work-card:nth-child(3) { opacity: 0 !important; pointer-events: none !important; }
+  .work-carousel__track,
+  .work-carousel-card img,
+  .work-carousel__dot {
+    transition: none !important;
   }
 }
