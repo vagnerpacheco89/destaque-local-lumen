@@ -1,0 +1,48 @@
+/* TRABALHOS — image fidelity pass.
+   Keep the carousel geometry and motion intact while avoiding GPU/mask rasterization
+   that can make compressed photographic assets look softer at rest. */
+
+.work-carousel-card {
+  transform: none !important;
+  backface-visibility: visible !important;
+  -webkit-mask-image: none !important;
+  contain: paint;
+}
+
+.work-carousel-card img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  transform: none !important;
+  backface-visibility: visible !important;
+  image-rendering: auto !important;
+  filter: none !important;
+  opacity: 1 !important;
+  transition: transform .42s cubic-bezier(.22,.61,.36,1) !important;
+}
+
+.work-carousel-card:hover img {
+  transform: scale(1.018) !important;
+}
+
+.work-carousel-card__shade {
+  background: linear-gradient(
+    180deg,
+    rgba(4,30,21,0) 18%,
+    rgba(4,30,21,.035) 45%,
+    rgba(4,30,21,.76) 100%
+  ) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-carousel-card img,
+  .work-carousel-card:hover img {
+    transform: none !important;
+    transition: none !important;
+  }
+}
