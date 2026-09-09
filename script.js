@@ -1,11 +1,16 @@
 (() => {
-  const VERSION = '20260909-work-proof-copy-04';
+  const VERSION = '20260909-quality-editorial-01';
+
+  const initPageEnhancements = () => {
+    initWorkCarousel();
+    initQualitySection();
+  };
 
   const loadBaseScript = () => {
     const base = document.createElement('script');
     base.src = `script-base.js?v=${VERSION}`;
-    base.onload = initWorkCarousel;
-    base.onerror = initWorkCarousel;
+    base.onload = initPageEnhancements;
+    base.onerror = initPageEnhancements;
     document.head.appendChild(base);
   };
 
@@ -221,6 +226,51 @@
 
     move(false);
     start();
+  };
+
+  const initQualitySection = () => {
+    const section = document.querySelector('.quality-section');
+    if (!section || section.dataset.qualityReady === 'true') return;
+
+    section.dataset.qualityReady = 'true';
+    section.innerHTML = `
+      <div class="container quality-layout">
+        <div class="quality-copy">
+          <p class="eyebrow">NO ATENDIMENTO</p>
+          <h2>O que você pode esperar ao contratar meu serviço.</h2>
+          <p class="quality-copy__lead">Clareza antes de começar, cuidado durante a execução e conferência antes de finalizar.</p>
+        </div>
+
+        <div class="quality-list" aria-label="Diferenciais do atendimento">
+          <article class="quality-item">
+            <span class="quality-item__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3 1.5-5A8 8 0 1 1 21 15Z"></path><path d="M8 10h8M8 14h5"></path></svg>
+            </span>
+            <div><h3>Explicação clara</h3><p>Você entende o que precisa ser feito antes do serviço começar.</p></div>
+          </article>
+
+          <article class="quality-item">
+            <span class="quality-item__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M9 5h9a2 2 0 0 1 2 2v12H6V8"></path><path d="M9 3H5a2 2 0 0 0-2 2v14h3"></path><path d="m10 12 2 2 4-4"></path></svg>
+            </span>
+            <div><h3>Tudo combinado antes</h3><p>Serviço, materiais e orçamento são alinhados antes da execução.</p></div>
+          </article>
+
+          <article class="quality-item">
+            <span class="quality-item__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10.5V20h13v-9.5"></path><path d="m16.5 5.5.8-2 .8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8Z"></path></svg>
+            </span>
+            <div><h3>Cuidado com o local</h3><p>Organização durante o trabalho e atenção ao acabamento.</p></div>
+          </article>
+
+          <article class="quality-item">
+            <span class="quality-item__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.5 2.5L16 9"></path></svg>
+            </span>
+            <div><h3>Conferência final</h3><p>O que foi executado é testado antes da finalização.</p></div>
+          </article>
+        </div>
+      </div>`;
   };
 
   loadBaseScript();
