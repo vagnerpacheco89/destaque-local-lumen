@@ -1,5 +1,5 @@
 (() => {
-  const VERSION = '20260909-work-proof-03';
+  const VERSION = '20260909-work-proof-copy-04';
 
   const loadBaseScript = () => {
     const base = document.createElement('script');
@@ -18,8 +18,8 @@
 
     const title = section.querySelector('.work-panel__head h2');
     const lead = section.querySelector('.work-panel__head > p:last-child');
-    if (title) title.textContent = 'Veja alguns tipos de trabalho na prática.';
-    if (lead) lead.textContent = 'Exemplos visuais de situações e instalações que podem fazer parte do atendimento.';
+    if (title) title.textContent = 'Veja alguns trabalhos que já realizei.';
+    if (lead) lead.textContent = 'Serviços executados em diferentes situações, com atenção à instalação e ao que cada imóvel precisava.';
 
     const items = [
       {
