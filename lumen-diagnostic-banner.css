@@ -19,10 +19,44 @@
 }
 
 @media (max-width: 680px) {
+  /* Mobile head must stay inside the card. The desktop forced line break was
+     keeping each line unwrappable and clipping the copy on narrow screens. */
+  .diagnostic-card__head,
+  .diagnostic-card__head > div,
+  .diagnostic-card__head h2,
+  .diagnostic-card__head > p {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .diagnostic-card__head h2::before {
+    display: block !important;
+    white-space: pre-line !important;
+    font-size: clamp(27px, 8.4vw, 32px) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -.05em !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+  }
+
+  .diagnostic-card__head > p {
+    white-space: normal !important;
+    overflow: visible !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+  }
+
   .diagnostic-card__media {
     width: 100%;
     aspect-ratio: 1500 / 480;
     border-width: 4px !important;
     border-radius: 18px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .diagnostic-card__head h2::before {
+    font-size: 26px !important;
   }
 }
