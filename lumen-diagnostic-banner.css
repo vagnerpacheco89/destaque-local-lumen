@@ -1,0 +1,28 @@
+/* DIAGNOSTIC BANNER — editorial argument replaces the generic technical photo. */
+.diagnostic-card__media {
+  min-height: 0 !important;
+  aspect-ratio: 600 / 272;
+  background-color: #f7f3e9 !important;
+  background-image: url("./assets/lumen-diagnostic-banner.svg") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 100% 100% !important;
+}
+
+.diagnostic-card__media > img {
+  display: none !important;
+}
+
+.diagnostic-card__media::after,
+.diagnostic-card__play {
+  display: none !important;
+}
+
+@media (max-width: 680px) {
+  .diagnostic-card__media {
+    width: 100%;
+    aspect-ratio: 600 / 272;
+    border-width: 4px !important;
+    border-radius: 18px !important;
+  }
+}
