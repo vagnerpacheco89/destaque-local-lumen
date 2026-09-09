@@ -1,4 +1,4 @@
-/* DIAGNOSTIC BANNER — editorial argument replaces the generic technical photo. */
+/* DIAGNOSTIC BANNER — stable vector artwork, no raster stretching. */
 .diagnostic-card__media {
   min-height: 0 !important;
   aspect-ratio: 600 / 272;
@@ -6,7 +6,7 @@
   background-image: url("./assets/lumen-diagnostic-banner.svg") !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
-  background-size: 100% 100% !important;
+  background-size: cover !important;
 }
 
 .diagnostic-card__media > img {
