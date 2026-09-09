@@ -1,5 +1,5 @@
 (() => {
-  const VERSION = '20260909-work-slider-02';
+  const VERSION = '20260909-work-proof-03';
 
   const loadBaseScript = () => {
     const base = document.createElement('script');
@@ -18,43 +18,43 @@
 
     const title = section.querySelector('.work-panel__head h2');
     const lead = section.querySelector('.work-panel__head > p:last-child');
-    if (title) title.textContent = 'Trabalhos elétricos para diferentes necessidades.';
-    if (lead) lead.textContent = 'Alguns exemplos de serviços que podem fazer parte do atendimento.';
+    if (title) title.textContent = 'Veja alguns tipos de trabalho na prática.';
+    if (lead) lead.textContent = 'Exemplos visuais de situações e instalações que podem fazer parte do atendimento.';
 
     const items = [
       {
         title: 'Quadros elétricos',
-        description: 'Organização, proteção e correções.',
+        description: 'Organização e adequação da instalação.',
         image: 'https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-02-quadro-organizado.webp',
         alt: 'Quadro elétrico residencial organizado.'
       },
       {
         title: 'Iluminação',
-        description: 'Instalação de luminárias e correções.',
+        description: 'Instalação de pontos e luminárias.',
         image: 'https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-04-luminarias.webp',
         alt: 'Instalação de iluminação em residência.'
       },
       {
         title: 'Novos pontos',
-        description: 'Tomadas, pontos e adequações.',
+        description: 'Tomadas e pontos onde o imóvel precisa.',
         image: 'https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-03-novos-pontos.webp',
         alt: 'Instalação de tomada e novo ponto elétrico.'
       },
       {
         title: 'Chuveiros e circuitos',
-        description: 'Instalação, avaliação e correções.',
+        description: 'Instalação e correção do circuito.',
         image: 'https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-05-chuveiro.webp',
         alt: 'Chuveiro elétrico em instalação residencial.'
       },
       {
         title: 'Diagnóstico elétrico',
-        description: 'Testes para entender a origem da falha.',
+        description: 'Teste para localizar a origem da falha.',
         image: 'https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-10-teste-comercio.webp',
         alt: 'Eletricista realizando teste em instalação elétrica.'
       },
       {
         title: 'Fiação, DR e DPS',
-        description: 'Proteção, melhorias e adequações.',
+        description: 'Adequações e proteção da instalação.',
         image: 'https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-08-dr-dps.webp',
         alt: 'Componentes de proteção DR e DPS em instalação elétrica.'
       }
@@ -84,6 +84,18 @@
           ${items.map((_, index) => `<span class="work-carousel__dot${index === 0 ? ' is-active' : ''}"></span>`).join('')}
         </div>
       </div>`;
+
+    const oldCta = section.querySelector('.work-panel__link');
+    if (oldCta && !section.querySelector('.work-panel__closing')) {
+      const closing = document.createElement('div');
+      closing.className = 'work-panel__closing';
+      const question = document.createElement('p');
+      question.textContent = 'Tem algo parecido para resolver no seu imóvel?';
+      oldCta.textContent = 'FALAR COM RAFAEL →';
+      oldCta.classList.add('work-panel__cta');
+      oldCta.parentNode.insertBefore(closing, oldCta);
+      closing.append(question, oldCta);
+    }
 
     const carousel = host.querySelector('.work-carousel');
     const viewport = host.querySelector('.work-carousel__viewport');
