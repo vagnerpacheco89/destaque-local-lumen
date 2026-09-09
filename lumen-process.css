@@ -1,4 +1,4 @@
-/* COMO FUNCIONA — premium connected journey, visually distinct from Diferenciais. */
+/* COMO FUNCIONA — compact connected journey with progressive hover states. */
 
 .process-section {
   position: relative;
@@ -11,7 +11,7 @@
 
 .process-shell {
   position: relative;
-  padding: 48px 46px 42px;
+  padding: 48px 46px 40px;
   border: 1px solid rgba(16, 68, 47, .10);
   border-radius: 30px;
   background: #fffdf8;
@@ -35,7 +35,7 @@
   position: relative;
   z-index: 2;
   max-width: 760px;
-  margin-bottom: 48px;
+  margin-bottom: 38px;
 }
 
 .process-head .eyebrow {
@@ -76,140 +76,210 @@
 }
 
 .process-route {
+  --progress-right: 87.5%;
   position: relative;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 18px;
+  gap: 14px;
   margin-top: 0;
-  padding-top: 30px;
+  padding-top: 28px;
+}
+
+/* Neutral rail links the centres of the four stage markers. */
+.process-route::before,
+.process-route::after {
+  content: "";
+  position: absolute;
+  top: 50px;
+  height: 2px;
+  border-radius: 999px;
+  pointer-events: none;
 }
 
 .process-route::before {
-  content: "";
-  position: absolute;
   z-index: 0;
-  left: 5%;
-  right: 5%;
-  top: 56px;
-  height: 2px;
-  border-radius: 999px;
-  background: linear-gradient(
-    90deg,
-    rgba(28, 91, 67, .12),
-    rgba(28, 91, 67, .28) 24%,
-    rgba(255, 210, 63, .84) 50%,
-    rgba(28, 91, 67, .28) 76%,
-    rgba(28, 91, 67, .12)
-  );
+  left: 12.5%;
+  right: 12.5%;
+  background: rgba(28, 91, 67, .14);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.35);
 }
+
+/* Yellow rail grows toward the hovered/focused stage. */
+.process-route::after {
+  z-index: 1;
+  left: 12.5%;
+  right: var(--progress-right);
+  background: linear-gradient(90deg, #f2bc22, var(--yellow));
+  box-shadow: 0 0 12px rgba(255, 199, 43, .28);
+  transition: right .34s cubic-bezier(.22,.61,.36,1);
+}
+
+.process-route:has(.process-step:nth-child(1):is(:hover,:focus-within)) { --progress-right: 87.5%; }
+.process-route:has(.process-step:nth-child(2):is(:hover,:focus-within)) { --progress-right: 62.5%; }
+.process-route:has(.process-step:nth-child(3):is(:hover,:focus-within)) { --progress-right: 37.5%; }
+.process-route:has(.process-step:nth-child(4):is(:hover,:focus-within)) { --progress-right: 12.5%; }
 
 .process-step {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-width: 0;
-  min-height: 218px;
-  margin-top: 26px;
-  padding: 44px 21px 22px;
+  min-height: 174px;
+  margin-top: 22px;
+  padding: 34px 18px 22px;
   border: 1px solid rgba(16, 68, 47, .10);
-  border-radius: 20px;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.96), rgba(249,250,246,.94));
+  border-radius: 18px;
+  text-align: center;
   box-shadow:
-    0 14px 34px rgba(20,65,48,.055),
-    inset 0 1px 0 rgba(255,255,255,.92);
+    0 11px 28px rgba(20,65,48,.045),
+    inset 0 1px 0 rgba(255,255,255,.90);
   transition:
-    transform .22s ease,
-    border-color .22s ease,
-    box-shadow .22s ease,
-    background .22s ease;
+    transform .24s cubic-bezier(.22,.61,.36,1),
+    border-color .24s ease,
+    box-shadow .24s ease,
+    background .24s ease;
+}
+
+/* Subtle variation keeps the cards from reading as four identical white boxes. */
+.process-step:nth-child(1) {
+  background: linear-gradient(180deg, #fbfcf8 0%, #f7faf5 100%);
+}
+.process-step:nth-child(2) {
+  background: linear-gradient(180deg, #f8fbf6 0%, #f3f8f2 100%);
+}
+.process-step:nth-child(3) {
+  background: linear-gradient(180deg, #f6faf4 0%, #eff6ee 100%);
+}
+.process-step:nth-child(4) {
+  background: linear-gradient(180deg, #fbfaef 0%, #f8f6e8 100%);
+}
+
+.process-step > div {
+  width: 100%;
+  max-width: 235px;
 }
 
 .process-step::after {
   content: "";
   position: absolute;
-  left: 20px;
-  right: 20px;
-  bottom: 0;
+  left: 50%;
+  bottom: 10px;
+  width: 34px;
   height: 3px;
-  border-radius: 999px 999px 0 0;
+  border-radius: 999px;
   background: var(--yellow);
   opacity: 0;
-  transform: scaleX(.28);
-  transform-origin: left center;
-  transition: opacity .22s ease, transform .22s ease;
-}
-
-.process-step:hover,
-.process-step:focus-within {
-  transform: translateY(-5px);
-  border-color: rgba(255, 194, 31, .42);
-  background: #fffef9;
-  box-shadow:
-    0 20px 42px rgba(20,65,48,.09),
-    inset 0 1px 0 rgba(255,255,255,.96);
-}
-
-.process-step:hover::after,
-.process-step:focus-within::after {
-  opacity: 1;
-  transform: scaleX(1);
+  transform: translateX(-50%) scaleX(.35);
+  transition: opacity .22s ease, transform .28s cubic-bezier(.22,.61,.36,1);
 }
 
 .process-step__number {
   position: absolute;
-  left: 20px;
-  top: -27px;
+  z-index: 3;
+  left: 50%;
+  top: -23px;
   display: grid;
   place-items: center;
-  width: 54px;
-  height: 54px;
-  border: 1px solid rgba(255, 194, 31, .48);
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(28, 91, 67, .18);
   border-radius: 50%;
   background: #fffdf8;
   color: #174d39;
   box-shadow:
-    0 10px 24px rgba(20,65,48,.10),
-    0 0 0 7px #fffdf8;
-  font-size: 15px;
+    0 8px 20px rgba(20,65,48,.09),
+    0 0 0 6px #fffdf8;
+  font-size: 13.5px;
   font-weight: 850;
   line-height: 1;
   letter-spacing: -.035em;
+  transform: translateX(-50%);
   transition:
-    color .22s ease,
-    background .22s ease,
-    border-color .22s ease,
-    transform .22s ease,
-    box-shadow .22s ease;
+    color .24s ease,
+    background .24s ease,
+    border-color .24s ease,
+    transform .24s cubic-bezier(.22,.61,.36,1),
+    box-shadow .24s ease;
 }
 
 .process-step__number::after {
   content: none;
 }
 
-.process-step:hover .process-step__number,
-.process-step:focus-within .process-step__number {
-  transform: translateY(-2px);
-  border-color: var(--yellow);
-  background: var(--yellow);
-  color: #123e2f;
-  box-shadow:
-    0 12px 28px rgba(255, 194, 31, .22),
-    0 0 0 7px #fffdf8;
-}
-
 .process-step h3 {
-  margin: 0 0 9px;
+  margin: 0 0 8px;
   color: #153c2f;
-  font-size: 17px;
-  line-height: 1.22;
+  font-size: 16px;
+  line-height: 1.2;
   letter-spacing: -.028em;
+  transition: color .22s ease;
 }
 
 .process-step p {
   margin: 0;
   color: #6b7a73;
-  font-size: 12px;
-  line-height: 1.58;
+  font-size: 11.5px;
+  line-height: 1.55;
+  transition: color .22s ease;
+}
+
+/* Current stage: yellow, lifted and visually dominant. */
+.process-step:hover,
+.process-step:focus-within {
+  transform: translateY(-4px);
+  border-color: rgba(255, 194, 31, .48);
+  background: linear-gradient(180deg, #fffdf1 0%, #fff8d9 100%);
+  box-shadow:
+    0 18px 36px rgba(20,65,48,.085),
+    0 8px 24px rgba(255,199,43,.08),
+    inset 0 1px 0 rgba(255,255,255,.94);
+}
+
+.process-step:hover::after,
+.process-step:focus-within::after {
+  opacity: 1;
+  transform: translateX(-50%) scaleX(1);
+}
+
+.process-step:hover .process-step__number,
+.process-step:focus-within .process-step__number {
+  border-color: var(--yellow);
+  background: var(--yellow);
+  color: #123e2f;
+  box-shadow:
+    0 11px 26px rgba(255, 194, 31, .22),
+    0 0 0 6px #fffdf8;
+  transform: translateX(-50%) translateY(-3px) scale(1.06);
+}
+
+/* Previous stages become visibly completed when hovering a later stage. */
+.process-route:has(.process-step:nth-child(2):is(:hover,:focus-within)) .process-step:nth-child(1),
+.process-route:has(.process-step:nth-child(3):is(:hover,:focus-within)) .process-step:nth-child(-n+2),
+.process-route:has(.process-step:nth-child(4):is(:hover,:focus-within)) .process-step:nth-child(-n+3) {
+  border-color: rgba(28, 91, 67, .22);
+  background: linear-gradient(180deg, #f0f8f2 0%, #e9f4ec 100%);
+  box-shadow:
+    0 12px 28px rgba(20,65,48,.055),
+    inset 0 1px 0 rgba(255,255,255,.88);
+}
+
+.process-route:has(.process-step:nth-child(2):is(:hover,:focus-within)) .process-step:nth-child(1) .process-step__number,
+.process-route:has(.process-step:nth-child(3):is(:hover,:focus-within)) .process-step:nth-child(-n+2) .process-step__number,
+.process-route:has(.process-step:nth-child(4):is(:hover,:focus-within)) .process-step:nth-child(-n+3) .process-step__number {
+  border-color: #1b7656;
+  background: #1b7656;
+  color: #fff;
+  box-shadow:
+    0 9px 22px rgba(27,118,86,.17),
+    0 0 0 6px #fffdf8;
+}
+
+.process-route:has(.process-step:nth-child(2):is(:hover,:focus-within)) .process-step:nth-child(1) h3,
+.process-route:has(.process-step:nth-child(3):is(:hover,:focus-within)) .process-step:nth-child(-n+2) h3,
+.process-route:has(.process-step:nth-child(4):is(:hover,:focus-within)) .process-step:nth-child(-n+3) h3 {
+  color: #174d39;
 }
 
 .process-close {
@@ -217,8 +287,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  margin-top: 32px;
-  padding-top: 24px;
+  margin-top: 28px;
+  padding-top: 22px;
   border-top: 1px solid rgba(16,68,47,.10);
 }
 
@@ -247,7 +317,7 @@
 
   .process-head {
     max-width: 700px;
-    margin-bottom: 38px;
+    margin-bottom: 34px;
   }
 
   .process-head__lead {
@@ -256,16 +326,17 @@
 
   .process-route {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 42px 20px;
-    padding-top: 28px;
+    gap: 42px 18px;
+    padding-top: 26px;
   }
 
-  .process-route::before {
+  .process-route::before,
+  .process-route::after {
     display: none;
   }
 
   .process-step {
-    min-height: 190px;
+    min-height: 158px;
   }
 }
 
@@ -281,7 +352,7 @@
   }
 
   .process-head {
-    margin-bottom: 30px;
+    margin-bottom: 28px;
   }
 
   .process-head h2 {
@@ -302,58 +373,85 @@
 
   .process-route::before {
     display: block;
-    left: 25px;
+    left: 24px;
     right: auto;
     top: 28px;
     bottom: 28px;
     width: 2px;
     height: auto;
-    background: linear-gradient(180deg, rgba(255,210,63,.92), rgba(28,91,67,.18));
+    background: rgba(28,91,67,.14);
+  }
+
+  .process-route::after {
+    display: none;
   }
 
   .process-step {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
     min-height: 0;
-    margin: 0 0 18px;
-    padding: 22px 18px 20px 28px;
-    border-radius: 18px;
+    margin: 0 0 16px;
+    padding: 20px 18px 20px 28px;
+    border-radius: 17px;
+    text-align: left;
   }
 
   .process-step:last-child {
     margin-bottom: 0;
   }
 
+  .process-step > div {
+    max-width: none;
+  }
+
   .process-step__number {
     left: -31px;
-    top: 19px;
-    width: 46px;
-    height: 46px;
+    top: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 12.5px;
+    transform: translate(-50%, -50%);
     box-shadow:
       0 8px 20px rgba(20,65,48,.09),
-      0 0 0 6px #fffdf8;
-    font-size: 13px;
+      0 0 0 5px #fffdf8;
   }
 
   .process-step:hover .process-step__number,
   .process-step:focus-within .process-step__number {
+    transform: translate(-50%, -50%) scale(1.04);
     box-shadow:
       0 10px 24px rgba(255,194,31,.20),
-      0 0 0 6px #fffdf8;
+      0 0 0 5px #fffdf8;
   }
 
   .process-step h3 {
-    margin-bottom: 7px;
-    font-size: 15.5px;
+    margin-bottom: 6px;
+    font-size: 15px;
   }
 
   .process-step p {
     font-size: 11.5px;
   }
 
+  .process-step::after {
+    left: 28px;
+    right: auto;
+    bottom: 9px;
+    transform: scaleX(.35);
+    transform-origin: left center;
+  }
+
+  .process-step:hover::after,
+  .process-step:focus-within::after {
+    transform: scaleX(1);
+  }
+
   .process-close {
     flex-direction: column;
     align-items: stretch;
     gap: 14px;
-    margin-top: 28px;
+    margin-top: 26px;
     padding-top: 20px;
   }
 
@@ -368,6 +466,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .process-route::after,
   .process-step,
   .process-step::after,
   .process-step__number {
@@ -375,9 +474,19 @@
   }
 
   .process-step:hover,
-  .process-step:focus-within,
+  .process-step:focus-within {
+    transform: none;
+  }
+
   .process-step:hover .process-step__number,
   .process-step:focus-within .process-step__number {
-    transform: none;
+    transform: translateX(-50%);
+  }
+
+  @media (max-width: 680px) {
+    .process-step:hover .process-step__number,
+    .process-step:focus-within .process-step__number {
+      transform: translate(-50%, -50%);
+    }
   }
 }
