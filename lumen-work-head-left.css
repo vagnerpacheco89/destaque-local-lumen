@@ -1,0 +1,61 @@
+/* TRABALHOS — align section intro with the established LUMEN section system. */
+
+.work-panel__head {
+  max-width: 820px;
+  margin: 0 0 34px;
+  text-align: left;
+}
+
+.work-panel__head .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+  margin: 0 0 14px;
+  color: #ffda55;
+}
+
+.work-panel__head .eyebrow::before {
+  content: "";
+  width: 46px;
+  height: 2px;
+  flex: 0 0 46px;
+  border-radius: 999px;
+  background: #ffd23f;
+}
+
+.work-panel__head h2 {
+  max-width: 760px;
+  margin: 0 0 14px;
+  text-align: left;
+}
+
+.work-panel__head > p:last-child {
+  max-width: 720px;
+  margin: 0;
+  text-align: left;
+}
+
+@media (max-width: 680px) {
+  .work-panel__head {
+    max-width: 100%;
+    margin-bottom: 22px;
+    text-align: left;
+  }
+
+  .work-panel__head .eyebrow {
+    justify-content: flex-start;
+    gap: 11px;
+  }
+
+  .work-panel__head .eyebrow::before {
+    width: 36px;
+    flex-basis: 36px;
+  }
+
+  .work-panel__head h2,
+  .work-panel__head > p:last-child {
+    max-width: 100%;
+    text-align: left;
+  }
+}
