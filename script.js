@@ -1,9 +1,10 @@
 (() => {
-  const VERSION = '20260909-quality-editorial-01';
+  const VERSION = '20260909-process-sequential-01';
 
   const initPageEnhancements = () => {
     initWorkCarousel();
     initQualitySection();
+    initProcessSection();
   };
 
   const loadBaseScript = () => {
@@ -269,6 +270,55 @@
             </span>
             <div><h3>Conferência final</h3><p>O que foi executado é testado antes da finalização.</p></div>
           </article>
+        </div>
+      </div>`;
+  };
+
+  const initProcessSection = () => {
+    const section = document.querySelector('.process-section');
+    if (!section || section.dataset.processReady === 'true') return;
+
+    section.dataset.processReady = 'true';
+    section.innerHTML = `
+      <div class="container process-shell">
+        <div class="process-head">
+          <div>
+            <p class="eyebrow">COMO FUNCIONA</p>
+            <h2>Do primeiro contato ao serviço finalizado.</h2>
+          </div>
+          <p class="process-head__lead">Você explica o que precisa, eu avalio a situação e combinamos o serviço antes de começar.</p>
+        </div>
+
+        <figure class="process-media">
+          <img src="https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-07-fiacao-reforma.webp" alt="Eletricista durante um serviço em instalação residencial." loading="lazy" decoding="async" />
+          <figcaption>Um caminho simples, do contato à conferência final.</figcaption>
+        </figure>
+
+        <div class="process-route" aria-label="Etapas do atendimento">
+          <article class="process-step">
+            <span class="process-step__number" aria-hidden="true">01</span>
+            <div><h3>Você me conta o que precisa</h3><p>Envie uma mensagem e, quando possível, fotos ou vídeos da situação.</p></div>
+          </article>
+
+          <article class="process-step">
+            <span class="process-step__number" aria-hidden="true">02</span>
+            <div><h3>Eu avalio o cenário</h3><p>As informações ajudam a entender o problema e se é necessária uma visita.</p></div>
+          </article>
+
+          <article class="process-step">
+            <span class="process-step__number" aria-hidden="true">03</span>
+            <div><h3>Combinamos o serviço</h3><p>O que será feito, materiais e orçamento são alinhados antes da execução.</p></div>
+          </article>
+
+          <article class="process-step">
+            <span class="process-step__number" aria-hidden="true">04</span>
+            <div><h3>Execução e conferência</h3><p>O serviço é realizado e testado antes da finalização.</p></div>
+          </article>
+        </div>
+
+        <div class="process-close">
+          <p>Pronto para explicar o que precisa?</p>
+          <button class="btn btn--yellow" type="button" data-demo-cta>COMEÇAR PELO WHATSAPP →</button>
         </div>
       </div>`;
   };
