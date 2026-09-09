@@ -34,11 +34,8 @@
 .process-head {
   position: relative;
   z-index: 2;
-  display: grid;
-  grid-template-columns: minmax(0, 1.06fr) minmax(300px, .72fr);
-  gap: 64px;
-  align-items: end;
-  margin-bottom: 30px;
+  max-width: 760px;
+  margin-bottom: 42px;
 }
 
 .process-head .eyebrow {
@@ -66,54 +63,16 @@
 }
 
 .process-head__lead {
-  max-width: 470px;
-  margin: 0 0 4px;
+  max-width: 650px;
+  margin: 20px 0 0;
   color: #65766e;
   font-size: 16px;
   line-height: 1.65;
 }
 
+/* The process should not repeat the panoramic-media language used in Diagnóstico. */
 .process-media {
-  position: relative;
-  height: 260px;
-  margin: 0;
-  border-radius: 22px;
-  overflow: hidden;
-  background: #dfe6e1;
-}
-
-.process-media::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(12, 61, 43, .18), transparent 58%);
-  pointer-events: none;
-}
-
-.process-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 52%;
-}
-
-.process-media figcaption {
-  position: absolute;
-  z-index: 2;
-  left: 18px;
-  bottom: 18px;
-  max-width: calc(100% - 36px);
-  padding: 9px 12px;
-  border: 1px solid rgba(255,255,255,.60);
-  border-radius: 999px;
-  background: rgba(255,253,248,.90);
-  color: #194f3c;
-  box-shadow: 0 8px 22px rgba(12,61,43,.08);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  font-size: 10.5px;
-  font-weight: 800;
-  letter-spacing: .015em;
+  display: none !important;
 }
 
 .process-route {
@@ -121,7 +80,7 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 28px;
-  margin-top: 34px;
+  margin-top: 0;
   padding-top: 5px;
 }
 
@@ -219,8 +178,8 @@
   }
 
   .process-head {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    max-width: 700px;
+    margin-bottom: 34px;
   }
 
   .process-head__lead {
@@ -259,7 +218,7 @@
   }
 
   .process-head {
-    margin-bottom: 22px;
+    margin-bottom: 28px;
   }
 
   .process-head h2 {
@@ -268,25 +227,14 @@
   }
 
   .process-head__lead {
+    margin-top: 15px;
     font-size: 14px;
     line-height: 1.6;
   }
 
-  .process-media {
-    height: 210px;
-    border-radius: 18px;
-  }
-
-  .process-media figcaption {
-    left: 12px;
-    bottom: 12px;
-    max-width: calc(100% - 24px);
-    font-size: 9.5px;
-  }
-
   .process-route {
     display: block;
-    margin-top: 26px;
+    margin-top: 0;
     padding: 0 0 0 17px;
   }
 
