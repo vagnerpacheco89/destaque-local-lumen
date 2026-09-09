@@ -95,6 +95,52 @@
   content: "Parou de funcionar ou apresenta sinais de dano." !important;
 }
 
+/* MICROINTERACTION — a green band sweeps across the card border on hover. */
+.diagnostic-features article::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 3 !important;
+  padding: 2px !important;
+  border-radius: inherit !important;
+  pointer-events: none !important;
+  opacity: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 34%,
+    rgba(23, 107, 75, 0) 40%,
+    #176b4b 48%,
+    #176b4b 54%,
+    rgba(23, 107, 75, 0) 62%,
+    transparent 68%
+  );
+  background-size: 300% 100%;
+  background-position: 100% 0;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.diagnostic-features article:hover::after {
+  opacity: 1;
+  animation: diagnostic-border-sweep .82s cubic-bezier(.22, .61, .36, 1) both;
+}
+
+@keyframes diagnostic-border-sweep {
+  from { background-position: 100% 0; }
+  to { background-position: 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .diagnostic-features article:hover::after {
+    animation: none;
+    background: #176b4b;
+    opacity: .9;
+  }
+}
+
 @media (max-width: 980px) {
   .diagnostic-features article,
   .diagnostic-features article:nth-child(2) {
