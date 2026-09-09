@@ -1,7 +1,7 @@
-/* DIAGNOSTIC BANNER — stable vector artwork, no raster stretching. */
+/* DIAGNOSTIC BANNER — wide editorial artwork fitted to the original media height. */
 .diagnostic-card__media {
   min-height: 0 !important;
-  aspect-ratio: 600 / 272;
+  aspect-ratio: 1500 / 480;
   background-color: #f7f3e9 !important;
   background-image: url("./assets/lumen-diagnostic-banner.svg") !important;
   background-repeat: no-repeat !important;
@@ -21,7 +21,7 @@
 @media (max-width: 680px) {
   .diagnostic-card__media {
     width: 100%;
-    aspect-ratio: 600 / 272;
+    aspect-ratio: 1500 / 480;
     border-width: 4px !important;
     border-radius: 18px !important;
   }
