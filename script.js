@@ -1,5 +1,5 @@
 (() => {
-  const VERSION = '20260909-process-sequential-01';
+  const VERSION = '20260909-process-cards-03';
 
   const initPageEnhancements = () => {
     initWorkCarousel();
@@ -282,32 +282,25 @@
     section.innerHTML = `
       <div class="container process-shell">
         <div class="process-head">
-          <div>
-            <p class="eyebrow">COMO FUNCIONA</p>
-            <h2>Do primeiro contato ao serviço finalizado.</h2>
-          </div>
+          <p class="eyebrow">COMO FUNCIONA</p>
+          <h2>Do primeiro contato ao serviço finalizado.</h2>
           <p class="process-head__lead">Você explica o que precisa, eu avalio a situação e combinamos o serviço antes de começar.</p>
         </div>
-
-        <figure class="process-media">
-          <img src="https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-07-fiacao-reforma.webp" alt="Eletricista durante um serviço em instalação residencial." loading="lazy" decoding="async" />
-          <figcaption>Um caminho simples, do contato à conferência final.</figcaption>
-        </figure>
 
         <div class="process-route" aria-label="Etapas do atendimento">
           <article class="process-step">
             <span class="process-step__number" aria-hidden="true">01</span>
-            <div><h3>Você me conta o que precisa</h3><p>Envie uma mensagem e, quando possível, fotos ou vídeos da situação.</p></div>
+            <div><h3>Você me conta o que precisa</h3><p>Envie mensagem e, se possível, fotos ou vídeos da situação.</p></div>
           </article>
 
           <article class="process-step">
             <span class="process-step__number" aria-hidden="true">02</span>
-            <div><h3>Eu avalio o cenário</h3><p>As informações ajudam a entender o problema e se é necessária uma visita.</p></div>
+            <div><h3>Eu avalio o cenário</h3><p>Analiso o problema e vejo se é preciso uma visita.</p></div>
           </article>
 
           <article class="process-step">
             <span class="process-step__number" aria-hidden="true">03</span>
-            <div><h3>Combinamos o serviço</h3><p>O que será feito, materiais e orçamento são alinhados antes da execução.</p></div>
+            <div><h3>Combinamos o serviço</h3><p>Alinhamos o que será feito, materiais e orçamento.</p></div>
           </article>
 
           <article class="process-step">
