@@ -1,0 +1,196 @@
+.area-section {
+  padding-top: 40px;
+  padding-bottom: 74px;
+  background: #fffdf8;
+}
+
+.area-card {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr);
+  gap: clamp(48px, 6vw, 86px);
+  align-items: center;
+  padding: clamp(46px, 5vw, 66px);
+  border-radius: 32px;
+  background: #10442f;
+  color: #fff;
+  box-shadow: 0 22px 54px rgba(16, 68, 47, .12);
+}
+
+.area-card::before {
+  content: "";
+  position: absolute;
+  width: 210px;
+  height: 210px;
+  right: -92px;
+  top: -112px;
+  border: 24px solid rgba(255, 255, 255, .045);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.area-card::after {
+  content: "";
+  position: absolute;
+  width: 86px;
+  height: 7px;
+  left: clamp(46px, 5vw, 66px);
+  bottom: 0;
+  border-radius: 8px 8px 0 0;
+  background: #f5bf25;
+  pointer-events: none;
+}
+
+.area-card__intro,
+.area-cities {
+  position: relative;
+  z-index: 1;
+}
+
+.area-card__intro .eyebrow {
+  margin-bottom: 16px;
+}
+
+.area-card__intro h2 {
+  margin: 0 0 18px;
+  font-size: 0;
+  line-height: 0;
+  max-width: 470px;
+}
+
+.area-card__intro h2::after {
+  content: "Atendimento em Palhoça e região.";
+  display: block;
+  font-size: clamp(34px, 3.45vw, 52px);
+  line-height: 1.03;
+  letter-spacing: -.045em;
+  color: #fff;
+}
+
+.area-card__intro > p:last-child {
+  margin: 0;
+  max-width: 480px;
+  font-size: 0;
+  line-height: 0;
+  color: transparent;
+}
+
+.area-card__intro > p:last-child::after {
+  content: "Atendo residências e pequenos comércios em Palhoça, São José e Florianópolis continental, conforme disponibilidade.";
+  display: block;
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, .72);
+}
+
+.area-cities {
+  border-top: 1px solid rgba(255, 255, 255, .20);
+}
+
+.area-cities article {
+  position: relative;
+  display: block;
+  padding: 20px 0 20px 26px;
+  border-bottom: 1px solid rgba(255, 255, 255, .16);
+}
+
+.area-cities article::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 29px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f5bf25;
+  box-shadow: 0 0 0 5px rgba(245, 191, 37, .10);
+}
+
+.area-cities article > span {
+  display: none !important;
+}
+
+.area-cities h3 {
+  margin: 0 0 7px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: -.025em;
+}
+
+.area-cities p {
+  margin: 0;
+  color: rgba(255, 255, 255, .68);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+@media (max-width: 820px) {
+  .area-section {
+    padding-top: 28px;
+    padding-bottom: 58px;
+  }
+
+  .area-card {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 38px 28px 42px;
+    border-radius: 26px;
+  }
+
+  .area-card::after {
+    left: 28px;
+  }
+
+  .area-card__intro h2::after {
+    font-size: clamp(32px, 8vw, 43px);
+  }
+
+  .area-card__intro > p:last-child::after {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 520px) {
+  .area-card {
+    gap: 30px;
+    padding: 34px 22px 38px;
+    border-radius: 22px;
+  }
+
+  .area-card::before {
+    width: 150px;
+    height: 150px;
+    right: -74px;
+    top: -82px;
+    border-width: 18px;
+  }
+
+  .area-card::after {
+    left: 22px;
+    width: 68px;
+  }
+
+  .area-card__intro h2 {
+    margin-bottom: 15px;
+  }
+
+  .area-card__intro h2::after {
+    font-size: 34px;
+  }
+
+  .area-cities article {
+    padding: 18px 0 18px 22px;
+  }
+
+  .area-cities article::before {
+    top: 26px;
+    width: 6px;
+    height: 6px;
+  }
+
+  .area-cities h3 {
+    font-size: 17px;
+  }
+}
