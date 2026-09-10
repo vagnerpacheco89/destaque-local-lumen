@@ -1,5 +1,5 @@
 (() => {
-  const VERSION = '20260910-reviews-six-cards-01';
+  const VERSION = '20260910-reviews-quote-flow-02';
 
   const initPageEnhancements = () => {
     initWorkCarousel();
@@ -367,9 +367,30 @@
 
     if (mini && mini.children.length < 5) {
       mini.insertAdjacentHTML('beforeend', `
-        <article><p>“Atendimento direto e explicação simples do que precisava ser feito.”</p><footer><strong>Ana L.</strong><span>Palhoça</span></footer></article>
-        <article><p>“Organizou a instalação e explicou o que foi ajustado antes de finalizar.”</p><footer><strong>Bruno M.</strong><span>São José</span></footer></article>`);
+        <article><p>Atendimento direto e explicação simples do que precisava ser feito.</p><footer><strong>Ana L.</strong><span>Palhoça</span></footer></article>
+        <article><p>Organizou a instalação e explicou o que foi ajustado antes de finalizar.</p><footer><strong>Bruno M.</strong><span>São José</span></footer></article>`);
     }
+
+    section.querySelectorAll('.review-featured > p, .reviews-mini article > p').forEach((paragraph) => {
+      const text = paragraph.textContent.trim().replace(/^[“”"']+|[“”"']+$/g, '');
+      paragraph.textContent = '';
+
+      const open = document.createElement('span');
+      open.className = 'review-quote-mark review-quote-mark--open';
+      open.setAttribute('aria-hidden', 'true');
+      open.textContent = '“';
+
+      const content = document.createElement('span');
+      content.className = 'review-quote-text';
+      content.textContent = text;
+
+      const close = document.createElement('span');
+      close.className = 'review-quote-mark review-quote-mark--close';
+      close.setAttribute('aria-hidden', 'true');
+      close.textContent = '”';
+
+      paragraph.append(open, content, close);
+    });
 
     if (!section.querySelector('.reviews-conversion')) {
       const close = document.createElement('div');
