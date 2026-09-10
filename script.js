@@ -1,11 +1,12 @@
 (() => {
-  const VERSION = '20260910-about-editorial-01';
+  const VERSION = '20260910-reviews-conversion-02';
 
   const initPageEnhancements = () => {
     initWorkCarousel();
     initQualitySection();
     initProcessSection();
     initAboutSection();
+    initReviewsSection();
   };
 
   const loadBaseScript = () => {
@@ -343,6 +344,43 @@
           <button class="btn btn--yellow" type="button" data-demo-cta>FALAR COM RAFAEL →</button>
         </div>
       </div>`;
+  };
+
+  const initReviewsSection = () => {
+    const section = document.querySelector('#avaliacoes');
+    if (!section || section.dataset.reviewsReady === 'true') return;
+
+    section.dataset.reviewsReady = 'true';
+
+    const copy = section.querySelector('.reviews-copy');
+    const eyebrow = copy?.querySelector('.eyebrow');
+    const title = copy?.querySelector('h2');
+    const intro = copy?.querySelector(':scope > p:not(.eyebrow)');
+    const rating = copy?.querySelector('.rating-card');
+
+    if (eyebrow) eyebrow.textContent = 'AVALIAÇÕES DE CLIENTES';
+    if (title) title.textContent = 'O que clientes dizem sobre o atendimento.';
+    if (intro) intro.textContent = 'Experiências de quem já chamou para resolver uma necessidade elétrica.';
+    rating?.remove();
+
+    if (copy && !copy.querySelector('.reviews-demo-note')) {
+      const note = document.createElement('span');
+      note.className = 'reviews-demo-note';
+      note.textContent = 'Exemplo de como as avaliações aparecem no site';
+      copy.appendChild(note);
+    }
+
+    if (!section.querySelector('.reviews-conversion')) {
+      const close = document.createElement('div');
+      close.className = 'reviews-conversion';
+      close.innerHTML = `
+        <div class="reviews-conversion__copy">
+          <span>DEPOIS DE CONHECER O TRABALHO</span>
+          <p>Quer explicar o que precisa resolver?</p>
+        </div>
+        <button class="btn btn--yellow" type="button" data-demo-cta>FALAR COM RAFAEL →</button>`;
+      section.appendChild(close);
+    }
   };
 
   loadBaseScript();
