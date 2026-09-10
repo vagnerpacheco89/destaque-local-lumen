@@ -1,4 +1,4 @@
-/* COMO FUNCIONA — mobile circuit centred between stacked cards. */
+/* COMO FUNCIONA — mobile circuit centred and physically connected between stacked cards. */
 
 @media (max-width: 680px) {
   .process-route {
@@ -16,7 +16,7 @@
   .process-step {
     position: relative;
     min-height: 104px;
-    margin: 0 0 24px;
+    margin: 0 0 28px;
     padding: 28px 15px 12px;
     overflow: visible;
   }
@@ -25,16 +25,19 @@
     margin-bottom: 0;
   }
 
-  /* Neutral connector: centred exactly between one card and the next. */
+  /*
+   * Connector is centred between the cards and deliberately overlaps both borders.
+   * This prevents the small visible gap caused by rounding/anti-aliasing and by hover transforms.
+   */
   .process-step:not(:last-child)::before,
   .process-step:not(:last-child)::after {
     content: "";
     position: absolute;
     z-index: 0;
     left: 50%;
-    top: 100%;
+    top: calc(100% - 2px);
     width: 3px;
-    height: 24px;
+    height: 32px;
     border-radius: 999px;
     transform: translateX(-50%);
     pointer-events: none;
@@ -46,12 +49,18 @@
     transition: opacity .18s ease;
   }
 
-  /* Energized connector uses the exact same geometry, so the grey line never peeks through. */
+  /* Energized connector uses identical geometry, so grey never peeks through. */
   .process-step:not(:last-child)::after {
     background: var(--yellow);
     opacity: 0;
     box-shadow: 0 0 8px rgba(245, 191, 37, .34);
     transition: opacity .18s ease;
+  }
+
+  /* Keep cards fixed on mobile so the connector remains physically attached while energized. */
+  .process-step:hover,
+  .process-step:focus-within {
+    transform: none;
   }
 
   /* Hover/focus 02: energize only 01 -> 02. */
