@@ -1,5 +1,5 @@
 (() => {
-  const VERSION = '20260910-reviews-copy-04';
+  const VERSION = '20260910-area-map-01';
 
   const initPageEnhancements = () => {
     initWorkCarousel();
@@ -7,6 +7,7 @@
     initProcessSection();
     initAboutSection();
     initReviewsSection();
+    initAreaSection();
   };
 
   const loadBaseScript = () => {
@@ -402,6 +403,35 @@
         </div>
         <button class="btn btn--yellow" type="button" data-demo-cta>FALAR COM RAFAEL →</button>`;
       section.appendChild(close);
+    }
+  };
+
+  const initAreaSection = () => {
+    const section = document.querySelector('#area-atendida');
+    if (!section || section.dataset.areaReady === 'true') return;
+
+    section.dataset.areaReady = 'true';
+
+    if (!section.querySelector('.area-map-wrap')) {
+      const map = document.createElement('div');
+      map.className = 'container area-map-wrap';
+      map.innerHTML = `
+        <div class="area-map-head">
+          <div>
+            <span class="area-map-kicker">CIDADE BASE</span>
+            <h3>Palhoça como ponto principal de atendimento.</h3>
+          </div>
+          <span class="area-map-location">Palhoça • SC</span>
+        </div>
+        <div class="area-map-frame">
+          <iframe
+            src="https://www.google.com/maps?q=Palho%C3%A7a%2C%20SC&z=12&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Mapa da área de atendimento com foco em Palhoça, Santa Catarina">
+          </iframe>
+        </div>`;
+      section.appendChild(map);
     }
   };
 
