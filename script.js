@@ -1,5 +1,5 @@
 (() => {
-  const VERSION = '20260910-reviews-no-demo-note-01';
+  const VERSION = '20260910-reviews-six-cards-01';
 
   const initPageEnhancements = () => {
     initWorkCarousel();
@@ -357,12 +357,19 @@
     const title = copy?.querySelector('h2');
     const intro = copy?.querySelector(':scope > p:not(.eyebrow)');
     const rating = copy?.querySelector('.rating-card');
+    const mini = section.querySelector('.reviews-mini');
 
     if (eyebrow) eyebrow.textContent = 'AVALIAÇÕES DE CLIENTES';
     if (title) title.textContent = 'O que clientes dizem sobre o atendimento.';
     if (intro) intro.textContent = 'Experiências de quem já chamou para resolver uma necessidade elétrica.';
     rating?.remove();
     copy?.querySelector('.reviews-demo-note')?.remove();
+
+    if (mini && mini.children.length < 5) {
+      mini.insertAdjacentHTML('beforeend', `
+        <article><p>“Atendimento direto e explicação simples do que precisava ser feito.”</p><footer><strong>Ana L.</strong><span>Palhoça</span></footer></article>
+        <article><p>“Organizou a instalação e explicou o que foi ajustado antes de finalizar.”</p><footer><strong>Bruno M.</strong><span>São José</span></footer></article>`);
+    }
 
     if (!section.querySelector('.reviews-conversion')) {
       const close = document.createElement('div');
