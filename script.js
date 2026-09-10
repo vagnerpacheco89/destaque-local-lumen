@@ -1,10 +1,11 @@
 (() => {
-  const VERSION = '20260909-process-cards-03';
+  const VERSION = '20260910-about-editorial-01';
 
   const initPageEnhancements = () => {
     initWorkCarousel();
     initQualitySection();
     initProcessSection();
+    initAboutSection();
   };
 
   const loadBaseScript = () => {
@@ -312,6 +313,34 @@
         <div class="process-close">
           <p>Pronto para explicar o que precisa?</p>
           <button class="btn btn--yellow" type="button" data-demo-cta>COMEÇAR PELO WHATSAPP →</button>
+        </div>
+      </div>`;
+  };
+
+  const initAboutSection = () => {
+    const section = document.querySelector('#sobre');
+    if (!section || section.dataset.aboutReady === 'true') return;
+
+    section.dataset.aboutReady = 'true';
+    section.innerHTML = `
+      <div class="container about-panel">
+        <div class="about-panel__media">
+          <img src="https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-09-retrato-rafael.webp" alt="Rafael Martins, eletricista em Palhoça." loading="lazy" decoding="async" />
+          <div class="about-person">
+            <strong>Rafael Martins</strong>
+            <span>Eletricista • Palhoça e região</span>
+          </div>
+        </div>
+
+        <div class="about-panel__head">
+          <p class="eyebrow eyebrow--light">QUEM VAI TE ATENDER</p>
+          <h2>Conheça quem está por trás do atendimento.</h2>
+        </div>
+
+        <div class="about-panel__body">
+          <p>Sou Rafael Martins, eletricista em Palhoça e região. Meu trabalho é atender necessidades elétricas de forma próxima e direta, desde pequenos reparos até instalações e adequações.</p>
+          <p>Quando você chama, a ideia é entender o que precisa ser resolvido e encontrar a solução adequada para o seu imóvel.</p>
+          <button class="btn btn--yellow" type="button" data-demo-cta>FALAR COM RAFAEL →</button>
         </div>
       </div>`;
   };
