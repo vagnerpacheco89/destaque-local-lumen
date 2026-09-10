@@ -1,5 +1,11 @@
 /* COMO FUNCIONA — circuit path correction: exact card contact + no neutral rail beneath energized segments. */
 
+/* Remove the small status dots beside the numeric badges. */
+.process-step__number::after {
+  content: none !important;
+  display: none !important;
+}
+
 @media (min-width: 981px) {
   .process-route::before,
   .process-route::after {
