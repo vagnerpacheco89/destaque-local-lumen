@@ -1,0 +1,95 @@
+/* COMO FUNCIONA — mobile circuit centred between stacked cards. */
+
+@media (max-width: 680px) {
+  .process-route {
+    display: block;
+    padding: 4px 0;
+  }
+
+  /* Remove the old side rail on mobile. */
+  .process-route::before,
+  .process-route::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .process-step {
+    position: relative;
+    min-height: 104px;
+    margin: 0 0 24px;
+    padding: 28px 15px 12px;
+    overflow: visible;
+  }
+
+  .process-step:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Neutral connector: centred exactly between one card and the next. */
+  .process-step:not(:last-child)::before,
+  .process-step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    left: 50%;
+    top: 100%;
+    width: 3px;
+    height: 24px;
+    border-radius: 999px;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .process-step:not(:last-child)::before {
+    background: #b7c9bf;
+    opacity: .92;
+    transition: opacity .18s ease;
+  }
+
+  /* Energized connector uses the exact same geometry, so the grey line never peeks through. */
+  .process-step:not(:last-child)::after {
+    background: var(--yellow);
+    opacity: 0;
+    box-shadow: 0 0 8px rgba(245, 191, 37, .34);
+    transition: opacity .18s ease;
+  }
+
+  /* Hover/focus 02: energize only 01 -> 02. */
+  .process-route:has(.process-step:nth-of-type(2):is(:hover,:focus-within)) .process-step:nth-of-type(1)::before {
+    opacity: 0;
+  }
+
+  .process-route:has(.process-step:nth-of-type(2):is(:hover,:focus-within)) .process-step:nth-of-type(1)::after {
+    opacity: 1;
+  }
+
+  /* Hover/focus 03: energize 01 -> 02 -> 03. */
+  .process-route:has(.process-step:nth-of-type(3):is(:hover,:focus-within)) .process-step:nth-of-type(-n+2)::before {
+    opacity: 0;
+  }
+
+  .process-route:has(.process-step:nth-of-type(3):is(:hover,:focus-within)) .process-step:nth-of-type(-n+2)::after {
+    opacity: 1;
+  }
+
+  /* Hover/focus 04: energize the complete mobile route. */
+  .process-route:has(.process-step:nth-of-type(4):is(:hover,:focus-within)) .process-step:nth-of-type(-n+3)::before {
+    opacity: 0;
+  }
+
+  .process-route:has(.process-step:nth-of-type(4):is(:hover,:focus-within)) .process-step:nth-of-type(-n+3)::after {
+    opacity: 1;
+  }
+
+  .process-step__number {
+    left: 10px;
+    top: 9px;
+  }
+}
+
+@media (max-width: 680px) and (prefers-reduced-motion: reduce) {
+  .process-step:not(:last-child)::before,
+  .process-step:not(:last-child)::after {
+    transition: none !important;
+  }
+}
