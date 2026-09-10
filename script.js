@@ -1,5 +1,5 @@
 (() => {
-  const VERSION = '20260910-reviews-quote-flow-02';
+  const VERSION = '20260910-reviews-copy-03';
 
   const initPageEnhancements = () => {
     initWorkCarousel();
@@ -360,8 +360,8 @@
     const mini = section.querySelector('.reviews-mini');
 
     if (eyebrow) eyebrow.textContent = 'AVALIAÇÕES DE CLIENTES';
-    if (title) title.textContent = 'O que clientes dizem sobre o atendimento.';
-    if (intro) intro.textContent = 'Experiências de quem já chamou para resolver uma necessidade elétrica.';
+    if (title) title.textContent = 'O que meus clientes dizem sobre o meu atendimento.';
+    if (intro) intro.textContent = 'Experiências de quem já me chamou para resolver uma necessidade elétrica.';
     rating?.remove();
     copy?.querySelector('.reviews-demo-note')?.remove();
 
@@ -397,8 +397,8 @@
       close.className = 'reviews-conversion';
       close.innerHTML = `
         <div class="reviews-conversion__copy">
-          <span>DEPOIS DE CONHECER O TRABALHO</span>
-          <p>Quer explicar o que precisa resolver?</p>
+          <span>PRECISA RESOLVER ALGO ELÉTRICO?</span>
+          <p>Me conte o que está acontecendo no seu imóvel.</p>
         </div>
         <button class="btn btn--yellow" type="button" data-demo-cta>FALAR COM RAFAEL →</button>`;
       section.appendChild(close);
