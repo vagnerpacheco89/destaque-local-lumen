@@ -1,5 +1,5 @@
 (() => {
-  const VERSION = '20260910-reviews-conversion-02';
+  const VERSION = '20260910-reviews-no-demo-note-01';
 
   const initPageEnhancements = () => {
     initWorkCarousel();
@@ -362,13 +362,7 @@
     if (title) title.textContent = 'O que clientes dizem sobre o atendimento.';
     if (intro) intro.textContent = 'Experiências de quem já chamou para resolver uma necessidade elétrica.';
     rating?.remove();
-
-    if (copy && !copy.querySelector('.reviews-demo-note')) {
-      const note = document.createElement('span');
-      note.className = 'reviews-demo-note';
-      note.textContent = 'Exemplo de como as avaliações aparecem no site';
-      copy.appendChild(note);
-    }
+    copy?.querySelector('.reviews-demo-note')?.remove();
 
     if (!section.querySelector('.reviews-conversion')) {
       const close = document.createElement('div');
