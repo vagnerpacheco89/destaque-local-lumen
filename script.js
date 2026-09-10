@@ -1,5 +1,5 @@
 (() => {
-  const VERSION = '20260910-reviews-copy-03';
+  const VERSION = '20260910-reviews-copy-04';
 
   const initPageEnhancements = () => {
     initWorkCarousel();
@@ -398,7 +398,7 @@
       close.innerHTML = `
         <div class="reviews-conversion__copy">
           <span>PRECISA RESOLVER ALGO ELÉTRICO?</span>
-          <p>Me conte o que está acontecendo no seu imóvel.</p>
+          <p>Me conte o que você precisa resolver.</p>
         </div>
         <button class="btn btn--yellow" type="button" data-demo-cta>FALAR COM RAFAEL →</button>`;
       section.appendChild(close);
