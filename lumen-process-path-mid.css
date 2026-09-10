@@ -1,34 +1,70 @@
-/* COMO FUNCIONA — circuit path correction matching the approved red guide. */
+/* COMO FUNCIONA — circuit path correction: exact card contact + no neutral rail beneath energized segments. */
 
 @media (min-width: 981px) {
   .process-route::before,
   .process-route::after {
     background-size: 100% 100%;
     background-position: center;
+    background-repeat: no-repeat;
+    clip-path: none !important;
   }
 
   /*
-   * Exact visual route requested:
-   * 01 exits from its right-side midpoint, then bends down into the TOP CENTER of 02.
-   * 02 exits from its right-side midpoint, then bends up into the BOTTOM CENTER of 03.
-   * 03 exits from its right-side midpoint, then bends down into the TOP CENTER of 04.
+   * Geometry follows the approved red guide:
+   * 01 right midpoint -> 02 top centre
+   * 02 right midpoint -> 03 bottom centre
+   * 03 right midpoint -> 04 top centre
    *
-   * This creates the broader, more expressive orthogonal "electrical conduit" rhythm
-   * shown in the red markup, rather than keeping the vertical breaks inside the narrow gaps.
+   * Endpoints intentionally extend a few pixels underneath the cards.
+   * Because the rail sits behind the cards, this removes visible gaps at every connection.
    */
   .process-route::before {
     opacity: .96;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 300' preserveAspectRatio='none'%3E%3Cg fill='none' stroke='%23b7c9bf' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke'%3E%3Cpath d='M242 72 H375 V150 M492 225 H625 V145 M742 72 H875 V150'/%3E%3C/g%3E%3C/svg%3E");
+    filter: none;
+    transition: opacity .18s ease;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 300' preserveAspectRatio='none'%3E%3Cg fill='none' stroke='%23b7c9bf' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke'%3E%3Cpath d='M238 72 H375 V166'/%3E%3Cpath d='M488 225 H625 V132'/%3E%3Cpath d='M738 72 H875 V166'/%3E%3C/g%3E%3C/svg%3E");
   }
 
   .process-route::after {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 300' preserveAspectRatio='none'%3E%3Cg fill='none' stroke='%23f5bf25' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke'%3E%3Cpath d='M242 72 H375 V150 M492 225 H625 V145 M742 72 H875 V150'/%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0;
     filter: drop-shadow(0 0 6px rgba(245, 191, 37, .38));
+    transition: opacity .18s ease;
+    background-image: none;
   }
 
-  /* Energize complete connections progressively up to the hovered/focused stage. */
-  .process-route:has(.process-step:nth-of-type(1):is(:hover,:focus-within)) { --process-clip: 100%; }
-  .process-route:has(.process-step:nth-of-type(2):is(:hover,:focus-within)) { --process-clip: 62.5%; }
-  .process-route:has(.process-step:nth-of-type(3):is(:hover,:focus-within)) { --process-clip: 37.5%; }
-  .process-route:has(.process-step:nth-of-type(4):is(:hover,:focus-within)) { --process-clip: 12.5%; }
+  /* Step 01 has no previous connection to energize. */
+  .process-route:has(.process-step:nth-of-type(1):is(:hover,:focus-within))::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 300' preserveAspectRatio='none'%3E%3Cg fill='none' stroke='%23b7c9bf' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke'%3E%3Cpath d='M238 72 H375 V166'/%3E%3Cpath d='M488 225 H625 V132'/%3E%3Cpath d='M738 72 H875 V166'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* Hover 02: connection 01->02 is yellow; neutral layer keeps only future connections. */
+  .process-route:has(.process-step:nth-of-type(2):is(:hover,:focus-within))::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 300' preserveAspectRatio='none'%3E%3Cg fill='none' stroke='%23b7c9bf' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke'%3E%3Cpath d='M488 225 H625 V132'/%3E%3Cpath d='M738 72 H875 V166'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .process-route:has(.process-step:nth-of-type(2):is(:hover,:focus-within))::after {
+    opacity: 1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 300' preserveAspectRatio='none'%3E%3Cg fill='none' stroke='%23f5bf25' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke'%3E%3Cpath d='M238 72 H375 V166'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* Hover 03: first two connections are yellow; only 03->04 remains neutral. */
+  .process-route:has(.process-step:nth-of-type(3):is(:hover,:focus-within))::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 300' preserveAspectRatio='none'%3E%3Cg fill='none' stroke='%23b7c9bf' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke'%3E%3Cpath d='M738 72 H875 V166'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .process-route:has(.process-step:nth-of-type(3):is(:hover,:focus-within))::after {
+    opacity: 1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 300' preserveAspectRatio='none'%3E%3Cg fill='none' stroke='%23f5bf25' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke'%3E%3Cpath d='M238 72 H375 V166'/%3E%3Cpath d='M488 225 H625 V132'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* Hover 04: the full route is energized, so the neutral rail disappears completely. */
+  .process-route:has(.process-step:nth-of-type(4):is(:hover,:focus-within))::before {
+    opacity: 0;
+    background-image: none;
+  }
+
+  .process-route:has(.process-step:nth-of-type(4):is(:hover,:focus-within))::after {
+    opacity: 1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 300' preserveAspectRatio='none'%3E%3Cg fill='none' stroke='%23f5bf25' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke'%3E%3Cpath d='M238 72 H375 V166'/%3E%3Cpath d='M488 225 H625 V132'/%3E%3Cpath d='M738 72 H875 V166'/%3E%3C/g%3E%3C/svg%3E");
+  }
 }
