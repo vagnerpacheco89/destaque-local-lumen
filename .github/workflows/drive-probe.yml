@@ -12,12 +12,12 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Probe one Drive image
+      - name: Probe one Drive image with gdown
         shell: bash
         run: |
           set -euxo pipefail
-          url='https://drive.usercontent.google.com/download?id=1L4b4-XyLTN8422XHDhSjbiA3GmoVJsZx&export=download&confirm=t'
-          curl -L --fail --retry 2 --connect-timeout 20 "$url" -o /tmp/probe.png
+          python -m pip install --quiet gdown
+          gdown 'https://drive.google.com/uc?id=1L4b4-XyLTN8422XHDhSjbiA3GmoVJsZx' -O /tmp/probe.png
           wc -c /tmp/probe.png
           file /tmp/probe.png
           head -c 16 /tmp/probe.png | xxd
