@@ -1,5 +1,5 @@
 (() => {
-  const VERSION = '20260910-area-map-01';
+  const VERSION = '20260911-drive-hd-01';
 
   const initPageEnhancements = () => {
     initWorkCarousel();
@@ -34,7 +34,7 @@
       {
         title: 'Quadros elétricos',
         description: 'Organização e adequação da instalação.',
-        image: 'https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-02-quadro-organizado.webp',
+        image: 'assets/asset-02-quadro-organizado-hd.webp',
         alt: 'Quadro elétrico residencial organizado.'
       },
       {
@@ -58,7 +58,7 @@
       {
         title: 'Diagnóstico elétrico',
         description: 'Teste para localizar a origem da falha.',
-        image: 'https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-10-teste-comercio.webp',
+        image: 'assets/asset-10-teste-comercio-hd.webp',
         alt: 'Eletricista realizando teste em instalação elétrica.'
       },
       {
