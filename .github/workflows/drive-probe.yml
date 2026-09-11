@@ -14,12 +14,12 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Download original Drive image without auth
+      - name: Download original Drive image with gdown
         shell: bash
         run: |
           set -euo pipefail
-          url='https://drive.google.com/uc?export=download&id=1L4b4-XyLTN8422XHDhSjbiA3GmoVJsZx'
-          curl -L --fail --silent --show-error "$url" -o /tmp/original.png
+          python -m pip install --quiet gdown
+          gdown 'https://drive.google.com/file/d/1L4b4-XyLTN8422XHDhSjbiA3GmoVJsZx/view?usp=drivesdk' -O /tmp/original.png
           echo "bytes=$(stat -c%s /tmp/original.png)"
           file /tmp/original.png
           sha256sum /tmp/original.png
