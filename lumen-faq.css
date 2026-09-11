@@ -73,7 +73,7 @@
 }
 
 .faq-media__copy::after {
-  content: "Aqui estão respostas rápidas sobre atendimento, orçamento e como o serviço funciona.";
+  content: "Você não precisa saber exatamente o que está acontecendo para iniciar o contato. Veja como funciona o primeiro passo e o que é combinado antes do serviço.";
   display: block;
   max-width: 400px;
   margin-top: 16px;
@@ -106,6 +106,7 @@
   border-bottom: 0;
 }
 
+.faq-list details:nth-child(5),
 .faq-list details:nth-child(6),
 .faq-list details:nth-child(7),
 .faq-list details:nth-child(8) {
@@ -169,6 +170,99 @@
   color: #697a72;
   font-size: 13px;
   line-height: 1.7;
+}
+
+/*
+  Iteration layer: keep the existing FAQ markup intact while we validate the
+  conversion-oriented question set visually. Consolidate only after approval.
+*/
+.faq-list details:nth-child(1) summary,
+.faq-list details:nth-child(2) summary,
+.faq-list details:nth-child(3) summary,
+.faq-list details:nth-child(4) summary,
+.faq-list details:nth-child(9) summary,
+.faq-list details:nth-child(10) summary,
+.faq-list details:nth-child(1) > p,
+.faq-list details:nth-child(2) > p,
+.faq-list details:nth-child(3) > p,
+.faq-list details:nth-child(4) > p,
+.faq-list details:nth-child(9) > p,
+.faq-list details:nth-child(10) > p {
+  font-size: 0;
+}
+
+.faq-list details:nth-child(1) summary::before,
+.faq-list details:nth-child(2) summary::before,
+.faq-list details:nth-child(3) summary::before,
+.faq-list details:nth-child(4) summary::before,
+.faq-list details:nth-child(9) summary::before,
+.faq-list details:nth-child(10) summary::before {
+  display: block;
+  color: #10442f;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -.02em;
+}
+
+.faq-list details:nth-child(1) > p::before,
+.faq-list details:nth-child(2) > p::before,
+.faq-list details:nth-child(3) > p::before,
+.faq-list details:nth-child(4) > p::before,
+.faq-list details:nth-child(9) > p::before,
+.faq-list details:nth-child(10) > p::before {
+  display: block;
+  color: #697a72;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.faq-list details:nth-child(1) summary::before {
+  content: "Não sei exatamente qual é o problema. Posso chamar mesmo assim?";
+}
+
+.faq-list details:nth-child(1) > p::before {
+  content: "Sim. Você pode explicar o que está acontecendo e, quando possível, enviar fotos ou vídeos. A avaliação começa pelas informações que você conseguir passar.";
+}
+
+.faq-list details:nth-child(2) summary::before {
+  content: "O que acontece depois que eu mando mensagem?";
+}
+
+.faq-list details:nth-child(2) > p::before {
+  content: "Você explica o que precisa e envia fotos ou vídeos quando possível. Rafael avalia o cenário e verifica se é preciso uma visita. Depois, o serviço é combinado antes da execução.";
+}
+
+.faq-list details:nth-child(3) summary::before {
+  content: "Como funciona o orçamento?";
+}
+
+.faq-list details:nth-child(3) > p::before {
+  content: "As informações do primeiro contato ajudam na avaliação inicial. Quando for necessária uma visita, o orçamento é apresentado antes da execução.";
+}
+
+.faq-list details:nth-child(4) summary::before {
+  content: "O serviço só começa depois de tudo combinado?";
+}
+
+.faq-list details:nth-child(4) > p::before {
+  content: "Sim. O que será feito, os materiais necessários e o orçamento são alinhados antes da execução.";
+}
+
+.faq-list details:nth-child(9) summary::before {
+  content: "Como ficam os materiais do serviço?";
+}
+
+.faq-list details:nth-child(9) > p::before {
+  content: "Os materiais necessários são combinados antes da execução. Quando preciso, Rafael orienta o que será necessário.";
+}
+
+.faq-list details:nth-child(10) summary::before {
+  content: "Como sei se você atende minha região?";
+}
+
+.faq-list details:nth-child(10) > p::before {
+  content: "O atendimento tem base em Palhoça e também pode ser realizado por deslocamento em São José e Florianópolis continental, conforme disponibilidade.";
 }
 
 @media (max-width: 900px) {
@@ -237,6 +331,15 @@
     font-size: 14px;
   }
 
+  .faq-list details:nth-child(1) summary::before,
+  .faq-list details:nth-child(2) summary::before,
+  .faq-list details:nth-child(3) summary::before,
+  .faq-list details:nth-child(4) summary::before,
+  .faq-list details:nth-child(9) summary::before,
+  .faq-list details:nth-child(10) summary::before {
+    font-size: 14px;
+  }
+
   .faq-list summary span {
     width: 29px;
     height: 29px;
@@ -246,6 +349,15 @@
   .faq-list details > p {
     margin-right: 8px;
     margin-bottom: 17px;
+    font-size: 12px;
+  }
+
+  .faq-list details:nth-child(1) > p::before,
+  .faq-list details:nth-child(2) > p::before,
+  .faq-list details:nth-child(3) > p::before,
+  .faq-list details:nth-child(4) > p::before,
+  .faq-list details:nth-child(9) > p::before,
+  .faq-list details:nth-child(10) > p::before {
     font-size: 12px;
   }
 }
