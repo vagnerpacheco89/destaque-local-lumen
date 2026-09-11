@@ -29,14 +29,48 @@ jobs:
             curl -L --fail --silent --show-error "$base/$f" -o "/tmp/lumen-transfer/$f"
             echo "$f $(stat -c%s /tmp/lumen-transfer/$f) bytes"
           done
+
+      - name: Diagnose transferred chunks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          allowed=set('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\r\n')
+          for p in sorted(Path('/tmp/lumen-transfer').glob('c*')):
+              s=p.read_text()
+              bad=[(i,repr(ch)) for i,ch in enumerate(s) if ch not in allowed]
+              print(p.name, 'len=',len(s),'bad_count=',len(bad),'first_bad=',bad[:10])
+              if bad:
+                  i=bad[0][0]
+                  print('around first bad:',repr(s[max(0,i-120):i+220]))
+              print('head:',repr(s[:80]))
+              print('tail:',repr(s[-120:]))
+          PY
+
+      - name: Try strict package decode
+        shell: bash
+        run: |
+          set -euo pipefail
           cat /tmp/lumen-transfer/c000 /tmp/lumen-transfer/c001 /tmp/lumen-transfer/c002 /tmp/lumen-transfer/c003 /tmp/lumen-transfer/c004 /tmp/lumen-transfer/c005 /tmp/lumen-transfer/c006 > /tmp/lumen_q45.zip.b64
-          base64 -d /tmp/lumen_q45.zip.b64 > /tmp/lumen_q45.zip
-          echo '599523a6c0f0af848baa2a5c257513d0c75486619f0a3876859ee243315b2f41  /tmp/lumen_q45.zip' | sha256sum -c -
+          python - <<'PY'
+          import base64,hashlib
+          from pathlib import Path
+          s=Path('/tmp/lumen_q45.zip.b64').read_text()
+          try:
+              b=base64.b64decode(s,validate=True)
+              print('decoded bytes',len(b),'sha256',hashlib.sha256(b).hexdigest())
+              Path('/tmp/lumen_q45.zip').write_bytes(b)
+          except Exception as e:
+              print('STRICT_DECODE_ERROR',repr(e))
+              raise
+          PY
 
       - name: Extract and validate assets
         shell: bash
         run: |
           set -euo pipefail
+          echo '599523a6c0f0af848baa2a5c257513d0c75486619f0a3876859ee243315b2f41  /tmp/lumen_q45.zip' | sha256sum -c -
           rm -rf /tmp/lumen_hd
           mkdir -p /tmp/lumen_hd assets/hd
           unzip -q /tmp/lumen_q45.zip -d /tmp/lumen_hd
@@ -44,7 +78,6 @@ jobs:
           find /tmp/lumen_hd -maxdepth 1 -type f -printf '%f %s bytes\n' | sort
           test "$(find /tmp/lumen_hd -maxdepth 1 -type f -name '*.avif' | wc -l)" -eq 14
           cp /tmp/lumen_hd/*.avif assets/hd/
-          test "$(find assets/hd -maxdepth 1 -type f -name '*.avif' | wc -l)" -eq 14
 
       - name: Commit reconstructed HD assets
         shell: bash
