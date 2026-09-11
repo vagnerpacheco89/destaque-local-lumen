@@ -1,35 +1,49 @@
-name: Drive probe
+name: Rebuild HD assets
 
 on:
   push:
     branches: [asset-hd-transfer]
+    paths:
+      - '.github/workflows/drive-probe.yml'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  probe:
+  rebuild:
     runs-on: ubuntu-latest
     steps:
-      - name: Probe Drive image endpoints
+      - name: Checkout transfer branch
+        uses: actions/checkout@v4
+        with:
+          ref: asset-hd-transfer
+
+      - name: Rebuild verified HD package
         shell: bash
         run: |
-          set +e
-          id='1L4b4-XyLTN8422XHDhSjbiA3GmoVJsZx'
-          urls=(
-            "https://drive.google.com/thumbnail?id=$id&sz=w2000"
-            "https://lh3.googleusercontent.com/d/$id=w2000"
-            "https://drive.google.com/uc?export=view&id=$id"
-            "https://drive.google.com/uc?export=download&id=$id"
-            "https://drive.usercontent.google.com/download?id=$id&export=download"
-          )
-          i=0
-          for url in "${urls[@]}"; do
-            out="/tmp/p$i"
-            echo "=== $i $url"
-            curl -L -sS --max-time 20 -o "$out" -w 'HTTP=%{http_code} TYPE=%{content_type} SIZE=%{size_download}\n' "$url"
-            file "$out"
-            head -c 16 "$out" | xxd
-            i=$((i+1))
-          done
+          set -euo pipefail
+          cat transfer2/c000 transfer2/c001 transfer2/c002 transfer2/c003 transfer2/c004 transfer2/c005 transfer2/c006 > /tmp/lumen_q45.zip.b64
+          base64 -d /tmp/lumen_q45.zip.b64 > /tmp/lumen_q45.zip
+          echo '599523a6c0f0af848baa2a5c257513d0c75486619f0a3876859ee243315b2f41  /tmp/lumen_q45.zip' | sha256sum -c -
+          rm -rf /tmp/lumen_hd
+          mkdir -p /tmp/lumen_hd assets/hd
+          unzip -q /tmp/lumen_q45.zip -d /tmp/lumen_hd
+          find /tmp/lumen_hd -maxdepth 1 -type f -name '*.avif' -print -exec file {} \;
+          test "$(find /tmp/lumen_hd -maxdepth 1 -type f -name '*.avif' | wc -l)" -eq 14
+          cp /tmp/lumen_hd/*.avif assets/hd/
+          test "$(find assets/hd -maxdepth 1 -type f -name '*.avif' | wc -l)" -eq 14
+
+      - name: Commit HD assets to transfer branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/hd
+          if git diff --cached --quiet; then
+            echo 'HD assets already present.'
+          else
+            git commit -m 'build: reconstruct verified HD image assets'
+            git push origin HEAD:asset-hd-transfer
+          fi
