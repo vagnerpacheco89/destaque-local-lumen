@@ -12,14 +12,24 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Probe one Drive image with gdown
+      - name: Probe Drive image endpoints
         shell: bash
         run: |
-          set -euxo pipefail
-          python -m pip install --quiet gdown
-          gdown 'https://drive.google.com/uc?id=1L4b4-XyLTN8422XHDhSjbiA3GmoVJsZx' -O /tmp/probe.png
-          wc -c /tmp/probe.png
-          file /tmp/probe.png
-          head -c 16 /tmp/probe.png | xxd
-          test "$(wc -c < /tmp/probe.png)" -gt 1000000
-          file /tmp/probe.png | grep -qi 'PNG image data'
+          set +e
+          id='1L4b4-XyLTN8422XHDhSjbiA3GmoVJsZx'
+          urls=(
+            "https://drive.google.com/thumbnail?id=$id&sz=w2000"
+            "https://lh3.googleusercontent.com/d/$id=w2000"
+            "https://drive.google.com/uc?export=view&id=$id"
+            "https://drive.google.com/uc?export=download&id=$id"
+            "https://drive.usercontent.google.com/download?id=$id&export=download"
+          )
+          i=0
+          for url in "${urls[@]}"; do
+            out="/tmp/p$i"
+            echo "=== $i $url"
+            curl -L -sS --max-time 20 -o "$out" -w 'HTTP=%{http_code} TYPE=%{content_type} SIZE=%{size_download}\n' "$url"
+            file "$out"
+            head -c 16 "$out" | xxd
+            i=$((i+1))
+          done
