@@ -1,0 +1,25 @@
+name: Drive probe
+
+on:
+  push:
+    branches: [asset-hd-transfer]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe one Drive image
+        shell: bash
+        run: |
+          set -euxo pipefail
+          url='https://drive.usercontent.google.com/download?id=1L4b4-XyLTN8422XHDhSjbiA3GmoVJsZx&export=download&confirm=t'
+          curl -L --fail --retry 2 --connect-timeout 20 "$url" -o /tmp/probe.png
+          wc -c /tmp/probe.png
+          file /tmp/probe.png
+          head -c 16 /tmp/probe.png | xxd
+          test "$(wc -c < /tmp/probe.png)" -gt 1000000
+          file /tmp/probe.png | grep -qi 'PNG image data'
