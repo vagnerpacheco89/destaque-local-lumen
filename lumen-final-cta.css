@@ -105,7 +105,7 @@
 }
 
 .final-cta__content h2::after {
-  content: "Tem algo elétrico para resolver? Me conte o que está acontecendo.";
+  content: "Não precisa saber o nome do problema. Me conte o que está acontecendo.";
   display: block;
   color: #fff;
   font-size: clamp(38px, 4vw, 58px);
@@ -122,7 +122,7 @@
 }
 
 .final-cta__content > p:not(.eyebrow)::after {
-  content: "Você não precisa saber exatamente qual é o problema. Informe seu bairro e, se puder, envie fotos ou vídeos.";
+  content: "Se puder, envie uma foto ou vídeo. A conversa começa por aí.";
   display: block;
   color: rgba(255, 255, 255, .76);
   font-size: 15px;
@@ -162,10 +162,11 @@
 }
 
 .final-cta__content::after {
-  content: "Orçamento antes do serviço   •   Atendimento direto com Rafael   •   Palhoça e região";
+  content: "Contato direto com Rafael. Você pode começar só explicando o que está acontecendo.";
   display: block;
-  margin-top: 25px;
-  color: rgba(255, 255, 255, .65);
+  max-width: 560px;
+  margin-top: 20px;
+  color: rgba(255, 255, 255, .60);
   font-size: 10.5px;
   font-weight: 700;
   line-height: 1.6;
@@ -251,7 +252,8 @@
   }
 
   .final-cta__content::after {
-    margin-top: 20px;
+    margin-top: 16px;
+    text-align: center;
     font-size: 10px;
   }
 
