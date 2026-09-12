@@ -77,7 +77,7 @@
   display: block;
   max-width: 400px;
   margin-top: 16px;
-  color: rgba(255, 255, 255, .76);
+  color: rgba(255, 255, 255, .78);
   font-size: 13px;
   line-height: 1.65;
 }
@@ -86,24 +86,57 @@
   display: none !important;
 }
 
+/* Question panel — individual cards make the interaction clearer and more premium. */
 .faq-list {
   align-self: stretch;
-  padding: 10px 28px;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid rgba(16, 68, 47, .07);
   border-radius: 24px;
-  background: rgba(255, 253, 248, .90);
-  box-shadow: inset 0 0 0 1px rgba(16, 68, 47, .06);
+  background: rgba(255, 253, 248, .72);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .72),
+    0 8px 24px rgba(16, 68, 47, .035);
 }
 
 .faq-list details {
+  position: relative;
   margin: 0;
-  border: 0;
-  border-bottom: 1px solid rgba(16, 68, 47, .12);
-  background: transparent;
-  transition: background .2s ease, box-shadow .2s ease;
+  overflow: hidden;
+  border: 1px solid rgba(16, 68, 47, .10);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .96) 0%, rgba(255, 254, 250, .94) 100%);
+  box-shadow:
+    0 7px 18px rgba(16, 68, 47, .035),
+    inset 0 1px 0 rgba(255, 255, 255, .90);
+  transition:
+    transform .2s ease,
+    border-color .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
 }
 
-.faq-list details:last-of-type {
-  border-bottom: 0;
+.faq-list details:hover {
+  transform: translateY(-1px);
+  border-color: rgba(16, 81, 59, .19);
+  box-shadow:
+    0 12px 24px rgba(16, 68, 47, .065),
+    inset 0 1px 0 rgba(255, 255, 255, .95);
+}
+
+.faq-list details::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 0;
+  width: 3px;
+  border-radius: 0 999px 999px 0;
+  background: transparent;
+  transition: background .2s ease, top .2s ease, bottom .2s ease;
 }
 
 .faq-list details:nth-child(5),
@@ -114,21 +147,28 @@
 }
 
 .faq-list details[open] {
-  margin-inline: -12px;
-  padding-inline: 12px;
-  border-bottom-color: transparent;
-  border-radius: 16px;
-  background: #f4f7f2;
-  box-shadow: inset 3px 0 0 #f5bf25;
+  border-color: rgba(245, 191, 37, .52);
+  background:
+    linear-gradient(180deg, #fffefa 0%, #fffaf0 100%);
+  box-shadow:
+    0 16px 32px rgba(16, 68, 47, .08),
+    0 0 0 3px rgba(245, 191, 37, .09),
+    inset 0 1px 0 rgba(255, 255, 255, .96);
+}
+
+.faq-list details[open]::after {
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, #f5bf25 0%, #f7cf55 58%, #176b4b 100%);
 }
 
 .faq-list summary {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 34px;
+  grid-template-columns: minmax(0, 1fr) 42px;
   align-items: center;
   gap: 18px;
-  min-height: 74px;
-  padding: 16px 2px;
+  min-height: 70px;
+  padding: 15px 16px 15px 18px;
   list-style: none;
   color: #10442f;
   font-size: 15px;
@@ -136,40 +176,68 @@
   line-height: 1.35;
   letter-spacing: -.02em;
   cursor: pointer;
+  outline: none;
 }
 
 .faq-list summary::-webkit-details-marker {
   display: none;
 }
 
+.faq-list summary:focus-visible {
+  border-radius: 16px;
+  box-shadow: inset 0 0 0 2px rgba(23, 107, 75, .42);
+}
+
 .faq-list summary span {
-  width: 32px;
-  height: 32px;
+  width: 38px;
+  height: 38px;
   display: grid;
   place-items: center;
   justify-self: end;
   border: 1px solid rgba(16, 68, 47, .13);
   border-radius: 50%;
-  background: #fffdf8;
+  background: rgba(255, 255, 255, .92);
   color: #14513b;
-  font-size: 18px;
+  box-shadow:
+    0 5px 12px rgba(16, 68, 47, .045),
+    inset 0 1px 0 rgba(255, 255, 255, .92);
+  font-size: 20px;
   font-weight: 500;
   line-height: 1;
-  transition: transform .2s ease, background .2s ease, border-color .2s ease;
+  transition:
+    transform .22s ease,
+    background .2s ease,
+    border-color .2s ease,
+    color .2s ease,
+    box-shadow .2s ease;
+}
+
+.faq-list details:hover summary span {
+  border-color: rgba(23, 107, 75, .24);
+  background: #f5f8f4;
+  box-shadow:
+    0 7px 15px rgba(16, 68, 47, .07),
+    inset 0 1px 0 rgba(255, 255, 255, .95);
 }
 
 .faq-list details[open] summary span {
   transform: rotate(45deg);
-  border-color: rgba(245, 191, 37, .55);
-  background: #f5bf25;
+  border-color: rgba(245, 191, 37, .72);
+  background: linear-gradient(180deg, #ffdd68 0%, #f5bf25 100%);
+  color: #10442f;
+  box-shadow:
+    0 8px 18px rgba(245, 191, 37, .22),
+    inset 0 1px 0 rgba(255, 255, 255, .65);
 }
 
 .faq-list details > p {
   max-width: 650px;
-  margin: -2px 48px 20px 2px;
+  margin: -1px 58px 20px 18px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(16, 68, 47, .08);
   color: #697a72;
   font-size: 13px;
-  line-height: 1.7;
+  line-height: 1.72;
 }
 
 /*
@@ -212,9 +280,9 @@
 .faq-list details:nth-child(9) > p::before,
 .faq-list details:nth-child(10) > p::before {
   display: block;
-  color: #697a72;
+  color: #61736a;
   font-size: 13px;
-  line-height: 1.7;
+  line-height: 1.72;
 }
 
 .faq-list details:nth-child(1) summary::before {
@@ -284,6 +352,10 @@
   .faq-media__copy h2::after {
     font-size: clamp(30px, 6vw, 40px);
   }
+
+  .faq-list {
+    gap: 10px;
+  }
 }
 
 @media (max-width: 560px) {
@@ -319,16 +391,20 @@
   }
 
   .faq-list {
-    padding: 6px 16px;
+    gap: 9px;
+    padding: 9px;
     border-radius: 19px;
   }
 
+  .faq-list details {
+    border-radius: 15px;
+  }
+
   .faq-list summary {
-    grid-template-columns: minmax(0, 1fr) 30px;
-    min-height: 66px;
+    grid-template-columns: minmax(0, 1fr) 36px;
+    min-height: 64px;
     gap: 12px;
-    padding-block: 13px;
-    font-size: 14px;
+    padding: 12px 12px 12px 14px;
   }
 
   .faq-list details:nth-child(1) summary::before,
@@ -341,15 +417,14 @@
   }
 
   .faq-list summary span {
-    width: 29px;
-    height: 29px;
-    font-size: 16px;
+    width: 34px;
+    height: 34px;
+    font-size: 18px;
   }
 
   .faq-list details > p {
-    margin-right: 8px;
-    margin-bottom: 17px;
-    font-size: 12px;
+    margin: -1px 14px 16px;
+    padding-top: 13px;
   }
 
   .faq-list details:nth-child(1) > p::before,
@@ -358,12 +433,14 @@
   .faq-list details:nth-child(4) > p::before,
   .faq-list details:nth-child(9) > p::before,
   .faq-list details:nth-child(10) > p::before {
-    font-size: 12px;
+    font-size: 12.5px;
+    line-height: 1.65;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .faq-list details,
+  .faq-list details::after,
   .faq-list summary span {
     transition: none;
   }
