@@ -49,10 +49,14 @@ jobs:
             bd65ba52bccd076cb00bec78d8924d6a66cbf2ea
             85208e76804f3bf5d8fddb419594efd8a506c10a
             91c4ff63fd19ad34333f93a8e0af5a3b7362ab94
-            d4b6cef718cd83eb58b39bb7f3944a7bdd85b74a
-            4924e9c148c718cef4546d755043981a39694b8b
-            559d038f4d358e1b83525a1ce47c1aa154ee9fa6
-            84f24cd295270fd27afa183db2e1aefe7ad1288b
+            bf1c1d45e298367a522734c07fc22d4fb2bb791a
+            940ed8cbf7cfb5ce7889ef2581af7c9fe1458264
+            220c2756c9bef67bea2f78e99c6a5c97fb096dc4
+            167dbc9c107c00a9b8e746e61a2a1b8570e5247a
+            19fa091dfe3e7c254804b4765eb5a37787c6a8e7
+            64a766cf02dacb3fe2717595a92baf86d7ec13f0
+            f335ec9f5cfe1e243c3849c81885b01f753fefac
+            757e04237e8bbe5f1653e2865b03c8275b640d0c
           )
           : > /tmp/lumen_q45.zip.b64
           i=0
@@ -112,22 +116,22 @@ jobs:
           candidates = [Path('index.html'), Path('script.js'), Path('script-base.js'), Path('styles.css')]
           candidates += sorted(Path('.').glob('lumen-*.css'))
           changed=[]
+          raw_prefix='https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/'
           for p in candidates:
             if not p.exists():
               continue
             text=p.read_text()
             before=text
             for old,new in mapping.items():
-              text=text.replace(f'https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/{old}', new)
-              text=text.replace(f'assets/{old}', new)
-              text=text.replace(old, new)
+              text=text.replace(raw_prefix + old, new)
+              text=text.replace('assets/' + old, new)
             if text != before:
               p.write_text(text)
               changed.append(str(p))
           print('changed files:', ', '.join(changed) or 'none')
           PY
 
-          if grep -RInE 'destaque-local-volt/main/assets/(asset-0[1-9]|asset-10)|assets/asset-problema-[^"'"'"' )]+\.webp' --include='*.html' --include='*.js' --include='*.css' .; then
+          if grep -RInE 'destaque-local-volt/main/assets/(asset-0[1-9]|asset-10)|assets/asset-problema-[^"'"'"' )]+\.webp|assets/hero-rafael-hd[^"'"'"' )]*\.webp' --include='*.html' --include='*.js' --include='*.css' .; then
             echo 'Legacy photography references remain.' >&2
             exit 1
           fi
