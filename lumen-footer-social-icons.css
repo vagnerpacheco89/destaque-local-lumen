@@ -81,11 +81,12 @@
 }
 
 .footer-social--whatsapp svg {
-  width: 23px !important;
-  height: 23px !important;
+  width: 29px !important;
+  height: 29px !important;
   fill: none !important;
   stroke: #fff !important;
-  stroke-width: 2.05 !important;
+  stroke-width: 2.25 !important;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .18));
 }
 
 .footer-social:hover {
@@ -110,5 +111,10 @@
 
   .footer-social::before {
     border-radius: 12px;
+  }
+
+  .footer-social--whatsapp svg {
+    width: 28px !important;
+    height: 28px !important;
   }
 }
