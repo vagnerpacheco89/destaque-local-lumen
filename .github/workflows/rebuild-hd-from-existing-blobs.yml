@@ -1,0 +1,147 @@
+name: Rebuild verified HD assets from existing blobs
+
+on:
+  push:
+    branches: [hd-assets-final]
+    paths:
+      - '.github/workflows/rebuild-hd-from-existing-blobs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: hd-assets-final
+
+      - name: Rebuild verified Q45 package from repository blobs
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          shas=(
+            64d399feed719d2e15ca4d003c1d0afc7a6fe118
+            45c64188dc629a555aeeccd30b767a51c33da1a6
+            2997b118f3ade11ba09a9ba5067dae089c4e1717
+            c8230e7bc3c2e45143d64a2586f9a8fcf92b67e5
+            3184c6429994106f400fa82d164559df76491dae
+            29f94bacceaa4b8b9b298b29a009d16c4413112e
+            a9993d08088ef7ed9bc3f4d5ed85b262d8eed98b
+            f000d0a4470573635225079204cd879f416bf311
+            8e9d94ed3a017813e421b6149161fa61a38a2cf0
+            38f3132a0112bebdae85f21390649c8e5dfb04c1
+            c947d8c07d2ac840309aa5d667f14136d6c65446
+            be9a935ba030421b63f0f21fd3fae154fb9f446a
+            6720c8d535b29698171ad8d661885785f1f29cf4
+            9d5ae0d7e6877c4ee4f007b1af642703d998b777
+            f0e935ee2cbc2224edcad39c3d3d85d272038716
+            611950fcfd49a06de954d05c1b379f8185ed8a1f
+            1b40ec6964f6b87ff791cf0bcf2511c75f4ec429
+            20c6b18965537730c151bfea3b49dad190537076
+            0e9edbd4d0e018c350ba134a5438ac928d74d609
+            9220e449c026b5bb9f8fc34e1e5227d6a8c90307
+            bd65ba52bccd076cb00bec78d8924d6a66cbf2ea
+            85208e76804f3bf5d8fddb419594efd8a506c10a
+            91c4ff63fd19ad34333f93a8e0af5a3b7362ab94
+            d4b6cef718cd83eb58b39bb7f3944a7bdd85b74a
+            4924e9c148c718cef4546d755043981a39694b8b
+            559d038f4d358e1b83525a1ce47c1aa154ee9fa6
+            84f24cd295270fd27afa183db2e1aefe7ad1288b
+          )
+          : > /tmp/lumen_q45.zip.b64
+          i=0
+          for sha in "${shas[@]}"; do
+            printf -v n '%03d' "$i"
+            curl -fsSL \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H 'Accept: application/vnd.github+json' \
+              "https://api.github.com/repos/${GITHUB_REPOSITORY}/git/blobs/${sha}" \
+              | jq -r '.content' | tr -d '\n' | base64 -d > "/tmp/chunk-${n}"
+            cat "/tmp/chunk-${n}" >> /tmp/lumen_q45.zip.b64
+            echo "chunk ${n}: $(stat -c%s /tmp/chunk-${n}) bytes"
+            i=$((i+1))
+          done
+          base64 -d /tmp/lumen_q45.zip.b64 > /tmp/lumen_q45.zip
+          echo '599523a6c0f0af848baa2a5c257513d0c75486619f0a3876859ee243315b2f41  /tmp/lumen_q45.zip' | sha256sum -c -
+          unzip -t /tmp/lumen_q45.zip
+
+      - name: Extract 14 HD assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf assets/hd
+          mkdir -p assets/hd
+          unzip -q /tmp/lumen_q45.zip -d assets/hd
+          test "$(find assets/hd -maxdepth 1 -type f -name '*.avif' | wc -l)" -eq 14
+          find assets/hd -maxdepth 1 -type f -name '*.avif' -printf '%f %s bytes\n' | sort
+
+      - name: Point site photography to verified HD assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          mapping = {
+            'asset-01-hero-quadro.webp': 'assets/hd/asset-01-hero-quadro-hd.avif',
+            'asset-02-quadro-organizado.webp': 'assets/hd/asset-02-quadro-organizado-hd.avif',
+            'asset-03-novos-pontos.webp': 'assets/hd/asset-03-novos-pontos-hd.avif',
+            'asset-04-luminarias.webp': 'assets/hd/asset-04-luminarias-hd.avif',
+            'asset-05-chuveiro.webp': 'assets/hd/asset-05-chuveiro-hd.avif',
+            'asset-06-disjuntores.webp': 'assets/hd/asset-06-disjuntores-hd.avif',
+            'asset-07-fiacao-reforma.webp': 'assets/hd/asset-07-fiacao-reforma-hd.avif',
+            'asset-08-dr-dps.webp': 'assets/hd/asset-08-dr-dps-hd.avif',
+            'asset-09-retrato-rafael.webp': 'assets/hd/asset-09-retrato-rafael-hd.avif',
+            'asset-10-teste-comercio.webp': 'assets/hd/asset-10-teste-comercio-hd.avif',
+            'asset-problema-01-disjuntor-desarmando-v2.webp': 'assets/hd/asset-problema-01-disjuntor-desarmando-hd.avif',
+            'asset-problema-01-disjuntor-desarmando.webp': 'assets/hd/asset-problema-01-disjuntor-desarmando-hd.avif',
+            'asset-problema-02-tomada-aquecendo.webp': 'assets/hd/asset-problema-02-tomada-aquecendo-hd.avif',
+            'asset-problema-03-parte-sem-energia.webp': 'assets/hd/asset-problema-03-parte-sem-energia-hd.avif',
+            'asset-problema-04-chuveiro-queimado.webp': 'assets/hd/asset-problema-04-chuveiro-queimado-hd.avif',
+            'hero-rafael-hd-v2.webp': 'assets/hd/asset-01-hero-quadro-hd.avif',
+            'hero-rafael-hd-v3.webp': 'assets/hd/asset-01-hero-quadro-hd.avif',
+            'hero-rafael-hd.webp': 'assets/hd/asset-01-hero-quadro-hd.avif',
+          }
+
+          candidates = [Path('index.html'), Path('script.js'), Path('script-base.js'), Path('styles.css')]
+          candidates += sorted(Path('.').glob('lumen-*.css'))
+          changed=[]
+          for p in candidates:
+            if not p.exists():
+              continue
+            text=p.read_text()
+            before=text
+            for old,new in mapping.items():
+              text=text.replace(f'https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/{old}', new)
+              text=text.replace(f'assets/{old}', new)
+              text=text.replace(old, new)
+            if text != before:
+              p.write_text(text)
+              changed.append(str(p))
+          print('changed files:', ', '.join(changed) or 'none')
+          PY
+
+          if grep -RInE 'destaque-local-volt/main/assets/(asset-0[1-9]|asset-10)|assets/asset-problema-[^"'"'"' )]+\.webp' --include='*.html' --include='*.js' --include='*.css' .; then
+            echo 'Legacy photography references remain.' >&2
+            exit 1
+          fi
+
+      - name: Commit verified assets and reference migration
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/hd index.html script.js script-base.js styles.css lumen-*.css
+          if git diff --cached --quiet; then
+            echo 'No changes to commit.'
+          else
+            git commit -m 'fix: migrate LUMEN photography to verified HD assets'
+            git push origin HEAD:hd-assets-final
+          fi
