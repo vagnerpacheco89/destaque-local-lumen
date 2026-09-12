@@ -1,0 +1,151 @@
+/* FOOTER — five-column desktop layout requested in final polish. */
+
+@media (min-width: 981px) {
+  .footer-grid--expanded {
+    grid-template-columns:
+      minmax(230px, 1.16fr)
+      minmax(125px, .68fr)
+      minmax(165px, .84fr)
+      minmax(120px, .68fr)
+      minmax(250px, 1.28fr) !important;
+    align-items: start !important;
+  }
+
+  /* Let Atendimento and Horários become independent grid columns. */
+  .footer-service-col {
+    display: contents !important;
+  }
+
+  .footer-grid--expanded > .footer-brand-col,
+  .footer-grid--expanded > .footer-service-col > .footer-block,
+  .footer-grid--expanded > .footer-nav-col,
+  .footer-grid--expanded > .footer-contact-col {
+    min-width: 0;
+    min-height: 218px;
+    padding: 2px 22px 6px !important;
+    border-left: 1px solid rgba(255, 255, 255, .12) !important;
+  }
+
+  .footer-grid--expanded > .footer-brand-col {
+    padding-left: 0 !important;
+    padding-right: 30px !important;
+    border-left: 0 !important;
+  }
+
+  .footer-grid--expanded > .footer-contact-col {
+    padding-right: 0 !important;
+  }
+
+  .footer-block--hours {
+    padding-top: 2px !important;
+    border-top: 0 !important;
+  }
+
+  .footer-contact__head {
+    display: block !important;
+    margin-bottom: 17px !important;
+  }
+
+  .footer-contact__head h2 {
+    margin-bottom: 18px !important;
+  }
+}
+
+/* Remove the extra demo-data pill; the footer already carries the global demo label below. */
+.footer-contact__head > span {
+  display: none !important;
+}
+
+@media (max-width: 1120px) and (min-width: 981px) {
+  .footer-grid--expanded {
+    grid-template-columns:
+      minmax(205px, 1.08fr)
+      minmax(112px, .64fr)
+      minmax(150px, .80fr)
+      minmax(108px, .62fr)
+      minmax(228px, 1.18fr) !important;
+  }
+
+  .footer-grid--expanded > .footer-brand-col,
+  .footer-grid--expanded > .footer-service-col > .footer-block,
+  .footer-grid--expanded > .footer-nav-col,
+  .footer-grid--expanded > .footer-contact-col {
+    padding-inline: 17px !important;
+  }
+
+  .footer-grid--expanded > .footer-brand-col {
+    padding-left: 0 !important;
+    padding-right: 24px !important;
+  }
+
+  .footer-grid--expanded > .footer-contact-col {
+    padding-right: 0 !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .footer-service-col {
+    display: contents !important;
+  }
+
+  .footer-grid--expanded {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .footer-grid--expanded > .footer-brand-col,
+  .footer-grid--expanded > .footer-service-col > .footer-block,
+  .footer-grid--expanded > .footer-nav-col,
+  .footer-grid--expanded > .footer-contact-col {
+    min-width: 0;
+    padding: 28px !important;
+    border-top: 1px solid rgba(255, 255, 255, .10) !important;
+    border-left: 0 !important;
+  }
+
+  .footer-grid--expanded > .footer-brand-col {
+    grid-column: 1 / 3;
+    padding: 0 0 30px !important;
+    border-top: 0 !important;
+  }
+
+  .footer-grid--expanded > .footer-service-col > .footer-block:nth-child(1),
+  .footer-grid--expanded > .footer-nav-col {
+    padding-left: 0 !important;
+  }
+
+  .footer-grid--expanded > .footer-service-col > .footer-block:nth-child(2),
+  .footer-grid--expanded > .footer-contact-col {
+    padding-right: 0 !important;
+    border-left: 1px solid rgba(255, 255, 255, .10) !important;
+  }
+
+  .footer-block--hours {
+    padding-top: 28px !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .footer-grid--expanded {
+    grid-template-columns: 1fr !important;
+  }
+
+  .footer-grid--expanded > .footer-brand-col,
+  .footer-grid--expanded > .footer-service-col > .footer-block,
+  .footer-grid--expanded > .footer-nav-col,
+  .footer-grid--expanded > .footer-contact-col {
+    grid-column: 1 !important;
+    padding: 25px 0 !important;
+    border-left: 0 !important;
+    border-top: 1px solid rgba(255, 255, 255, .11) !important;
+  }
+
+  .footer-grid--expanded > .footer-brand-col {
+    padding-top: 0 !important;
+    padding-bottom: 30px !important;
+    border-top: 0 !important;
+  }
+
+  .footer-block--hours {
+    padding-top: 25px !important;
+  }
+}
