@@ -1,0 +1,30 @@
+/* FAQ plus button — keep the control vertically centered inside each card. */
+.faq-list summary {
+  position: relative;
+  display: block;
+  min-height: 70px;
+  padding: 15px 74px 15px 18px;
+}
+
+.faq-list summary span {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  justify-self: auto;
+  transform: translateY(-50%);
+}
+
+.faq-list details[open] summary span {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+@media (max-width: 560px) {
+  .faq-list summary {
+    min-height: 64px;
+    padding: 12px 62px 12px 14px;
+  }
+
+  .faq-list summary span {
+    right: 12px;
+  }
+}
