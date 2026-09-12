@@ -1,0 +1,1 @@
+Temporary transfer package for verified HD assets. Generated from local lumen_hd_assets.zip; expected zip SHA-256: 5aba421dc5d49da23f46b2a7d5bf8e5d4704cdc1b84a6aa2e367b68889d6a98c. Package will be removed before final main publication.
