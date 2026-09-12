@@ -1,100 +1,93 @@
-/* FOOTER SOCIAL ICONS — cleaner, richer brand treatment without external assets. */
+/* FOOTER SOCIAL ICONS — muted monochrome treatment aligned with the footer. */
 .footer-socials__icons {
   gap: 12px !important;
 }
 
 .footer-social {
   position: relative;
+  display: grid;
+  place-items: center;
   isolation: isolate;
   overflow: hidden;
   width: 48px !important;
   height: 48px !important;
-  border: 1px solid rgba(255, 255, 255, .26) !important;
   border-radius: 15px !important;
-  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, .16) !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .08) 0%, rgba(255, 255, 255, .04) 100%) !important;
+  color: rgba(255, 255, 255, .90) !important;
   box-shadow:
-    0 10px 20px rgba(0, 0, 0, .16),
-    inset 0 1px 0 rgba(255, 255, 255, .24) !important;
+    inset 0 1px 0 rgba(255, 255, 255, .10),
+    0 10px 20px rgba(0, 0, 0, .10) !important;
   transition:
     transform .2s ease,
     box-shadow .2s ease,
-    filter .2s ease !important;
+    border-color .2s ease,
+    background .2s ease,
+    color .2s ease !important;
 }
 
 .footer-social::before {
   content: "";
   position: absolute;
-  z-index: -1;
   inset: 1px;
   border-radius: 13px;
-  background: linear-gradient(145deg, rgba(255, 255, 255, .18), transparent 45%);
+  background: linear-gradient(145deg, rgba(255, 255, 255, .08), transparent 58%);
   pointer-events: none;
 }
 
 .footer-social::after {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  top: -18px;
-  left: -10px;
-  width: 46px;
-  height: 30px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, .12);
-  transform: rotate(-18deg);
-  pointer-events: none;
+  content: none !important;
 }
 
 .footer-social svg {
   position: relative;
   z-index: 1;
-  width: 22px !important;
-  height: 22px !important;
-  color: #fff !important;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .15));
+  width: 21px !important;
+  height: 21px !important;
+  color: currentColor !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  filter: none !important;
+  opacity: .96;
 }
 
-.footer-social--instagram {
-  background:
-    radial-gradient(circle at 30% 105%, #feda75 0 15%, #fa7e1e 30%, #d62976 56%, #962fbf 76%, #4f5bd5 100%) !important;
+.footer-social--instagram,
+.footer-social--facebook,
+.footer-social--whatsapp {
+  background: linear-gradient(180deg, rgba(255, 255, 255, .08) 0%, rgba(255, 255, 255, .04) 100%) !important;
 }
 
 .footer-social--instagram svg {
+  width: 21px !important;
+  height: 21px !important;
   fill: none !important;
-  stroke: #fff !important;
-  stroke-width: 2.15 !important;
-}
-
-.footer-social--facebook {
-  background: linear-gradient(145deg, #2589ff 0%, #1877f2 58%, #0f5fc9 100%) !important;
+  stroke: currentColor !important;
+  stroke-width: 2 !important;
 }
 
 .footer-social--facebook svg {
-  width: 21px !important;
-  height: 21px !important;
-  fill: #fff !important;
+  width: 19px !important;
+  height: 19px !important;
+  fill: currentColor !important;
   stroke: none !important;
 }
 
-.footer-social--whatsapp {
-  background: linear-gradient(145deg, #36df78 0%, #25d366 58%, #128c7e 100%) !important;
-}
-
 .footer-social--whatsapp svg {
-  width: 29px !important;
-  height: 29px !important;
+  width: 24px !important;
+  height: 24px !important;
   fill: none !important;
-  stroke: #fff !important;
-  stroke-width: 2.25 !important;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .18));
+  stroke: currentColor !important;
+  stroke-width: 2.1 !important;
 }
 
 .footer-social:hover {
-  transform: translateY(-3px) scale(1.03) !important;
-  filter: saturate(1.06) brightness(1.04) !important;
+  transform: translateY(-2px) !important;
+  border-color: rgba(245, 191, 37, .34) !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .12) 0%, rgba(255, 255, 255, .06) 100%) !important;
+  color: #fff !important;
   box-shadow:
-    0 15px 28px rgba(0, 0, 0, .20),
-    inset 0 1px 0 rgba(255, 255, 255, .30) !important;
+    inset 0 1px 0 rgba(255, 255, 255, .14),
+    0 14px 24px rgba(0, 0, 0, .14) !important;
 }
 
 .footer-social:focus-visible {
@@ -111,10 +104,5 @@
 
   .footer-social::before {
     border-radius: 12px;
-  }
-
-  .footer-social--whatsapp svg {
-    width: 28px !important;
-    height: 28px !important;
   }
 }
