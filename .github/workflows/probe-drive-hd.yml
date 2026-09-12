@@ -1,0 +1,38 @@
+name: Probe Drive HD download
+
+on:
+  push:
+    branches: [hd-assets-final]
+    paths:
+      - '.github/workflows/probe-drive-hd.yml'
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe anonymous Drive endpoints
+        shell: bash
+        run: |
+          set -u
+          id='1L4b4-XyLTN8422XHDhSjbiA3GmoVJsZx'
+          urls=(
+            "https://drive.usercontent.google.com/download?id=${id}&export=download&confirm=t"
+            "https://drive.google.com/uc?export=download&id=${id}&confirm=t"
+            "https://lh3.googleusercontent.com/d/${id}"
+          )
+          i=0
+          for url in "${urls[@]}"; do
+            out="/tmp/probe-${i}"
+            hdr="/tmp/probe-${i}.headers"
+            echo "=== probe $i ==="
+            curl -L --connect-timeout 10 --max-time 30 -sS -D "$hdr" "$url" -o "$out" || true
+            echo "final headers:"
+            tail -n 20 "$hdr" || true
+            echo "bytes: $(wc -c < "$out" 2>/dev/null || echo 0)"
+            echo -n "magic: "
+            xxd -l 16 -p "$out" 2>/dev/null || true
+            echo -n "file: "
+            file -b "$out" 2>/dev/null || true
+            i=$((i+1))
+          done
