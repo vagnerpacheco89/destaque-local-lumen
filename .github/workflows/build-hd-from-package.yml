@@ -1,0 +1,40 @@
+name: Build HD assets from repository package
+
+on:
+  push:
+    branches: [hd-assets-final]
+    paths:
+      - '.github/workflows/build-hd-from-package.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: hd-assets-final
+      - name: Decode package, validate and extract
+        shell: bash
+        run: |
+          set -euo pipefail
+          base64 -d hd-package/lumen_hd_assets.zip.b64 > /tmp/lumen_hd_assets.zip
+          echo '5aba421dc5d49da23f46b2a7d5bf8e5d4704cdc1b84a6aa2e367b68889d6a98c  /tmp/lumen_hd_assets.zip' | sha256sum -c -
+          unzip -t /tmp/lumen_hd_assets.zip
+          rm -rf assets/hd
+          mkdir -p assets/hd
+          unzip -q /tmp/lumen_hd_assets.zip -d assets/hd
+          test "$(find assets/hd -maxdepth 1 -type f -name '*.avif' | wc -l)" -eq 14
+          file assets/hd/*.avif
+      - name: Commit HD assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/hd
+          git commit -m 'build: add verified HD image assets' || exit 0
+          git push origin HEAD:hd-assets-final
