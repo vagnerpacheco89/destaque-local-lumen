@@ -1,0 +1,73 @@
+/* FINAL CTA — mobile layout fix: keep the photo separate from the conversion copy. */
+@media (max-width: 680px) {
+  .final-cta__card {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    background: #10442f !important;
+  }
+
+  .final-cta__content {
+    position: relative !important;
+    z-index: 3 !important;
+    order: 1;
+    width: 100% !important;
+    min-height: 0 !important;
+    padding: 38px 24px 30px !important;
+    background:
+      radial-gradient(circle at 8% 10%, rgba(255, 220, 104, .10), transparent 30%),
+      linear-gradient(135deg, #174f3a 0%, #10442f 72%, #0d3929 100%);
+  }
+
+  .final-cta__content::after {
+    margin-top: 16px !important;
+    text-align: left !important;
+  }
+
+  .final-cta__card > img {
+    position: relative !important;
+    inset: auto !important;
+    z-index: 0 !important;
+    order: 2;
+    display: block !important;
+    width: 100% !important;
+    height: 330px !important;
+    flex: 0 0 330px;
+    object-fit: cover !important;
+    object-position: center 18% !important;
+  }
+
+  .final-cta__shade {
+    display: none !important;
+  }
+
+  .final-cta__card::after {
+    content: "Rafael Martins  •  Eletricista" !important;
+    right: 16px !important;
+    bottom: 16px !important;
+    z-index: 4 !important;
+    padding: 9px 12px !important;
+    border-color: rgba(245, 191, 37, .92) !important;
+    background: #f5bf25 !important;
+    color: #10442f !important;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .12) !important;
+    font-size: 8.5px !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .final-cta__content {
+    padding: 34px 20px 28px !important;
+  }
+
+  .final-cta__content h2::after {
+    font-size: clamp(30px, 9.6vw, 40px) !important;
+  }
+
+  .final-cta__card > img {
+    height: 300px !important;
+    flex-basis: 300px;
+    object-position: center 15% !important;
+  }
+}
