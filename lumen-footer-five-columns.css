@@ -56,6 +56,55 @@
   display: none !important;
 }
 
+/* Footer identity must use the same horizontal lockup as the navbar. */
+.footer-grid .brand--footer {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  flex-wrap: nowrap !important;
+  width: max-content !important;
+  max-width: 100% !important;
+  gap: 11px !important;
+  margin: 0 !important;
+  padding: 8px 13px 8px 8px !important;
+}
+
+.footer-grid .brand--footer .brand__mark {
+  flex: 0 0 42px !important;
+  width: 42px !important;
+  height: 42px !important;
+  border: 2px solid #f3cf56 !important;
+  background: var(--green) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+.footer-grid .brand--footer .brand__text {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  min-width: 0 !important;
+  line-height: 1.02 !important;
+  white-space: nowrap !important;
+}
+
+.footer-grid .brand--footer .brand__text strong {
+  display: block !important;
+  margin: 0 !important;
+  font-size: 14px !important;
+  line-height: 1.05 !important;
+}
+
+.footer-grid .brand--footer .brand__text small {
+  display: block !important;
+  margin: 4px 0 0 !important;
+  font-size: 9px !important;
+  line-height: 1 !important;
+  letter-spacing: .18em !important;
+}
+
 @media (max-width: 1120px) and (min-width: 981px) {
   .footer-grid--expanded {
     grid-template-columns:
@@ -147,5 +196,16 @@
 
   .footer-block--hours {
     padding-top: 25px !important;
+  }
+
+  .footer-grid .brand--footer {
+    gap: 10px !important;
+    padding: 7px 11px 7px 7px !important;
+  }
+
+  .footer-grid .brand--footer .brand__mark {
+    flex-basis: 40px !important;
+    width: 40px !important;
+    height: 40px !important;
   }
 }
