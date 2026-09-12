@@ -34,37 +34,37 @@
       {
         title: 'Quadros elétricos',
         description: 'Organização e adequação da instalação.',
-        image: 'https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-02-quadro-organizado.webp',
+        image: 'assets/hd/asset-02-quadro-organizado-hd.avif',
         alt: 'Quadro elétrico residencial organizado.'
       },
       {
         title: 'Iluminação',
         description: 'Instalação de pontos e luminárias.',
-        image: 'https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-04-luminarias.webp',
+        image: 'assets/hd/asset-04-luminarias-hd.avif',
         alt: 'Instalação de iluminação em residência.'
       },
       {
         title: 'Novos pontos',
         description: 'Tomadas e pontos onde o imóvel precisa.',
-        image: 'https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-03-novos-pontos.webp',
+        image: 'assets/hd/asset-03-novos-pontos-hd.avif',
         alt: 'Instalação de tomada e novo ponto elétrico.'
       },
       {
         title: 'Chuveiros e circuitos',
         description: 'Instalação e correção do circuito.',
-        image: 'https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-05-chuveiro.webp',
+        image: 'assets/hd/asset-05-chuveiro-hd.avif',
         alt: 'Chuveiro elétrico em instalação residencial.'
       },
       {
         title: 'Diagnóstico elétrico',
         description: 'Teste para localizar a origem da falha.',
-        image: 'https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-10-teste-comercio.webp',
+        image: 'assets/hd/asset-10-teste-comercio-hd.avif',
         alt: 'Eletricista realizando teste em instalação elétrica.'
       },
       {
         title: 'Fiação, DR e DPS',
         description: 'Adequações e proteção da instalação.',
-        image: 'https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-08-dr-dps.webp',
+        image: 'assets/hd/asset-08-dr-dps-hd.avif',
         alt: 'Componentes de proteção DR e DPS em instalação elétrica.'
       }
     ];
@@ -327,7 +327,7 @@
     section.innerHTML = `
       <div class="container about-panel">
         <div class="about-panel__media">
-          <img src="https://raw.githubusercontent.com/vagnerpacheco89/destaque-local-volt/main/assets/asset-09-retrato-rafael.webp" alt="Rafael Martins, eletricista em Palhoça." loading="lazy" decoding="async" />
+          <img src="assets/hd/asset-09-retrato-rafael-hd.avif" alt="Rafael Martins, eletricista em Palhoça." loading="lazy" decoding="async" />
           <div class="about-person">
             <strong>Rafael Martins</strong>
             <span>Eletricista • Palhoça e região</span>

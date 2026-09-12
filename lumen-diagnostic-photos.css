@@ -44,22 +44,22 @@
 }
 
 .diagnostic-features article:nth-child(1) span {
-  background-image: url("./assets/asset-problema-01-disjuntor-desarmando-v2.webp") !important;
+  background-image: url("./assets/hd/asset-problema-01-disjuntor-desarmando-hd.avif") !important;
   background-position: center 50% !important;
 }
 
 .diagnostic-features article:nth-child(2) span {
-  background-image: url("./assets/asset-problema-02-tomada-aquecendo.webp") !important;
+  background-image: url("./assets/hd/asset-problema-02-tomada-aquecendo-hd.avif") !important;
   background-position: center 50% !important;
 }
 
 .diagnostic-features article:nth-child(3) span {
-  background-image: url("./assets/asset-problema-03-parte-sem-energia.webp") !important;
+  background-image: url("./assets/hd/asset-problema-03-parte-sem-energia-hd.avif") !important;
   background-position: center 50% !important;
 }
 
 .diagnostic-features article:nth-child(4) span {
-  background-image: url("./assets/asset-problema-04-chuveiro-queimado.webp") !important;
+  background-image: url("./assets/hd/asset-problema-04-chuveiro-queimado-hd.avif") !important;
   background-position: center 50% !important;
 }
 
