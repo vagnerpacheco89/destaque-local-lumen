@@ -1,0 +1,176 @@
+name: LUMEN final responsive QA
+
+on:
+  push:
+    branches: [qa-global-lumen]
+    paths:
+      - '.github/workflows/qa-responsive.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: qa-global-lumen
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Playwright
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0 >/dev/null
+          npx playwright install --with-deps chromium >/dev/null
+
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/lumen-server.log 2>&1 &
+          for i in {1..20}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/lumen-server.log
+          exit 1
+
+      - name: Run final browser QA
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p qa-artifacts
+          cat > qa.mjs <<'JS'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+
+          const viewports = [
+            { name: 'desktop-1440', width: 1440, height: 1000 },
+            { name: 'tablet-1024', width: 1024, height: 900 },
+            { name: 'tablet-768', width: 768, height: 900 },
+            { name: 'mobile-390', width: 390, height: 844 },
+          ];
+
+          const browser = await chromium.launch({ headless: true });
+          const report = { generatedAt: new Date().toISOString(), viewports: [] };
+          const failures = [];
+
+          for (const vp of viewports) {
+            const context = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, reducedMotion: 'reduce' });
+            const page = await context.newPage();
+            const consoleErrors = [];
+            const pageErrors = [];
+            const failedRequests = [];
+            page.on('console', msg => { if (msg.type() === 'error') consoleErrors.push(msg.text()); });
+            page.on('pageerror', err => pageErrors.push(String(err)));
+            page.on('requestfailed', req => failedRequests.push(`${req.method()} ${req.url()} :: ${req.failure()?.errorText || 'failed'}`));
+
+            await page.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' });
+            const docHeight = await page.evaluate(() => document.documentElement.scrollHeight);
+            for (let y = 0; y < docHeight; y += Math.max(500, Math.floor(vp.height * .75))) {
+              await page.evaluate(y => window.scrollTo(0, y), y);
+              await page.waitForTimeout(60);
+            }
+            await page.evaluate(() => window.scrollTo(0, 0));
+            await page.waitForTimeout(350);
+
+            const dom = await page.evaluate(() => {
+              const ids = [...document.querySelectorAll('[id]')].map(el => el.id);
+              const duplicateIds = ids.filter((id, i) => ids.indexOf(id) !== i);
+              const missingHashTargets = [...document.querySelectorAll('a[href^="#"]')]
+                .map(a => a.getAttribute('href'))
+                .filter(href => href && href !== '#' && !document.querySelector(href));
+              const brokenImages = [...document.images]
+                .filter(img => !img.complete || img.naturalWidth === 0)
+                .map(img => img.getAttribute('src'));
+              return {
+                title: document.title,
+                h1Count: document.querySelectorAll('h1').length,
+                duplicateIds: [...new Set(duplicateIds)],
+                missingHashTargets: [...new Set(missingHashTargets)],
+                brokenImages,
+                horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
+                clientWidth: document.documentElement.clientWidth,
+                scrollWidth: document.documentElement.scrollWidth,
+                robots: document.querySelector('meta[name="robots"]')?.content || null,
+                faqVisible: !!document.querySelector('#faq'),
+                finalCtaVisible: !!document.querySelector('#contato'),
+                footerVisible: !!document.querySelector('.site-footer'),
+              };
+            });
+
+            const interactions = {};
+            if (vp.width <= 980) {
+              const menuButton = page.locator('.menu-toggle');
+              const mobileMenu = page.locator('#mobile-menu');
+              await menuButton.click();
+              interactions.mobileMenuOpened = await mobileMenu.isVisible();
+              interactions.mobileMenuExpanded = await menuButton.getAttribute('aria-expanded');
+              interactions.mobileMenuLabelOpen = await menuButton.getAttribute('aria-label');
+              await page.keyboard.press('Escape');
+              await page.waitForTimeout(80);
+              interactions.mobileMenuClosedByEscape = !(await mobileMenu.isVisible());
+              interactions.mobileMenuExpandedAfterEscape = await menuButton.getAttribute('aria-expanded');
+              interactions.mobileMenuLabelAfterEscape = await menuButton.getAttribute('aria-label');
+            }
+
+            const cta = page.locator('[data-demo-cta]:visible').first();
+            await cta.click();
+            interactions.demoDialogOpened = await page.locator('#demo-dialog').evaluate(el => el.open);
+            await page.locator('[data-dialog-close]:visible').first().click();
+
+            const visibleFaqCount = await page.locator('.faq-list details:visible').count();
+            interactions.visibleFaqCount = visibleFaqCount;
+            if (visibleFaqCount > 1) {
+              const second = page.locator('.faq-list details:visible').nth(1);
+              await second.locator('summary').click();
+              await page.waitForTimeout(120);
+              interactions.onlyOneFaqOpen = (await page.locator('.faq-list details[open]:visible').count()) === 1;
+            }
+
+            await page.evaluate(() => window.scrollTo(0, 0));
+            await page.waitForTimeout(100);
+            await page.screenshot({ path: `qa-artifacts/${vp.name}.png`, fullPage: true });
+
+            const result = { ...vp, dom, interactions, consoleErrors, pageErrors, failedRequests };
+            report.viewports.push(result);
+
+            const prefix = vp.name;
+            if (dom.h1Count !== 1) failures.push(`${prefix}: expected exactly one H1`);
+            if (dom.duplicateIds.length) failures.push(`${prefix}: duplicate IDs ${dom.duplicateIds.join(', ')}`);
+            if (dom.missingHashTargets.length) failures.push(`${prefix}: missing hash targets ${dom.missingHashTargets.join(', ')}`);
+            if (dom.brokenImages.length) failures.push(`${prefix}: broken images ${dom.brokenImages.join(', ')}`);
+            if (dom.horizontalOverflow) failures.push(`${prefix}: horizontal overflow ${dom.scrollWidth}/${dom.clientWidth}`);
+            if (!String(dom.robots || '').includes('noindex')) failures.push(`${prefix}: demo lost noindex`);
+            if (!dom.faqVisible || !dom.finalCtaVisible || !dom.footerVisible) failures.push(`${prefix}: key sections missing`);
+            if (!interactions.demoDialogOpened) failures.push(`${prefix}: demo dialog did not open`);
+            if (interactions.visibleFaqCount !== 6 || !interactions.onlyOneFaqOpen) failures.push(`${prefix}: FAQ interaction failed`);
+            if (consoleErrors.length) failures.push(`${prefix}: console errors`);
+            if (pageErrors.length) failures.push(`${prefix}: page errors`);
+            if (failedRequests.length) failures.push(`${prefix}: failed requests`);
+            if (vp.width <= 980) {
+              if (!interactions.mobileMenuOpened || interactions.mobileMenuExpanded !== 'true') failures.push(`${prefix}: mobile menu did not open correctly`);
+              if (interactions.mobileMenuLabelOpen !== 'Fechar menu') failures.push(`${prefix}: mobile menu open label is wrong`);
+              if (!interactions.mobileMenuClosedByEscape || interactions.mobileMenuExpandedAfterEscape !== 'false') failures.push(`${prefix}: Escape did not close mobile menu`);
+              if (interactions.mobileMenuLabelAfterEscape !== 'Abrir menu') failures.push(`${prefix}: mobile menu closed label is wrong`);
+            }
+          }
+
+          await browser.close();
+          report.failures = failures;
+          fs.writeFileSync('qa-artifacts/report.json', JSON.stringify(report, null, 2));
+          console.log(JSON.stringify(report, null, 2));
+          if (failures.length) process.exit(1);
+          JS
+          node ./qa.mjs | tee qa-artifacts/console-report.txt
+          rm -f qa.mjs
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lumen-final-responsive-qa
+          path: qa-artifacts/
+          if-no-files-found: error
