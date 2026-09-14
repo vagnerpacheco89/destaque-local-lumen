@@ -47,6 +47,8 @@
   color: currentColor !important;
   fill: none !important;
   stroke: currentColor !important;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   filter: none !important;
   opacity: .96;
 }
@@ -72,12 +74,24 @@
   stroke: none !important;
 }
 
+/* WhatsApp: separate the handset visually from the conversation ring. */
 .footer-social--whatsapp svg {
-  width: 24px !important;
-  height: 24px !important;
+  width: 23px !important;
+  height: 23px !important;
   fill: none !important;
   stroke: currentColor !important;
-  stroke-width: 2.1 !important;
+  stroke-width: 1.8 !important;
+}
+
+.footer-social--whatsapp svg path:first-child {
+  stroke-width: 1.75 !important;
+}
+
+.footer-social--whatsapp svg path:last-child {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(.78);
+  stroke-width: 1.7 !important;
 }
 
 .footer-social:hover {
