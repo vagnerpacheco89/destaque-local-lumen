@@ -74,24 +74,25 @@
   stroke: none !important;
 }
 
-/* WhatsApp: separate the handset visually from the conversation ring. */
+/* WhatsApp: keep the handset comfortably inside the conversation ring. */
 .footer-social--whatsapp svg {
-  width: 23px !important;
-  height: 23px !important;
+  width: 24px !important;
+  height: 24px !important;
   fill: none !important;
   stroke: currentColor !important;
-  stroke-width: 1.8 !important;
+  stroke-width: 1.65 !important;
+  overflow: visible;
 }
 
 .footer-social--whatsapp svg path:first-child {
-  stroke-width: 1.75 !important;
+  stroke-width: 1.65 !important;
 }
 
 .footer-social--whatsapp svg path:last-child {
   transform-box: fill-box;
   transform-origin: center;
-  transform: scale(.78);
-  stroke-width: 1.7 !important;
+  transform: translate(-.15px, -.1px) scale(.64);
+  stroke-width: 1.5 !important;
 }
 
 .footer-social:hover {
@@ -118,5 +119,10 @@
 
   .footer-social::before {
     border-radius: 12px;
+  }
+
+  .footer-social--whatsapp svg {
+    width: 23px !important;
+    height: 23px !important;
   }
 }
