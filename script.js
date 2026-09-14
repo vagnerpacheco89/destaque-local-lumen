@@ -1,5 +1,5 @@
 (() => {
-  const VERSION = '20260914-qa-01';
+  const VERSION = '20260914-qa-02';
 
   const initPageEnhancements = () => {
     initWorkCarousel();

@@ -506,20 +506,28 @@
   const menuToggle = document.querySelector('.menu-toggle');
   const mobileMenu = document.querySelector('#mobile-menu');
 
-  const closeMenu = () => {
+  const setMenuState = (open) => {
     if (!menuToggle || !mobileMenu) return;
-    menuToggle.setAttribute('aria-expanded', 'false');
-    mobileMenu.hidden = true;
+    menuToggle.setAttribute('aria-expanded', String(open));
+    menuToggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    mobileMenu.hidden = !open;
   };
+
+  const closeMenu = () => setMenuState(false);
 
   menuToggle?.addEventListener('click', () => {
     const open = menuToggle.getAttribute('aria-expanded') === 'true';
-    menuToggle.setAttribute('aria-expanded', String(!open));
-    mobileMenu.hidden = open;
+    setMenuState(!open);
   });
 
   mobileMenu?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || menuToggle?.getAttribute('aria-expanded') !== 'true') return;
+    closeMenu();
+    menuToggle?.focus();
   });
 
   const dialog = document.querySelector('#demo-dialog');
