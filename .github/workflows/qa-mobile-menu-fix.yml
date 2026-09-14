@@ -1,0 +1,100 @@
+name: LUMEN mobile menu QA fix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/qa-mobile-menu-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Improve mobile menu keyboard state
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('script-base.js')
+          text = p.read_text()
+          old = '''  const closeMenu = () => {
+    if (!menuToggle || !mobileMenu) return;
+    menuToggle.setAttribute('aria-expanded', 'false');
+    mobileMenu.hidden = true;
+  };
+
+  menuToggle?.addEventListener('click', () => {
+    const open = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', String(!open));
+    mobileMenu.hidden = open;
+  });
+
+  mobileMenu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+'''
+          new = '''  const setMenuState = (open) => {
+    if (!menuToggle || !mobileMenu) return;
+    menuToggle.setAttribute('aria-expanded', String(open));
+    menuToggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    mobileMenu.hidden = !open;
+  };
+
+  const closeMenu = () => setMenuState(false);
+
+  menuToggle?.addEventListener('click', () => {
+    const open = menuToggle.getAttribute('aria-expanded') === 'true';
+    setMenuState(!open);
+  });
+
+  mobileMenu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || menuToggle?.getAttribute('aria-expanded') !== 'true') return;
+    closeMenu();
+    menuToggle?.focus();
+  });
+'''
+          if old not in text:
+              raise SystemExit('Expected mobile-menu block not found')
+          p.write_text(text.replace(old, new, 1))
+
+          p = Path('script.js')
+          text = p.read_text()
+          old = "const VERSION = '20260914-qa-01';"
+          new = "const VERSION = '20260914-qa-02';"
+          if old not in text:
+              raise SystemExit('Expected VERSION marker not found')
+          p.write_text(text.replace(old, new, 1))
+
+          p = Path('index.html')
+          text = p.read_text()
+          old = '<script src="script.js?v=20260914-qa-01"></script>'
+          new = '<script src="script.js?v=20260914-qa-02"></script>'
+          if old not in text:
+              raise SystemExit('Expected script cache marker not found')
+          p.write_text(text.replace(old, new, 1))
+          PY
+
+          rm -f .github/workflows/qa-mobile-menu-fix.yml
+
+      - name: Commit QA fix and remove one-off workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add script-base.js script.js index.html .github/workflows/qa-mobile-menu-fix.yml
+          git commit -m "fix: improve mobile menu keyboard behavior"
+          git push origin HEAD:main
