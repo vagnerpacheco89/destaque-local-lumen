@@ -1,0 +1,165 @@
+import { chromium } from 'playwright';
+import fs from 'node:fs';
+
+const baseUrl = 'https://vagnerpacheco89.github.io/destaque-local-lumen/';
+const outDir = 'qa-artifacts';
+fs.mkdirSync(outDir, { recursive: true });
+
+const viewports = [
+  { name: 'mobile-320', width: 320, height: 780 },
+  { name: 'mobile-390', width: 390, height: 844 },
+  { name: 'tablet-768', width: 768, height: 900 },
+  { name: 'tablet-1024', width: 1024, height: 900 },
+  { name: 'desktop-1440', width: 1440, height: 1000 }
+];
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const failures = [];
+const reports = [];
+
+async function waitForMasterDeploy(page) {
+  for (let i = 0; i < 30; i += 1) {
+    const response = await page.goto(`${baseUrl}?masterqa=${Date.now()}`, { waitUntil: 'domcontentloaded', timeout: 45000 });
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href').catch(() => null);
+    const staticFaq = await page.locator('#faq .faq-list details').count().catch(() => 0);
+    if (response?.ok() && canonical === baseUrl && staticFaq === 6) return;
+    await sleep(10000);
+  }
+  throw new Error('Timed out waiting for the consolidated MASTER candidate deploy.');
+}
+
+const browser = await chromium.launch({ headless: true });
+try {
+  for (const viewport of viewports) {
+    const context = await browser.newContext({ viewport: { width: viewport.width, height: viewport.height } });
+    const page = await context.newPage();
+
+    const consoleErrors = [];
+    const pageErrors = [];
+    const failedRequests = [];
+    page.on('console', (msg) => {
+      const loc = msg.location()?.url || '';
+      if (msg.type() === 'error' && (!loc || loc.includes('vagnerpacheco89.github.io/destaque-local-lumen'))) {
+        consoleErrors.push(msg.text());
+      }
+    });
+    page.on('pageerror', (error) => pageErrors.push(error.message));
+    page.on('requestfailed', (request) => {
+      if (request.url().startsWith(baseUrl)) {
+        failedRequests.push(`${request.method()} ${request.url()} :: ${request.failure()?.errorText || 'failed'}`);
+      }
+    });
+
+    await waitForMasterDeploy(page);
+    await page.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {});
+    await page.evaluate(() => document.fonts?.ready);
+    await sleep(500);
+
+    const staticReport = await page.evaluate(() => {
+      const ids = [...document.querySelectorAll('[id]')].map((el) => el.id);
+      const duplicateIds = [...new Set(ids.filter((id, index) => ids.indexOf(id) !== index))];
+      const brokenHashes = [...document.querySelectorAll('a[href^="#"]')]
+        .map((a) => a.getAttribute('href'))
+        .filter((href) => href && href !== '#' && !document.getElementById(href.slice(1)));
+      const brokenImages = [...document.images]
+        .filter((img) => !img.complete || img.naturalWidth === 0)
+        .map((img) => img.getAttribute('src'));
+      const jsonLd = [...document.querySelectorAll('script[type="application/ld+json"]')].map((s) => {
+        try { JSON.parse(s.textContent); return true; } catch { return false; }
+      });
+      return {
+        title: document.title,
+        h1Count: document.querySelectorAll('h1').length,
+        duplicateIds,
+        brokenHashes,
+        brokenImages,
+        overflow: document.documentElement.scrollWidth > window.innerWidth + 1,
+        robots: document.querySelector('meta[name="robots"]')?.content || null,
+        canonical: document.querySelector('link[rel="canonical"]')?.href || null,
+        ogTitle: document.querySelector('meta[property="og:title"]')?.content || null,
+        twitterCard: document.querySelector('meta[name="twitter:card"]')?.content || null,
+        jsonLd,
+        faqCount: document.querySelectorAll('#faq .faq-list details').length,
+        hasSince2017: document.body.innerText.toLowerCase().includes('desde 2017'),
+        hasFinalCta: document.body.innerText.includes('Não precisa saber o nome do problema. Me conte o que está acontecendo.'),
+        demoButtonsWithRealHref: [...document.querySelectorAll('[data-demo-cta]')].some((el) => /^(https?:|whatsapp:|tel:)/i.test(el.getAttribute('href') || ''))
+      };
+    });
+
+    const localFailures = [];
+    if (!staticReport.title) localFailures.push('missing title');
+    if (staticReport.h1Count !== 1) localFailures.push(`h1 count ${staticReport.h1Count}`);
+    if (staticReport.duplicateIds.length) localFailures.push(`duplicate ids: ${staticReport.duplicateIds.join(',')}`);
+    if (staticReport.brokenHashes.length) localFailures.push(`broken hashes: ${staticReport.brokenHashes.join(',')}`);
+    if (staticReport.brokenImages.length) localFailures.push(`broken images: ${staticReport.brokenImages.join(',')}`);
+    if (staticReport.overflow) localFailures.push('horizontal overflow');
+    if (!staticReport.robots?.startsWith('noindex,follow')) localFailures.push(`robots=${staticReport.robots}`);
+    if (staticReport.canonical !== baseUrl) localFailures.push(`canonical=${staticReport.canonical}`);
+    if (!staticReport.ogTitle) localFailures.push('missing og:title');
+    if (staticReport.twitterCard !== 'summary_large_image') localFailures.push(`twitter card=${staticReport.twitterCard}`);
+    if (!staticReport.jsonLd.length || staticReport.jsonLd.includes(false)) localFailures.push('invalid JSON-LD');
+    if (staticReport.faqCount !== 6) localFailures.push(`FAQ count ${staticReport.faqCount}`);
+    if (staticReport.hasSince2017) localFailures.push('removed demo claim “desde 2017” resurfaced');
+    if (!staticReport.hasFinalCta) localFailures.push('final CTA semantic text missing');
+    if (staticReport.demoButtonsWithRealHref) localFailures.push('demo CTA points to a real external scheme');
+
+    // FAQ: only one open at a time.
+    const faq = page.locator('#faq .faq-list details');
+    if (await faq.count() >= 2) {
+      await faq.nth(1).locator('summary').click();
+      await sleep(120);
+      const openCount = await page.locator('#faq .faq-list details[open]').count();
+      if (openCount !== 1) localFailures.push(`FAQ open count after interaction=${openCount}`);
+    }
+
+    // Demo CTA must open dialog without navigation.
+    const beforeUrl = page.url();
+    await page.locator('[data-demo-cta]').first().click();
+    await sleep(100);
+    const dialogOpen = await page.locator('#demo-dialog').evaluate((el) => el.open);
+    if (!dialogOpen) localFailures.push('demo dialog did not open');
+    if (page.url().split('?')[0] !== beforeUrl.split('?')[0]) localFailures.push('demo CTA navigated away');
+    await page.locator('[data-dialog-close]').first().click();
+
+    // Mobile menu keyboard behavior.
+    if (viewport.width <= 768) {
+      const toggle = page.locator('.menu-toggle');
+      await toggle.click();
+      const openExpanded = await toggle.getAttribute('aria-expanded');
+      const openLabel = await toggle.getAttribute('aria-label');
+      if (openExpanded !== 'true' || openLabel !== 'Fechar menu') {
+        localFailures.push(`mobile menu open state ${openExpanded}/${openLabel}`);
+      }
+      await page.keyboard.press('Escape');
+      const closedExpanded = await toggle.getAttribute('aria-expanded');
+      const closedLabel = await toggle.getAttribute('aria-label');
+      const focused = await toggle.evaluate((el) => document.activeElement === el);
+      if (closedExpanded !== 'false' || closedLabel !== 'Abrir menu' || !focused) {
+        localFailures.push(`mobile menu close state ${closedExpanded}/${closedLabel}/focus=${focused}`);
+      }
+    }
+
+    // Internal anchor should respect fixed header offset.
+    if (viewport.width >= 1024) {
+      await page.locator('.desktop-nav a[href="#servicos"]').click();
+      await sleep(250);
+      const targetTop = await page.locator('#servicos').evaluate((el) => el.getBoundingClientRect().top);
+      if (targetTop < 70) localFailures.push(`anchor offset too small: ${targetTop}`);
+    }
+
+    await page.screenshot({ path: `${outDir}/${viewport.name}.png`, fullPage: true });
+
+    reports.push({
+      viewport,
+      ...staticReport,
+      consoleErrors,
+      pageErrors,
+      failedRequests,
+      failures: localFailures
+    });
+    for (const failure of localFailures) failures.push(`${viewport.name}: ${failure}`);
+    for (const e of consoleErrors) failures.push(`${viewport.name}: console: ${e}`);
+    for (const e of pageErrors) failures.push(`${viewport.name}: pageerror: ${e}`);
+    for (const e of failedRequests) failures.push(`${viewport.name}: requestfailed: ${e}`);
+
+    await conte
