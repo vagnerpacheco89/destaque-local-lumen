@@ -1,0 +1,105 @@
+name: Finalize LUMEN MASTER candidate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/finalize-lumen-master.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Consolidate approved LUMEN state
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          cat .master-staging/index.part01 \
+              .master-staging/index.part02 \
+              .master-staging/index.part03 \
+              .master-staging/index.part04 \
+              .master-staging/index.part05 > index.html
+
+          cat .master-staging/mastercss.part01 \
+              .master-staging/mastercss.part02 > lumen-master.css
+
+          cp .master-staging/script.js script.js
+          cp .master-staging/lumen-polish.css lumen-polish.css
+          cp .master-staging/robots.txt robots.txt
+          cp .master-staging/sitemap.xml sitemap.xml
+
+          mkdir -p qa .github/workflows
+          cat .master-staging/qajs.part01 \
+              .master-staging/qajs.part02 > qa/qa-master.mjs
+          cp .master-staging/lumen-master-qa.yml .github/workflows/lumen-master-qa.yml
+
+          # Force lazy-loaded images to enter the viewport before asset checks.
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('qa/qa-master.mjs')
+          text = p.read_text()
+          needle = "    await page.evaluate(() => document.fonts?.ready);\n    await sleep(500);\n"
+          replacement = """    await page.evaluate(() => document.fonts?.ready.then(() => true));
+              await sleep(300);
+              await page.evaluate(async () => {
+                const height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+                for (let y = 0; y < height; y += 600) {
+                  window.scrollTo(0, y);
+                  await new Promise((resolve) => setTimeout(resolve, 40));
+                }
+                window.scrollTo(0, 0);
+              });
+              await page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});
+              await sleep(300);
+          """
+          if needle not in text:
+              raise SystemExit('QA lazy-load patch marker not found')
+          p.write_text(text.replace(needle, replacement, 1))
+          PY
+
+          # Remove only superseded runtime/development artifacts proven unused by the final graph.
+          rm -f script-base.js lumen-diagnostic-banner-fix.css
+          rm -f assets/lumen-diagnostic-banner-700q45.webp.b64
+          rm -f assets/lumen-diagnostic-banner-native.webp.txt
+          rm -f assets/lumen-diagnostic-banner-v2.webp.b64
+          rm -f assets/work-01-quadros-hd.webp.b64
+
+          rm -rf .master-staging
+          rm -f .github/workflows/finalize-lumen-master.yml
+
+      - name: Static finalization gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check script.js
+          node --check qa/qa-master.mjs
+          grep -F '<link rel="canonical" href="https://vagnerpacheco89.github.io/destaque-local-lumen/"' index.html
+          grep -F '<meta name="robots" content="noindex,follow,max-image-preview:large"' index.html
+          grep -F 'application/ld+json' index.html
+          grep -F 'OAI-SearchBot' robots.txt
+          grep -F 'sitemap.xml' robots.txt
+          test "$(grep -o '<h1[ >]' index.html | wc -l)" -eq 1
+          test "$(grep -o '<details' index.html | wc -l)" -eq 6
+          ! grep -Fq 'script-base.js' index.html
+          ! grep -Fq '?v=' index.html
+          ! grep -Fiq 'desde 2017' index.html
+
+      - name: Commit consolidated candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "refactor: consolidate LUMEN master structure"
+          git push origin HEAD:main
