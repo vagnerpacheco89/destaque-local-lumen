@@ -38,10 +38,9 @@ jobs:
           cp .master-staging/robots.txt robots.txt
           cp .master-staging/sitemap.xml sitemap.xml
 
-          mkdir -p qa .github/workflows
+          mkdir -p qa
           cat .master-staging/qajs.part01 \
               .master-staging/qajs.part02 > qa/qa-master.mjs
-          cp .master-staging/lumen-master-qa.yml .github/workflows/lumen-master-qa.yml
 
           # Force lazy-loaded images to enter the viewport before asset checks.
           python - <<'PY'
@@ -73,9 +72,7 @@ jobs:
           rm -f assets/lumen-diagnostic-banner-native.webp.txt
           rm -f assets/lumen-diagnostic-banner-v2.webp.b64
           rm -f assets/work-01-quadros-hd.webp.b64
-
           rm -rf .master-staging
-          rm -f .github/workflows/finalize-lumen-master.yml
 
       - name: Static finalization gates
         shell: bash
