@@ -1,0 +1,122 @@
+iv class="reviews-conversion">
+        <div class="reviews-conversion__copy"><span>PRECISA RESOLVER ALGO ELÉTRICO?</span><p>Me conte o que você precisa resolver.</p></div>
+        <button class="btn btn--yellow" type="button" data-demo-cta>FALAR COM RAFAEL →</button>
+      </div>
+    </section>
+
+    <section class="section-pad area-section" id="area-atendida">
+      <div class="container area-card">
+        <div class="area-card__intro">
+          <p class="eyebrow eyebrow--light">ÁREA ATENDIDA</p>
+          <h2>Atendimento em Palhoça e região.</h2>
+          <p>Atendo residências e pequenos comércios em Palhoça, São José e Florianópolis continental, conforme disponibilidade.</p>
+        </div>
+        <div class="area-cities">
+          <article><span aria-hidden="true">01</span><div><h3>Palhoça</h3><p>Pagani • Pedra Branca • Passa Vinte • Ponte do Imaruim • Bela Vista • Aririú</p></div></article>
+          <article><span aria-hidden="true">02</span><div><h3>São José</h3><p>Kobrasol • Campinas • Barreiros</p></div></article>
+          <article><span aria-hidden="true">03</span><div><h3>Florianópolis continental</h3><p>Estreito • Coqueiros • Capoeiras</p></div></article>
+        </div>
+      </div>
+      <div class="container area-map-wrap">
+        <div class="area-map-frame">
+          <iframe src="https://www.google.com/maps?q=Palho%C3%A7a%2C%20SC&z=12&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa da área de atendimento com foco em Palhoça, Santa Catarina"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad faq-section" id="faq">
+      <div class="container faq-card">
+        <div class="faq-media">
+          <img src="assets/hd/asset-10-teste-comercio-hd.avif" alt="Eletricista realizando testes em instalação elétrica." loading="lazy" decoding="async" />
+          <div class="faq-media__copy">
+            <p class="eyebrow eyebrow--light">DÚVIDAS FREQUENTES</p>
+            <h2>Algumas dúvidas antes de me chamar.</h2>
+            <p class="faq-media__lead">Você não precisa saber exatamente o que está acontecendo para iniciar o contato. Veja como funciona o primeiro passo e o que é combinado antes do serviço.</p>
+          </div>
+        </div>
+
+        <div class="faq-list">
+          <details open><summary>Não sei exatamente qual é o problema. Posso chamar mesmo assim?<span aria-hidden="true">+</span></summary><p>Sim. Você pode explicar o que está acontecendo e, quando possível, enviar fotos ou vídeos. A avaliação começa pelas informações que você conseguir passar.</p></details>
+          <details><summary>O que acontece depois que eu mando mensagem?<span aria-hidden="true">+</span></summary><p>Você explica o que precisa e envia fotos ou vídeos quando possível. Rafael avalia o cenário e verifica se é preciso uma visita. Depois, o serviço é combinado antes da execução.</p></details>
+          <details><summary>Como funciona o orçamento?<span aria-hidden="true">+</span></summary><p>As informações do primeiro contato ajudam na avaliação inicial. Quando for necessária uma visita, o orçamento é apresentado antes da execução.</p></details>
+          <details><summary>O serviço só começa depois de tudo combinado?<span aria-hidden="true">+</span></summary><p>Sim. O que será feito, os materiais necessários e o orçamento são alinhados antes da execução.</p></details>
+          <details><summary>Como ficam os materiais do serviço?<span aria-hidden="true">+</span></summary><p>Os materiais necessários são combinados antes da execução. Quando preciso, Rafael orienta o que será necessário.</p></details>
+          <details><summary>Como sei se você atende minha região?<span aria-hidden="true">+</span></summary><p>O atendimento tem base em Palhoça e também pode ser realizado por deslocamento em São José e Florianópolis continental, conforme disponibilidade.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad final-cta" id="contato">
+      <div class="container final-cta__card">
+        <img src="assets/hd/asset-09-retrato-rafael-hd.avif" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <div class="final-cta__shade"></div>
+        <div class="final-cta__content">
+          <p class="eyebrow eyebrow--light">PRONTO PARA DAR O PRÓXIMO PASSO?</p>
+          <h2>Não precisa saber o nome do problema. Me conte o que está acontecendo.</h2>
+          <p class="final-cta__support">Se puder, envie uma foto ou vídeo. A conversa começa por aí.</p>
+          <button class="btn btn--yellow btn--large" type="button" data-demo-cta>FALAR COM RAFAEL NO WHATSAPP</button>
+          <p class="final-cta__note">Contato direto com Rafael. Você pode começar só explicando o que está acontecendo.</p>
+        </div>
+        <span class="final-cta__badge"><span class="final-cta__badge-full">Rafael Martins <span aria-hidden="true">•</span> Eletricista em Palhoça</span><span class="final-cta__badge-mobile">Rafael Martins <span aria-hidden="true">•</span> Eletricista</span></span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-wrap">
+    <div class="container site-footer">
+      <div class="footer-grid footer-grid--expanded">
+        <div class="footer-brand-col">
+          <a class="brand brand--footer" href="#topo" aria-label="Rafael Martins Eletricista — voltar ao início">
+            <span class="brand__mark">RM</span>
+            <span class="brand__text"><strong>Rafael Martins</strong><small>Eletricista</small></span>
+          </a>
+          <p>Serviços elétricos para residências e pequenos comércios em Palhoça e região.</p>
+
+          <div class="footer-socials" aria-label="Redes sociais demonstrativas">
+            <span class="footer-socials__label">Redes sociais</span>
+            <div class="footer-socials__icons">
+              <button class="footer-social footer-social--instagram" type="button" data-demo-cta aria-label="Instagram demonstrativo">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+              </button>
+              <button class="footer-social footer-social--facebook" type="button" data-demo-cta aria-label="Facebook demonstrativo">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 8H17V4.5h-2.8c-3.1 0-5.2 1.9-5.2 5.5v2H6v3.5h3V22h4v-6.5h3.2L17 12h-4v-1.8C13 8.7 13.5 8 14.5 8Z"/></svg>
+              </button>
+              <button class="footer-social footer-social--whatsapp" type="button" data-demo-cta aria-label="WhatsApp demonstrativo">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.7a8 8 0 0 1-11.8 7L4 20l1.4-4A8 8 0 1 1 20 11.7Z"/><path d="M9 8.2c.3-.5.6-.5.9-.5h.6c.2 0 .4.1.5.4l.7 1.7c.1.3.1.5-.1.7l-.6.8c-.2.2-.1.4 0 .6.6 1.1 1.5 2 2.6 2.6.2.1.4.2.6 0l.9-1c.2-.2.4-.3.7-.1l1.7.8c.3.1.4.3.4.5 0 .5-.2 1.5-.9 2-.6.5-1.4.8-2.3.6-1.5-.3-3.5-1.1-5.2-2.8-1.4-1.4-2.4-3.1-2.6-4.6-.2-.9 0-1.7.5-2.3.4-.5.9-.6 1.6-.4Z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-service-col">
+          <section class="footer-block">
+            <h2>Atendimento</h2>
+            <p>Palhoça</p>
+            <p>São José</p>
+            <p>Florianópolis continental</p>
+          </section>
+          <section class="footer-block footer-block--hours">
+            <h2>Horários</h2>
+            <p>Seg–sex 08:00–18:00</p>
+            <p>Sáb 08:00–13:00</p>
+            <p>Domingos e feriados: não atende</p>
+          </section>
+        </div>
+
+        <div class="footer-nav-col">
+          <h2>Navegação</h2>
+          <nav class="footer-nav" aria-label="Navegação do rodapé">
+            <a href="#servicos">Serviços</a>
+            <a href="#trabalhos">Trabalhos</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#avaliacoes">Avaliações</a>
+            <a href="#area-atendida">Área atendida</a>
+            <a href="#faq">Dúvidas</a>
+          </nav>
+        </div>
+
+        <div class="footer-contact-col">
+          <div class="footer-contact__head"><h2>Contato</h2></div>
+          <div class="footer-contact-list">
+            <p><span class="footer-contact__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 21c.9-4 3.2-6 7-6s6.1 2 7 6"/></svg></span><span><strong>Rafael Martins</strong><small>Eletricista</small></span></p>
+            <p><span cl
