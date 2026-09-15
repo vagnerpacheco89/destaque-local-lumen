@@ -146,10 +146,13 @@ try {
     if (page.url().split('?')[0] !== beforeUrl.split('?')[0]) localFailures.push('demo CTA navigated away');
     await page.locator('[data-dialog-close]').first().click();
 
-    // FAQ: only one open at a time.
+    // FAQ: native summary click, after explicitly stabilizing its viewport position.
     const faq = page.locator('#faq .faq-list details');
     if (await faq.count() >= 2) {
-      await faq.nth(1).locator('summary').click();
+      const secondSummary = faq.nth(1).locator('summary');
+      await secondSummary.scrollIntoViewIfNeeded();
+      await sleep(350);
+      await secondSummary.click({ force: true });
       await sleep(120);
       const openCount = await page.locator('#faq .faq-list details[open]').count();
       if (openCount !== 1) localFailures.push(`FAQ open count after interaction=${openCount}`);
