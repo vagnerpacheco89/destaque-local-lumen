@@ -27,43 +27,7 @@ jobs:
           npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
 
-      - name: Patch QA harness for deterministic diagnostics
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p = Path('qa/qa-master.mjs')
-          text = p.read_text()
-
-          text = text.replace(
-              "await page.locator('[data-demo-cta]').first().click();",
-              "await page.locator('[data-demo-cta]:visible').first().dispatchEvent('click');",
-              1,
-          )
-
-          old_wait = """    await page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});\n    await sleep(300);\n\n    const staticReport = await page.evaluate(() => {"""
-          new_wait = """    await page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});\n    await page.evaluate(() => {\n      document.querySelectorAll('img[loading=\"lazy\"]').forEach((img) => { img.loading = 'eager'; });\n    });\n    await page.waitForFunction(() => [...document.images].every((img) => img.complete), null, { timeout: 10000 }).catch(() => {});\n    await sleep(500);\n\n    const staticReport = await page.evaluate(() => {"""
-          if old_wait not in text:
-              raise SystemExit('lazy-load wait marker not found')
-          text = text.replace(old_wait, new_wait, 1)
-
-          old_overflow = """        overflow: document.documentElement.scrollWidth > window.innerWidth + 1,\n        robots:"""
-          new_overflow = """        overflow: document.documentElement.scrollWidth > window.innerWidth + 1,\n        overflowElements: [...document.querySelectorAll('body *')].map((el) => {\n          const rect = el.getBoundingClientRect();\n          return {\n            tag: el.tagName.toLowerCase(),\n            id: el.id || null,\n            className: typeof el.className === 'string' ? el.className : null,\n            left: Math.round(rect.left),\n            right: Math.round(rect.right),\n            width: Math.round(rect.width)\n          };\n        }).filter((item) => item.right > window.innerWidth + 1 || item.left < -1).slice(0, 20),\n        robots:"""
-          if old_overflow not in text:
-              raise SystemExit('overflow report marker not found')
-          text = text.replace(old_overflow, new_overflow, 1)
-
-          old_failure = "if (staticReport.overflow) localFailures.push('horizontal overflow');"
-          new_failure = "if (staticReport.overflow) localFailures.push(`horizontal overflow: ${JSON.stringify(staticReport.overflowElements)}`);"
-          if old_failure not in text:
-              raise SystemExit('overflow failure marker not found')
-          text = text.replace(old_failure, new_failure, 1)
-
-          text = text.replace('      await sleep(250);', '      await sleep(1200);', 1)
-
-          p.write_text(text)
-          PY
-
-      - name: Run real-deploy QA
+      - name: Run canonical real-deploy QA
         run: node qa/qa-master.mjs
 
       - name: Upload QA evidence
