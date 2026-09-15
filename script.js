@@ -1,125 +1,110 @@
 (() => {
-  const VERSION = '20260914-qa-02';
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  const initPageEnhancements = () => {
-    initWorkCarousel();
-    initQualitySection();
-    initProcessSection();
-    initAboutSection();
-    initReviewsSection();
-    initAreaSection();
+  const siteHeader = document.querySelector('.site-header');
+  let headerTicking = false;
+
+  const syncHeaderState = () => {
+    siteHeader?.classList.toggle('is-compact', window.scrollY > 36);
+    headerTicking = false;
   };
 
-  const loadBaseScript = () => {
-    const base = document.createElement('script');
-    base.src = `script-base.js?v=${VERSION}`;
-    base.onload = initPageEnhancements;
-    base.onerror = initPageEnhancements;
-    document.head.appendChild(base);
+  syncHeaderState();
+  window.addEventListener('scroll', () => {
+    if (headerTicking) return;
+    headerTicking = true;
+    window.requestAnimationFrame(syncHeaderState);
+  }, { passive: true });
+
+  const menuToggle = document.querySelector('.menu-toggle');
+  const mobileMenu = document.querySelector('#mobile-menu');
+
+  const setMenuState = (open) => {
+    if (!menuToggle || !mobileMenu) return;
+    menuToggle.setAttribute('aria-expanded', String(open));
+    menuToggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    mobileMenu.hidden = !open;
   };
+
+  menuToggle?.addEventListener('click', () => {
+    setMenuState(menuToggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  mobileMenu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setMenuState(false));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || menuToggle?.getAttribute('aria-expanded') !== 'true') return;
+    setMenuState(false);
+    menuToggle?.focus();
+  });
+
+  const dialog = document.querySelector('#demo-dialog');
+
+  document.addEventListener('click', (event) => {
+    const cta = event.target.closest('[data-demo-cta]');
+    if (!cta) return;
+    event.preventDefault();
+    if (dialog?.showModal) dialog.showModal();
+  });
+
+  document.querySelectorAll('[data-dialog-close]').forEach((button) => {
+    button.addEventListener('click', () => dialog?.close());
+  });
+
+  dialog?.addEventListener('click', (event) => {
+    const box = dialog.getBoundingClientRect();
+    const outside = event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom;
+    if (outside) dialog.close();
+  });
+
+  const faqItems = [...document.querySelectorAll('.faq-list details')];
+  faqItems.forEach((item) => {
+    item.addEventListener('toggle', () => {
+      if (!item.open) return;
+      faqItems.forEach((other) => {
+        if (other !== item) other.open = false;
+      });
+    });
+  });
+
+  document.querySelector('[data-back-top]')?.addEventListener('click', (event) => {
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+  });
 
   const initWorkCarousel = () => {
-    const section = document.querySelector('#trabalhos');
-    const host = section?.querySelector('.work-cards');
-    if (!section || !host || host.dataset.sliderReady === 'true') return;
+    const carousel = document.querySelector('.work-carousel');
+    const viewport = carousel?.querySelector('.work-carousel__viewport');
+    const track = carousel?.querySelector('.work-carousel__track');
+    const dots = [...(carousel?.querySelectorAll('.work-carousel__dot') || [])];
+    if (!carousel || !viewport || !track) return;
 
-    host.dataset.sliderReady = 'true';
+    const originals = [...track.querySelectorAll('.work-carousel-card:not(.is-clone)')];
+    if (!originals.length) return;
 
-    const title = section.querySelector('.work-panel__head h2');
-    const lead = section.querySelector('.work-panel__head > p:last-child');
-    if (title) title.textContent = 'Veja alguns trabalhos que já realizei.';
-    if (lead) lead.textContent = 'Serviços executados em diferentes situações, com atenção à instalação e ao que cada imóvel precisava.';
+    const cloneCount = Math.min(3, originals.length);
+    originals.slice(0, cloneCount).forEach((card) => {
+      const clone = card.cloneNode(true);
+      clone.classList.add('is-clone');
+      clone.setAttribute('aria-hidden', 'true');
+      clone.querySelectorAll('img').forEach((image) => {
+        image.alt = '';
+        image.setAttribute('role', 'presentation');
+      });
+      track.appendChild(clone);
+    });
 
-    const items = [
-      {
-        title: 'Quadros elétricos',
-        description: 'Organização e adequação da instalação.',
-        image: 'assets/hd/asset-02-quadro-organizado-hd.avif',
-        alt: 'Quadro elétrico residencial organizado.'
-      },
-      {
-        title: 'Iluminação',
-        description: 'Instalação de pontos e luminárias.',
-        image: 'assets/hd/asset-04-luminarias-hd.avif',
-        alt: 'Instalação de iluminação em residência.'
-      },
-      {
-        title: 'Novos pontos',
-        description: 'Tomadas e pontos onde o imóvel precisa.',
-        image: 'assets/hd/asset-03-novos-pontos-hd.avif',
-        alt: 'Instalação de tomada e novo ponto elétrico.'
-      },
-      {
-        title: 'Chuveiros e circuitos',
-        description: 'Instalação e correção do circuito.',
-        image: 'assets/hd/asset-05-chuveiro-hd.avif',
-        alt: 'Chuveiro elétrico em instalação residencial.'
-      },
-      {
-        title: 'Diagnóstico elétrico',
-        description: 'Teste para localizar a origem da falha.',
-        image: 'assets/hd/asset-10-teste-comercio-hd.avif',
-        alt: 'Eletricista realizando teste em instalação elétrica.'
-      },
-      {
-        title: 'Fiação, DR e DPS',
-        description: 'Adequações e proteção da instalação.',
-        image: 'assets/hd/asset-08-dr-dps-hd.avif',
-        alt: 'Componentes de proteção DR e DPS em instalação elétrica.'
-      }
-    ];
-
-    const clones = items.slice(0, 3);
-    const renderCard = (item, index, clone = false) => `
-      <article class="work-carousel-card${clone ? ' is-clone' : ''}" ${clone ? 'aria-hidden="true"' : ''}>
-        <img src="${item.image}" alt="${clone ? '' : item.alt}" ${clone ? 'role="presentation"' : ''} loading="lazy" decoding="async" />
-        <div class="work-carousel-card__shade"></div>
-        <div class="work-carousel-card__content">
-          <span class="work-carousel-card__index" aria-hidden="true">${String((index % items.length) + 1).padStart(2, '0')}</span>
-          <h3>${item.title}</h3>
-          <p>${item.description}</p>
-        </div>
-      </article>`;
-
-    host.innerHTML = `
-      <div class="work-carousel" aria-label="Exemplos de trabalhos elétricos">
-        <div class="work-carousel__viewport">
-          <div class="work-carousel__track">
-            ${items.map((item, index) => renderCard(item, index)).join('')}
-            ${clones.map((item, index) => renderCard(item, index, true)).join('')}
-          </div>
-        </div>
-        <div class="work-carousel__dots" aria-hidden="true">
-          ${items.map((_, index) => `<span class="work-carousel__dot${index === 0 ? ' is-active' : ''}"></span>`).join('')}
-        </div>
-      </div>`;
-
-    const oldCta = section.querySelector('.work-panel__link');
-    if (oldCta && !section.querySelector('.work-panel__closing')) {
-      const closing = document.createElement('div');
-      closing.className = 'work-panel__closing';
-      const question = document.createElement('p');
-      question.textContent = 'Tem algo parecido para resolver no seu imóvel?';
-      oldCta.textContent = 'FALAR COM RAFAEL →';
-      oldCta.classList.add('work-panel__cta');
-      oldCta.parentNode.insertBefore(closing, oldCta);
-      closing.append(question, oldCta);
-    }
-
-    const carousel = host.querySelector('.work-carousel');
-    const viewport = host.querySelector('.work-carousel__viewport');
-    const track = host.querySelector('.work-carousel__track');
-    const cards = [...host.querySelectorAll('.work-carousel-card')];
-    const dots = [...host.querySelectorAll('.work-carousel__dot')];
-    if (!carousel || !viewport || !track || !cards.length) return;
-
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let cards = [...track.querySelectorAll('.work-carousel-card')];
     let index = 0;
     let timer = null;
     let stepSize = 0;
     let paused = false;
+    let pointerStart = null;
 
     const updateStep = () => {
+      cards = [...track.querySelectorAll('.work-carousel-card')];
       const card = cards[0];
       if (!card) return;
       const styles = getComputedStyle(track);
@@ -128,7 +113,7 @@
     };
 
     const updateDots = () => {
-      const active = index % items.length;
+      const active = index % originals.length;
       dots.forEach((dot, dotIndex) => dot.classList.toggle('is-active', dotIndex === active));
     };
 
@@ -157,10 +142,10 @@
 
     track.addEventListener('transitionend', (event) => {
       if (event.propertyName !== 'transform') return;
-      if (index >= items.length) {
+      if (index >= originals.length) {
         index = 0;
         move(false);
-        requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
           track.style.transition = '';
         });
       }
@@ -186,7 +171,6 @@
       start();
     });
 
-    let pointerStart = null;
     viewport.addEventListener('pointerdown', (event) => {
       pointerStart = event.clientX;
       viewport.setPointerCapture?.(event.pointerId);
@@ -197,14 +181,16 @@
       if (pointerStart === null) return;
       const delta = event.clientX - pointerStart;
       pointerStart = null;
+
       if (Math.abs(delta) > 42) {
-        if (delta < 0) {
-          index += 1;
-        } else {
-          index = Math.max(0, index - 1);
-        }
+        index = delta < 0 ? index + 1 : Math.max(0, index - 1);
         move(true);
       }
+      start();
+    });
+
+    viewport.addEventListener('pointercancel', () => {
+      pointerStart = null;
       start();
     });
 
@@ -222,218 +208,9 @@
       else start();
     });
 
-    items.forEach((item) => {
-      const image = new Image();
-      image.decoding = 'async';
-      image.src = item.image;
-    });
-
     move(false);
     start();
   };
 
-  const initQualitySection = () => {
-    const section = document.querySelector('.quality-section');
-    if (!section || section.dataset.qualityReady === 'true') return;
-
-    section.dataset.qualityReady = 'true';
-    section.innerHTML = `
-      <div class="container quality-layout">
-        <div class="quality-copy">
-          <p class="eyebrow">NO ATENDIMENTO</p>
-          <h2>O que você pode esperar ao contratar meu serviço.</h2>
-          <p class="quality-copy__lead">Clareza antes de começar, cuidado durante a execução e conferência antes de finalizar.</p>
-        </div>
-
-        <div class="quality-list" aria-label="Diferenciais do atendimento">
-          <article class="quality-item">
-            <span class="quality-item__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3 1.5-5A8 8 0 1 1 21 15Z"></path><path d="M8 10h8M8 14h5"></path></svg>
-            </span>
-            <div><h3>Explicação clara</h3><p>Você entende o que precisa ser feito antes do serviço começar.</p></div>
-          </article>
-
-          <article class="quality-item">
-            <span class="quality-item__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M9 5h9a2 2 0 0 1 2 2v12H6V8"></path><path d="M9 3H5a2 2 0 0 0-2 2v14h3"></path><path d="m10 12 2 2 4-4"></path></svg>
-            </span>
-            <div><h3>Tudo combinado antes</h3><p>Serviço, materiais e orçamento são alinhados antes da execução.</p></div>
-          </article>
-
-          <article class="quality-item">
-            <span class="quality-item__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10.5V20h13v-9.5"></path><path d="m16.5 5.5.8-2 .8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8Z"></path></svg>
-            </span>
-            <div><h3>Cuidado com o local</h3><p>Organização durante o trabalho e atenção ao acabamento.</p></div>
-          </article>
-
-          <article class="quality-item">
-            <span class="quality-item__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.5 2.5L16 9"></path></svg>
-            </span>
-            <div><h3>Conferência final</h3><p>O que foi executado é testado antes da finalização.</p></div>
-          </article>
-        </div>
-      </div>`;
-  };
-
-  const initProcessSection = () => {
-    const section = document.querySelector('.process-section');
-    if (!section || section.dataset.processReady === 'true') return;
-
-    section.dataset.processReady = 'true';
-    section.innerHTML = `
-      <div class="container process-shell">
-        <div class="process-head">
-          <p class="eyebrow">COMO FUNCIONA</p>
-          <h2>Do primeiro contato ao serviço finalizado.</h2>
-          <p class="process-head__lead">Você explica o que precisa, eu avalio a situação e combinamos o serviço antes de começar.</p>
-        </div>
-
-        <div class="process-route" aria-label="Etapas do atendimento">
-          <article class="process-step">
-            <span class="process-step__number" aria-hidden="true">01</span>
-            <div><h3>Você me conta o que precisa</h3><p>Envie mensagem e, se possível, fotos ou vídeos da situação.</p></div>
-          </article>
-
-          <article class="process-step">
-            <span class="process-step__number" aria-hidden="true">02</span>
-            <div><h3>Eu avalio o cenário</h3><p>Analiso o problema e vejo se é preciso uma visita.</p></div>
-          </article>
-
-          <article class="process-step">
-            <span class="process-step__number" aria-hidden="true">03</span>
-            <div><h3>Combinamos o serviço</h3><p>Alinhamos o que será feito, materiais e orçamento.</p></div>
-          </article>
-
-          <article class="process-step">
-            <span class="process-step__number" aria-hidden="true">04</span>
-            <div><h3>Execução e conferência</h3><p>O serviço é realizado e testado antes da finalização.</p></div>
-          </article>
-        </div>
-
-        <div class="process-close">
-          <p>Pronto para explicar o que precisa?</p>
-          <button class="btn btn--yellow" type="button" data-demo-cta>COMEÇAR PELO WHATSAPP →</button>
-        </div>
-      </div>`;
-  };
-
-  const initAboutSection = () => {
-    const section = document.querySelector('#sobre');
-    if (!section || section.dataset.aboutReady === 'true') return;
-
-    section.dataset.aboutReady = 'true';
-    section.innerHTML = `
-      <div class="container about-panel">
-        <div class="about-panel__media">
-          <img src="assets/hd/asset-09-retrato-rafael-hd.avif" alt="Rafael Martins, eletricista em Palhoça." loading="lazy" decoding="async" />
-          <div class="about-person">
-            <strong>Rafael Martins</strong>
-            <span>Eletricista • Palhoça e região</span>
-          </div>
-        </div>
-
-        <div class="about-panel__head">
-          <p class="eyebrow eyebrow--light">QUEM VAI TE ATENDER</p>
-          <h2>Conheça quem está por trás do atendimento.</h2>
-        </div>
-
-        <div class="about-panel__body">
-          <p>Sou Rafael Martins, eletricista em Palhoça e região. Meu trabalho é atender necessidades elétricas de forma próxima e direta, desde pequenos reparos até instalações e adequações.</p>
-          <p>Quando você chama, a ideia é entender o que precisa ser resolvido e encontrar a solução adequada para o seu imóvel.</p>
-          <button class="btn btn--yellow" type="button" data-demo-cta>FALAR COM RAFAEL →</button>
-        </div>
-      </div>`;
-  };
-
-  const initReviewsSection = () => {
-    const section = document.querySelector('#avaliacoes');
-    if (!section || section.dataset.reviewsReady === 'true') return;
-
-    section.dataset.reviewsReady = 'true';
-
-    const copy = section.querySelector('.reviews-copy');
-    const eyebrow = copy?.querySelector('.eyebrow');
-    const title = copy?.querySelector('h2');
-    const intro = copy?.querySelector(':scope > p:not(.eyebrow)');
-    const rating = copy?.querySelector('.rating-card');
-    const mini = section.querySelector('.reviews-mini');
-
-    if (eyebrow) eyebrow.textContent = 'AVALIAÇÕES DE CLIENTES';
-    if (title) title.textContent = 'O que meus clientes dizem sobre o meu atendimento.';
-    if (intro) intro.textContent = 'Experiências de quem já me chamou para resolver uma necessidade elétrica.';
-    rating?.remove();
-    copy?.querySelector('.reviews-demo-note')?.remove();
-
-    if (mini && mini.children.length < 5) {
-      mini.insertAdjacentHTML('beforeend', `
-        <article><p>Atendimento direto e explicação simples do que precisava ser feito.</p><footer><strong>Ana L.</strong><span>Palhoça</span></footer></article>
-        <article><p>Organizou a instalação e explicou o que foi ajustado antes de finalizar.</p><footer><strong>Bruno M.</strong><span>São José</span></footer></article>`);
-    }
-
-    section.querySelectorAll('.review-featured > p, .reviews-mini article > p').forEach((paragraph) => {
-      const text = paragraph.textContent.trim().replace(/^[“”"']+|[“”"']+$/g, '');
-      paragraph.textContent = '';
-
-      const open = document.createElement('span');
-      open.className = 'review-quote-mark review-quote-mark--open';
-      open.setAttribute('aria-hidden', 'true');
-      open.textContent = '“';
-
-      const content = document.createElement('span');
-      content.className = 'review-quote-text';
-      content.textContent = text;
-
-      const close = document.createElement('span');
-      close.className = 'review-quote-mark review-quote-mark--close';
-      close.setAttribute('aria-hidden', 'true');
-      close.textContent = '”';
-
-      paragraph.append(open, content, close);
-    });
-
-    if (!section.querySelector('.reviews-conversion')) {
-      const close = document.createElement('div');
-      close.className = 'reviews-conversion';
-      close.innerHTML = `
-        <div class="reviews-conversion__copy">
-          <span>PRECISA RESOLVER ALGO ELÉTRICO?</span>
-          <p>Me conte o que você precisa resolver.</p>
-        </div>
-        <button class="btn btn--yellow" type="button" data-demo-cta>FALAR COM RAFAEL →</button>`;
-      section.appendChild(close);
-    }
-  };
-
-  const initAreaSection = () => {
-    const section = document.querySelector('#area-atendida');
-    if (!section || section.dataset.areaReady === 'true') return;
-
-    section.dataset.areaReady = 'true';
-
-    if (!section.querySelector('.area-map-wrap')) {
-      const map = document.createElement('div');
-      map.className = 'container area-map-wrap';
-      map.innerHTML = `
-        <div class="area-map-head">
-          <div>
-            <span class="area-map-kicker">CIDADE BASE</span>
-            <h3>Palhoça como ponto principal de atendimento.</h3>
-          </div>
-          <span class="area-map-location">Palhoça • SC</span>
-        </div>
-        <div class="area-map-frame">
-          <iframe
-            src="https://www.google.com/maps?q=Palho%C3%A7a%2C%20SC&z=12&output=embed"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Mapa da área de atendimento com foco em Palhoça, Santa Catarina">
-          </iframe>
-        </div>`;
-      section.appendChild(map);
-    }
-  };
-
-  loadBaseScript();
+  initWorkCarousel();
 })();

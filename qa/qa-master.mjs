@@ -52,8 +52,18 @@ try {
 
     await waitForMasterDeploy(page);
     await page.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {});
-    await page.evaluate(() => document.fonts?.ready);
-    await sleep(500);
+    await page.evaluate(() => document.fonts?.ready.then(() => true));
+    await sleep(300);
+    await page.evaluate(async () => {
+      const height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+      for (let y = 0; y < height; y += 600) {
+        window.scrollTo(0, y);
+        await new Promise((resolve) => setTimeout(resolve, 40));
+      }
+      window.scrollTo(0, 0);
+    });
+    await page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});
+    await sleep(300);
 
     const staticReport = await page.evaluate(() => {
       const ids = [...document.querySelectorAll('[id]')].map((el) => el.id);
@@ -162,4 +172,30 @@ try {
     for (const e of pageErrors) failures.push(`${viewport.name}: pageerror: ${e}`);
     for (const e of failedRequests) failures.push(`${viewport.name}: requestfailed: ${e}`);
 
-    await conte
+    await context.close();
+  }
+
+  // Reduced motion: carousel must not auto-advance.
+  const reduced = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
+  const reducedPage = await reduced.newPage();
+  await reducedPage.goto(`${baseUrl}?reduced=${Date.now()}`, { waitUntil: 'networkidle', timeout: 45000 });
+  const beforeTransform = await reducedPage.locator('.work-carousel__track').evaluate((el) => getComputedStyle(el).transform);
+  await sleep(5300);
+  const afterTransform = await reducedPage.locator('.work-carousel__track').evaluate((el) => getComputedStyle(el).transform);
+  if (beforeTransform !== afterTransform) failures.push('reduced-motion: work carousel auto-advanced');
+  await reduced.close();
+
+  const result = {
+    date: new Date().toISOString(),
+    url: baseUrl,
+    status: failures.length ? 'FAIL' : 'PASS',
+    failures,
+    reports
+  };
+  fs.writeFileSync(`${outDir}/report.json`, JSON.stringify(result, null, 2));
+  fs.writeFileSync(`${outDir}/console-report.txt`, failures.length ? failures.join('\n') : 'PASS — no blocking failures.\n');
+  console.log(JSON.stringify({ status: result.status, failures: result.failures }, null, 2));
+  if (failures.length) process.exitCode = 1;
+} finally {
+  await browser.close();
+}
