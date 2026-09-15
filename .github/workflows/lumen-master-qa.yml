@@ -43,3 +43,5 @@ jobs:
           name: lumen-master-qa
           path: qa-artifacts/
           if-no-files-found: error
+
+# Trigger post-consolidation QA after Pages deploy of 36d4db823f0ad5fd47d3bee8bed72516181b1cc9.
