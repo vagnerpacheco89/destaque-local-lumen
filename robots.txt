@@ -4,4 +4,4 @@ Allow: /
 User-agent: OAI-SearchBot
 Allow: /
 
-Sitemap: https://vagnerpacheco89.github.io/destaque-local-lumen/sitemap.xml
+Sitemap: https://lumen.destaquelocal.com.br/sitemap.xml
