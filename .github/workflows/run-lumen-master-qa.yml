@@ -1,0 +1,39 @@
+name: Run LUMEN MASTER QA now
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/run-lumen-master-qa.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Run real-deploy QA
+        run: node qa/qa-master.mjs
+
+      - name: Upload QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lumen-master-qa
+          path: qa-artifacts/
+          if-no-files-found: error
