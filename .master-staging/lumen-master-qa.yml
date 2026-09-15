@@ -1,0 +1,45 @@
+name: LUMEN MASTER post-consolidation QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'styles.css'
+      - 'lumen-*.css'
+      - 'script.js'
+      - 'robots.txt'
+      - 'sitemap.xml'
+      - 'qa/qa-master.mjs'
+      - '.github/workflows/lumen-master-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Run deployed-site QA
+        run: node qa/qa-master.mjs
+
+      - name: Upload QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lumen-master-qa
+          path: qa-artifacts/
+          if-no-files-found: error
