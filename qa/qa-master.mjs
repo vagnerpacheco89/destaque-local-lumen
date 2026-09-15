@@ -28,6 +28,28 @@ async function waitForMasterDeploy(page) {
   throw new Error('Timed out waiting for the consolidated MASTER candidate deploy.');
 }
 
+async function settleImagesAndLayout(page) {
+  await page.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {});
+  await page.evaluate(() => document.fonts?.ready.then(() => true));
+  await sleep(300);
+
+  await page.evaluate(async () => {
+    const height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    for (let y = 0; y < height; y += 600) {
+      window.scrollTo(0, y);
+      await new Promise((resolve) => setTimeout(resolve, 40));
+    }
+    window.scrollTo(0, 0);
+    document.querySelectorAll('img[loading="lazy"]').forEach((img) => {
+      img.loading = 'eager';
+    });
+  });
+
+  await page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});
+  await page.waitForFunction(() => [...document.images].every((img) => img.complete), null, { timeout: 10000 }).catch(() => {});
+  await sleep(500);
+}
+
 const browser = await chromium.launch({ headless: true });
 try {
   for (const viewport of viewports) {
@@ -51,19 +73,7 @@ try {
     });
 
     await waitForMasterDeploy(page);
-    await page.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {});
-    await page.evaluate(() => document.fonts?.ready.then(() => true));
-    await sleep(300);
-    await page.evaluate(async () => {
-      const height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-      for (let y = 0; y < height; y += 600) {
-        window.scrollTo(0, y);
-        await new Promise((resolve) => setTimeout(resolve, 40));
-      }
-      window.scrollTo(0, 0);
-    });
-    await page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});
-    await sleep(300);
+    await settleImagesAndLayout(page);
 
     const staticReport = await page.evaluate(() => {
       const ids = [...document.querySelectorAll('[id]')].map((el) => el.id);
@@ -77,6 +87,18 @@ try {
       const jsonLd = [...document.querySelectorAll('script[type="application/ld+json"]')].map((s) => {
         try { JSON.parse(s.textContent); return true; } catch { return false; }
       });
+      const overflowElements = [...document.querySelectorAll('body *')].map((el) => {
+        const rect = el.getBoundingClientRect();
+        return {
+          tag: el.tagName.toLowerCase(),
+          id: el.id || null,
+          className: typeof el.className === 'string' ? el.className : null,
+          left: Math.round(rect.left),
+          right: Math.round(rect.right),
+          width: Math.round(rect.width)
+        };
+      }).filter((item) => item.right > window.innerWidth + 1 || item.left < -1).slice(0, 20);
+
       return {
         title: document.title,
         h1Count: document.querySelectorAll('h1').length,
@@ -84,6 +106,7 @@ try {
         brokenHashes,
         brokenImages,
         overflow: document.documentElement.scrollWidth > window.innerWidth + 1,
+        overflowElements,
         robots: document.querySelector('meta[name="robots"]')?.content || null,
         canonical: document.querySelector('link[rel="canonical"]')?.href || null,
         ogTitle: document.querySelector('meta[property="og:title"]')?.content || null,
@@ -102,7 +125,7 @@ try {
     if (staticReport.duplicateIds.length) localFailures.push(`duplicate ids: ${staticReport.duplicateIds.join(',')}`);
     if (staticReport.brokenHashes.length) localFailures.push(`broken hashes: ${staticReport.brokenHashes.join(',')}`);
     if (staticReport.brokenImages.length) localFailures.push(`broken images: ${staticReport.brokenImages.join(',')}`);
-    if (staticReport.overflow) localFailures.push('horizontal overflow');
+    if (staticReport.overflow) localFailures.push(`horizontal overflow: ${JSON.stringify(staticReport.overflowElements)}`);
     if (!staticReport.robots?.startsWith('noindex,follow')) localFailures.push(`robots=${staticReport.robots}`);
     if (staticReport.canonical !== baseUrl) localFailures.push(`canonical=${staticReport.canonical}`);
     if (!staticReport.ogTitle) localFailures.push('missing og:title');
@@ -113,6 +136,16 @@ try {
     if (!staticReport.hasFinalCta) localFailures.push('final CTA semantic text missing');
     if (staticReport.demoButtonsWithRealHref) localFailures.push('demo CTA points to a real external scheme');
 
+    // Demo CTA: perform a real click on the first visible action while still at the top.
+    const beforeUrl = page.url();
+    const visibleDemoCta = page.locator('[data-demo-cta]:visible').first();
+    await visibleDemoCta.click();
+    await sleep(100);
+    const dialogOpen = await page.locator('#demo-dialog').evaluate((el) => el.open);
+    if (!dialogOpen) localFailures.push('demo dialog did not open');
+    if (page.url().split('?')[0] !== beforeUrl.split('?')[0]) localFailures.push('demo CTA navigated away');
+    await page.locator('[data-dialog-close]').first().click();
+
     // FAQ: only one open at a time.
     const faq = page.locator('#faq .faq-list details');
     if (await faq.count() >= 2) {
@@ -121,15 +154,6 @@ try {
       const openCount = await page.locator('#faq .faq-list details[open]').count();
       if (openCount !== 1) localFailures.push(`FAQ open count after interaction=${openCount}`);
     }
-
-    // Demo CTA must open dialog without navigation.
-    const beforeUrl = page.url();
-    await page.locator('[data-demo-cta]').first().click();
-    await sleep(100);
-    const dialogOpen = await page.locator('#demo-dialog').evaluate((el) => el.open);
-    if (!dialogOpen) localFailures.push('demo dialog did not open');
-    if (page.url().split('?')[0] !== beforeUrl.split('?')[0]) localFailures.push('demo CTA navigated away');
-    await page.locator('[data-dialog-close]').first().click();
 
     // Mobile menu keyboard behavior.
     if (viewport.width <= 768) {
@@ -149,13 +173,19 @@ try {
       }
     }
 
-    // Internal anchor should respect fixed header offset.
+    // Internal anchor should finish below the fixed header.
     if (viewport.width >= 1024) {
       await page.locator('.desktop-nav a[href="#servicos"]').click();
-      await sleep(250);
+      await sleep(1200);
       const targetTop = await page.locator('#servicos').evaluate((el) => el.getBoundingClientRect().top);
-      if (targetTop < 70) localFailures.push(`anchor offset too small: ${targetTop}`);
+      if (targetTop < 70 || targetTop > 180) localFailures.push(`anchor offset outside expected range: ${targetTop}`);
     }
+
+    // Back-to-top control should return the document to the top without navigation.
+    await page.locator('[data-back-top]').click();
+    await sleep(1200);
+    const backTopY = await page.evaluate(() => window.scrollY);
+    if (backTopY > 5) localFailures.push(`back-to-top ended at scrollY=${backTopY}`);
 
     await page.screenshot({ path: `${outDir}/${viewport.name}.png`, fullPage: true });
 
