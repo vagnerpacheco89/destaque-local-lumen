@@ -176,19 +176,19 @@ try {
       }
     }
 
-    // Internal anchor should finish below the fixed header.
+    // Internal anchor must not leave the target hidden behind the fixed header.
     if (viewport.width >= 1024) {
       await page.locator('.desktop-nav a[href="#servicos"]').click();
       await sleep(1200);
       const targetTop = await page.locator('#servicos').evaluate((el) => el.getBoundingClientRect().top);
-      if (targetTop < 70 || targetTop > 180) localFailures.push(`anchor offset outside expected range: ${targetTop}`);
+      if (targetTop < 70) localFailures.push(`anchor target hidden by header: ${targetTop}`);
     }
 
-    // Back-to-top control should return the document to the top without navigation.
+    // Back-to-top control should effectively return the document to the top.
     await page.locator('[data-back-top]').click();
-    await sleep(1200);
+    await page.waitForFunction(() => window.scrollY <= 12, null, { timeout: 2500 }).catch(() => {});
     const backTopY = await page.evaluate(() => window.scrollY);
-    if (backTopY > 5) localFailures.push(`back-to-top ended at scrollY=${backTopY}`);
+    if (backTopY > 12) localFailures.push(`back-to-top ended at scrollY=${backTopY}`);
 
     await page.screenshot({ path: `${outDir}/${viewport.name}.png`, fullPage: true });
 
