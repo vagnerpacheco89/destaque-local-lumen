@@ -1,0 +1,124 @@
+proteção da instalação.</p></div>
+                </article>
+              </div>
+            </div>
+            <div class="work-carousel__dots" aria-hidden="true">
+              <span class="work-carousel__dot is-active"></span>
+              <span class="work-carousel__dot"></span>
+              <span class="work-carousel__dot"></span>
+              <span class="work-carousel__dot"></span>
+              <span class="work-carousel__dot"></span>
+              <span class="work-carousel__dot"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="work-panel__closing">
+          <p>Tem algo parecido para resolver no seu imóvel?</p>
+          <button class="work-panel__link work-panel__cta" type="button" data-demo-cta>FALAR COM RAFAEL →</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad quality-section">
+      <div class="container quality-layout">
+        <div class="quality-copy">
+          <p class="eyebrow">NO ATENDIMENTO</p>
+          <h2>O que você pode esperar ao contratar meu serviço.</h2>
+          <p class="quality-copy__lead">Clareza antes de começar, cuidado durante a execução e conferência antes de finalizar.</p>
+        </div>
+
+        <div class="quality-list" aria-label="Diferenciais do atendimento">
+          <article class="quality-item">
+            <span class="quality-item__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3 1.5-5A8 8 0 1 1 21 15Z"></path><path d="M8 10h8M8 14h5"></path></svg>
+            </span>
+            <div><h3>Explicação clara</h3><p>Você entende o que precisa ser feito antes do serviço começar.</p></div>
+          </article>
+          <article class="quality-item">
+            <span class="quality-item__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M9 5h9a2 2 0 0 1 2 2v12H6V8"></path><path d="M9 3H5a2 2 0 0 0-2 2v14h3"></path><path d="m10 12 2 2 4-4"></path></svg>
+            </span>
+            <div><h3>Tudo combinado antes</h3><p>Serviço, materiais e orçamento são alinhados antes da execução.</p></div>
+          </article>
+          <article class="quality-item">
+            <span class="quality-item__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10.5V20h13v-9.5"></path><path d="m16.5 5.5.8-2 .8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8Z"></path></svg>
+            </span>
+            <div><h3>Cuidado com o local</h3><p>Organização durante o trabalho e atenção ao acabamento.</p></div>
+          </article>
+          <article class="quality-item">
+            <span class="quality-item__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.5 2.5L16 9"></path></svg>
+            </span>
+            <div><h3>Conferência final</h3><p>O que foi executado é testado antes da finalização.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad process-section">
+      <div class="container process-shell">
+        <div class="process-head">
+          <p class="eyebrow">COMO FUNCIONA</p>
+          <h2>Do primeiro contato ao serviço finalizado.</h2>
+          <p class="process-head__lead">Você explica o que precisa, eu avalio a situação e combinamos o serviço antes de começar.</p>
+        </div>
+
+        <div class="process-route" aria-label="Etapas do atendimento">
+          <article class="process-step"><span class="process-step__number" aria-hidden="true">01</span><div><h3>Você me conta o que precisa</h3><p>Envie mensagem e, se possível, fotos ou vídeos da situação.</p></div></article>
+          <article class="process-step"><span class="process-step__number" aria-hidden="true">02</span><div><h3>Eu avalio o cenário</h3><p>Analiso o problema e vejo se é preciso uma visita.</p></div></article>
+          <article class="process-step"><span class="process-step__number" aria-hidden="true">03</span><div><h3>Combinamos o serviço</h3><p>Alinhamos o que será feito, materiais e orçamento.</p></div></article>
+          <article class="process-step"><span class="process-step__number" aria-hidden="true">04</span><div><h3>Execução e conferência</h3><p>O serviço é realizado e testado antes da finalização.</p></div></article>
+        </div>
+
+        <div class="process-close">
+          <p>Pronto para explicar o que precisa?</p>
+          <button class="btn btn--yellow" type="button" data-demo-cta>COMEÇAR PELO WHATSAPP →</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad about-wrap" id="sobre">
+      <div class="container about-panel">
+        <div class="about-panel__media">
+          <img src="assets/hd/asset-09-retrato-rafael-hd.avif" alt="Rafael Martins, eletricista demonstrativo em Palhoça." loading="lazy" decoding="async" />
+          <div class="about-person"><strong>Rafael Martins</strong><span>Eletricista • Palhoça e região</span></div>
+        </div>
+
+        <div class="about-panel__head">
+          <p class="eyebrow eyebrow--light">QUEM VAI TE ATENDER</p>
+          <h2>Conheça quem está por trás do atendimento.</h2>
+        </div>
+
+        <div class="about-panel__body">
+          <p>Sou Rafael Martins, eletricista em Palhoça e região. Meu trabalho é atender necessidades elétricas de forma próxima e direta, desde pequenos reparos até instalações e adequações.</p>
+          <p>Quando você chama, a ideia é entender o que precisa ser resolvido e encontrar a solução adequada para o seu imóvel.</p>
+          <button class="btn btn--yellow" type="button" data-demo-cta>FALAR COM RAFAEL →</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad reviews-section" id="avaliacoes">
+      <div class="container reviews-layout">
+        <div class="reviews-copy">
+          <p class="eyebrow">AVALIAÇÕES DE CLIENTES</p>
+          <h2>O que meus clientes dizem sobre o meu atendimento.</h2>
+          <p>Experiências de quem já me chamou para resolver uma necessidade elétrica.</p>
+        </div>
+
+        <article class="review-featured">
+          <p><span class="review-quote-mark review-quote-mark--open" aria-hidden="true">“</span><span class="review-quote-text">Explicou o problema com clareza e deixou o quadro muito organizado.</span><span class="review-quote-mark review-quote-mark--close" aria-hidden="true">”</span></p>
+          <footer><strong>Marcelo A.</strong><span>Pedra Branca • Palhoça</span></footer>
+        </article>
+      </div>
+
+      <div class="container reviews-mini">
+        <article><p><span class="review-quote-mark review-quote-mark--open" aria-hidden="true">“</span><span class="review-quote-text">Atendimento cuidadoso e orçamento explicado antes de começar o serviço.</span><span class="review-quote-mark review-quote-mark--close" aria-hidden="true">”</span></p><footer><strong>Camila R.</strong><span>Pagani • Palhoça</span></footer></article>
+        <article><p><span class="review-quote-mark review-quote-mark--open" aria-hidden="true">“</span><span class="review-quote-text">Resolveu um disjuntor que desarmava e mostrou o que precisava ser corrigido.</span><span class="review-quote-mark review-quote-mark--close" aria-hidden="true">”</span></p><footer><strong>João P.</strong><span>São José</span></footer></article>
+        <article><p><span class="review-quote-mark review-quote-mark--open" aria-hidden="true">“</span><span class="review-quote-text">Muito organizado na instalação das luminárias e dos novos pontos.</span><span class="review-quote-mark review-quote-mark--close" aria-hidden="true">”</span></p><footer><strong>Renata S.</strong><span>Passa Vinte • Palhoça</span></footer></article>
+        <article><p><span class="review-quote-mark review-quote-mark--open" aria-hidden="true">“</span><span class="review-quote-text">Atendimento direto e explicação simples do que precisava ser feito.</span><span class="review-quote-mark review-quote-mark--close" aria-hidden="true">”</span></p><footer><strong>Ana L.</strong><span>Palhoça</span></footer></article>
+        <article><p><span class="review-quote-mark review-quote-mark--open" aria-hidden="true">“</span><span class="review-quote-text">Organizou a instalação e explicou o que foi ajustado antes de finalizar.</span><span class="review-quote-mark review-quote-mark--close" aria-hidden="true">”</span></p><footer><strong>Bruno M.</strong><span>São José</span></footer></article>
+      </div>
+
+      <d
