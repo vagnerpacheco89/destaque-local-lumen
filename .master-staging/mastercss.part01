@@ -1,0 +1,334 @@
+/* LUMEN MASTER v1.0 — final static consolidation.
+   Loaded last. Preserves the frozen visual state while removing runtime CSS/content substitutions. */
+
+/* Exact interface polish previously injected by script-base.js. */
+.hero {
+  padding-top: 10px !important;
+  padding-bottom: 54px !important;
+}
+
+.hero-contact {
+  width: 350px !important;
+  padding: 22px 22px 18px !important;
+}
+
+.hero-contact::before {
+  content: none !important;
+  display: none !important;
+}
+
+.hero-contact__kicker {
+  width: 100%;
+  text-align: center;
+}
+
+.hero-contact strong {
+  max-width: 100% !important;
+  margin: 0 auto 14px !important;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.hero-contact .text-link {
+  width: 100% !important;
+  margin-left: 0 !important;
+}
+
+.hero-proof {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px !important;
+  width: min(650px, 100%);
+  margin-top: 28px !important;
+}
+
+.hero-proof > span {
+  display: grid !important;
+  grid-template-columns: 34px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 8px !important;
+  min-height: 50px !important;
+  padding: 5px 10px 5px 5px !important;
+  border: 1px solid rgba(255, 210, 63, .28) !important;
+  border-radius: 999px !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.045)),
+    rgba(2,48,34,.38) !important;
+  color: rgba(255,255,255,.96) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 8px 22px rgba(0,0,0,.10) !important;
+  font-size: 11.5px !important;
+  font-weight: 750 !important;
+  line-height: 1.22 !important;
+  letter-spacing: -.015em !important;
+}
+
+.hero-proof > span::before {
+  content: none !important;
+  display: none !important;
+}
+
+.hero-proof > span svg {
+  width: 34px;
+  height: 34px;
+  padding: 7px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #ffdc5b 0%, var(--yellow) 100%);
+  color: #0d4b36;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  box-shadow: 0 5px 14px rgba(255,199,43,.22), inset 0 1px 0 rgba(255,255,255,.44);
+}
+
+/* Navigation — exact frozen floating light bar. */
+.site-header {
+  top: 0 !important;
+  padding: 10px 0 0 !important;
+  background: transparent !important;
+  border-bottom: 0 !important;
+  backdrop-filter: none !important;
+  transition: padding .22s ease;
+}
+
+.site-header .nav {
+  position: relative;
+  height: 68px !important;
+  padding: 0 18px !important;
+  gap: 18px !important;
+  border: 1px solid rgba(16, 61, 44, .10);
+  border-radius: 20px;
+  background: rgba(255, 254, 249, .94);
+  box-shadow:
+    0 16px 38px rgba(18, 91, 64, .10),
+    inset 0 1px 0 rgba(255,255,255,.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition: height .22s ease, border-radius .22s ease, box-shadow .22s ease, padding .22s ease;
+}
+
+.site-header .brand {
+  gap: 12px !important;
+}
+
+.site-header .brand__mark {
+  width: 42px !important;
+  height: 42px !important;
+  background: linear-gradient(180deg, #1b7955 0%, #0f563c 100%) !important;
+  color: #fff !important;
+  font-size: 13px !important;
+  box-shadow:
+    0 0 0 2px rgba(255,254,249,.98),
+    0 0 0 3px rgba(255,210,63,.96),
+    0 8px 18px rgba(13, 73, 52, .18) !important;
+  transition: width .22s ease, height .22s ease, font-size .22s ease;
+}
+
+.site-header .brand__text strong {
+  color: #123e2f;
+  font-size: 15px !important;
+  font-weight: 800;
+  letter-spacing: -.025em;
+  transition: font-size .22s ease;
+}
+
+.site-header .brand__text small {
+  margin-top: 5px !important;
+  color: #75857d;
+  font-size: 9.5px !important;
+  font-weight: 700;
+  letter-spacing: .19em !important;
+  transition: font-size .22s ease, margin .22s ease;
+}
+
+.site-header .nav-demo-tag {
+  min-height: 26px !important;
+  padding: 0 10px !important;
+  border: 1px solid rgba(255, 199, 43, .52) !important;
+  border-radius: 999px !important;
+  background: rgba(255, 210, 63, .17) !important;
+  color: #15523c !important;
+  box-shadow: none !important;
+  font-size: 9.5px !important;
+  font-weight: 850 !important;
+  letter-spacing: .085em !important;
+  transition: min-height .22s ease, padding .22s ease, font-size .22s ease;
+}
+
+.site-header .desktop-nav {
+  gap: 25px !important;
+}
+
+.site-header .desktop-nav a {
+  position: relative;
+  padding: 24px 0 22px;
+  color: #425c51 !important;
+  font-size: 12.5px !important;
+  font-weight: 750 !important;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+  transition: color .18s ease, padding .22s ease;
+}
+
+.site-header .desktop-nav a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  width: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--yellow);
+  box-shadow: 0 0 10px rgba(255, 210, 63, .28);
+  transform: translateX(-50%);
+  transition: width .18s ease, bottom .22s ease;
+}
+
+.site-header .desktop-nav a:hover,
+.site-header .desktop-nav a:focus-visible {
+  color: #0f563c !important;
+}
+
+.site-header .desktop-nav a:hover::after,
+.site-header .desktop-nav a:focus-visible::after {
+  width: 24px;
+}
+
+.site-header .nav-cta {
+  min-height: 46px !important;
+  padding: 0 17px 0 19px !important;
+  border: 1px solid rgba(255, 183, 20, .44) !important;
+  border-radius: 14px !important;
+  background: linear-gradient(180deg, #ffdc55 0%, var(--yellow) 100%) !important;
+  color: #103d2c !important;
+  box-shadow:
+    0 11px 24px rgba(255, 199, 43, .24),
+    inset 0 1px 0 rgba(255,255,255,.48) !important;
+  font-size: 12.5px !important;
+  font-weight: 900 !important;
+  letter-spacing: .015em !important;
+  gap: 9px;
+  transition: min-height .22s ease, padding .22s ease, transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+.site-header .nav-cta::after {
+  content: "→";
+  display: inline-block;
+  font-size: 16px;
+  line-height: 1;
+  transform: translateX(0);
+  transition: transform .18s ease;
+}
+
+.site-header .nav-cta:hover {
+  background: linear-gradient(180deg, #ffe370 0%, #ffd23f 100%) !important;
+  box-shadow: 0 14px 30px rgba(255, 199, 43, .30) !important;
+  transform: translateY(-1px);
+}
+
+.site-header .nav-cta:hover::after {
+  transform: translateX(3px);
+}
+
+.site-header.is-compact {
+  padding: 5px 0 !important;
+}
+
+.site-header.is-compact .nav {
+  height: 58px !important;
+  padding-inline: 15px !important;
+  border-radius: 17px;
+  box-shadow:
+    0 14px 34px rgba(12, 73, 52, .14),
+    inset 0 1px 0 rgba(255,255,255,.90);
+}
+
+.site-header.is-compact .brand__mark {
+  width: 35px !important;
+  height: 35px !important;
+  font-size: 11.5px !important;
+}
+
+.site-header.is-compact .brand__text strong {
+  font-size: 13.5px !important;
+}
+
+.site-header.is-compact .brand__text small {
+  margin-top: 3px !important;
+  font-size: 8.5px !important;
+}
+
+.site-header.is-compact .nav-demo-tag {
+  min-height: 23px !important;
+  padding-inline: 8px !important;
+  font-size: 8.5px !important;
+}
+
+.site-header.is-compact .desktop-nav a {
+  padding-top: 19px;
+  padding-bottom: 18px;
+}
+
+.site-header.is-compact .desktop-nav a::after {
+  bottom: 10px;
+}
+
+.site-header.is-compact .nav-cta {
+  min-height: 40px !important;
+  padding-inline: 15px !important;
+}
+
+.mobile-menu {
+  width: min(1180px, calc(100% - 40px));
+  margin: 4px auto 0;
+  overflow: hidden;
+  border: 1px solid rgba(16, 61, 44, .10) !important;
+  border-radius: 16px;
+  background: rgba(255,254,249,.98) !important;
+  box-shadow: 0 18px 42px rgba(18,91,64,.12);
+}
+
+.mobile-menu__inner {
+  padding: 10px 18px 18px !important;
+}
+
+.mobile-menu__inner a {
+  color: #315548;
+  border-bottom-color: rgba(16,61,44,.10) !important;
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+
+.menu-toggle {
+  border-color: rgba(16,61,44,.14) !important;
+  background: rgba(255,255,255,.76) !important;
+  border-radius: 12px !important;
+}
+
+.menu-toggle span {
+  background: var(--green-deep) !important;
+}
+
+/* Fixed-header anchor offset. */
+[id] {
+  scroll-margin-top: 96px;
+}
+
+/* Replace old CSS-generated copy with semantic HTML while keeping identical typography. */
+.diagnostic-card__head h2 {
+  max-width: 1100px !important;
+  margin: 0 !important;
+  color: #103d2c !important;
+  font-size: clamp(38px, 3.7vw, 54px) !important;
+  font-weight: 800 !important;
+  line-height: 1.02 !important;
+  letter-spacing: -.055em !important;
+}
+.diagnostic-card__head h2::before { content: none !important; display: none !important; }
+
+.diagnostic-features article:nth-child(4) strong {
+  color: #123e2f !important;
+  font-size: 16px !important;
