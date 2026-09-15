@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eletricista em Palhoça | Rafael Martins Eletricista</title>
+  <meta name="description" content="Eletricista em Palhoça para manutenção, instalações e reparos elétricos em residências e pequenos comércios. Atendimento também em São José e Florianópolis continental. Site demonstrativo." />
+  <meta name="robots" content="noindex,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#1c5b43" />
+
+  <link rel="canonical" href="https://vagnerpacheco89.github.io/destaque-local-lumen/" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="LUMEN — Destaque Local | SITES" />
+  <meta property="og:title" content="Eletricista em Palhoça | Rafael Martins Eletricista" />
+  <meta property="og:description" content="Template demonstrativo LUMEN para eletricistas locais, com serviços elétricos em Palhoça e região." />
+  <meta property="og:url" content="https://vagnerpacheco89.github.io/destaque-local-lumen/" />
+  <meta property="og:image" content="https://vagnerpacheco89.github.io/destaque-local-lumen/assets/hero-rafael-hd-v2.webp" />
+  <meta property="og:image:alt" content="Site demonstrativo LUMEN para eletricistas locais." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Eletricista em Palhoça | Rafael Martins Eletricista" />
+  <meta name="twitter:description" content="Template demonstrativo LUMEN para eletricistas locais, com serviços elétricos em Palhoça e região." />
+  <meta name="twitter:image" content="https://vagnerpacheco89.github.io/destaque-local-lumen/assets/hero-rafael-hd-v2.webp" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://vagnerpacheco89.github.io/destaque-local-lumen/#website",
+        "url": "https://vagnerpacheco89.github.io/destaque-local-lumen/",
+        "name": "LUMEN — Site demonstrativo para eletricistas",
+        "inLanguage": "pt-BR",
+        "description": "Template demonstrativo da Destaque Local | SITES. A persona, contatos, avaliações e informações comerciais são fictícios."
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://vagnerpacheco89.github.io/destaque-local-lumen/#webpage",
+        "url": "https://vagnerpacheco89.github.io/destaque-local-lumen/",
+        "name": "Eletricista em Palhoça | Rafael Martins Eletricista",
+        "isPartOf": {
+          "@id": "https://vagnerpacheco89.github.io/destaque-local-lumen/#website"
+        },
+        "inLanguage": "pt-BR",
+        "description": "Página demonstrativa LUMEN para serviços elétricos locais em Palhoça e região.",
+        "mainEntity": {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Não sei exatamente qual é o problema. Posso chamar mesmo assim?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sim. Você pode explicar o que está acontecendo e, quando possível, enviar fotos ou vídeos. A avaliação começa pelas informações que você conseguir passar."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "O que acontece depois que eu mando mensagem?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Você explica o que precisa e envia fotos ou vídeos quando possível. Rafael avalia o cenário e verifica se é preciso uma visita. Depois, o serviço é combinado antes da execução."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Como funciona o orçamento?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "As informações do primeiro contato ajudam na avaliação inicial. Quando for necessária uma visita, o orçamento é apresentado antes da execução."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "O serviço só começa depois de tudo combinado?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sim. O que será feito, os materiais necessários e o orçamento são alinhados antes da execução."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Como ficam os materiais do serviço?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Os materiais necessários são combinados antes da execução. Quando preciso, Rafael orienta o que será necessário."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Como sei se você atende minha região?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "O atendimento tem base em Palhoça e também pode ser realizado por deslocamento em São José e Florianópolis continental, conforme disponibilidade."
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="lumen-polish.css" />
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header" id="topo">
+    <div class="container nav">
+      <a class="brand" href="#topo" aria-label="Rafael Martins Eletricista — início">
+        <span class="brand__mark">RM</span>
+        <span class="brand__text"><strong>Rafael Martins</strong><small>Eletricista</small></span>
+      </a>
+      <span class="nav-demo-tag">SITE DEMONSTRATIVO</span>
+
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a href="#servicos">Serviços</a>
+        <a href="#trabalhos">Trabalhos</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#avaliacoes">Avaliações</a>
+        <a href="#faq">Dúvidas</a>
+      </nav>
+
+      <button class="btn btn--yellow nav-cta" type="button" data-demo-cta>PEDIR ORÇAMENTO</button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="mobile-menu" id="mobile-menu" hidden>
+      <div class="container mobile-menu__inner">
+        <a href="#servicos">Serviços</a>
+        <a href="#trabalhos">Trabalhos</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#avaliacoes">Avaliações</a>
+        <a href="#area-atendida">Área atendida</a>
+        <a href="#faq">Dúvidas</a>
+        <button class="btn btn--yellow" type="button" data-demo-cta>PEDIR ORÇAMENTO</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero section-pad">
+      <div class="container">
+        <div class="hero-card">
+          <img class="hero-card__image" src="assets/hd/asset-01-hero-quadro-hd.avif" alt="Eletricista trabalhando em quadro elétrico residencial." fetchpriority="high" />
+          <div class="hero-card__shade"></div>
+
+          <div class="hero-card__content">
+            <p class="eyebrow eyebrow--light">SERVIÇOS ELÉTRICOS EM PALHOÇA E REGIÃO</p>
+            <h1>Eletricista em Palhoça</h1>
+            <p class="hero-card__lead">Manutenção, instalações e correções elétricas para residências e pequenos comércios, com atendimento direto e serviço explicado com clareza.</p>
+            <div class="hero-card__actions">
+              <button class="btn btn--yellow btn--large" type="button" data-demo-cta>PEDIR ORÇAMENTO NO WHATSAPP</button>
+              <a class="btn btn--glass btn--large" href="#servicos">VER SERVIÇOS</a>
+            </div>
+            <div class="hero-proof" aria-label="Informações de confiança">
+              <span>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M12 3 5 6v5c0 4.6 2.9 8.1 7 10 4.1-1.9 7-5.4 7-10V6l-7-3Z"></path>
+                  <path d="m9.2 12 1.8 1.8 3.8-4"></path>
+                </svg>
+                Orçamento 
