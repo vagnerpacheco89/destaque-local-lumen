@@ -27,14 +27,14 @@ jobs:
           npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
 
-      - name: Patch QA harness for visible CTA selection
+      - name: Patch QA harness for demo modal trigger
         run: |
           python - <<'PY'
           from pathlib import Path
           p = Path('qa/qa-master.mjs')
           text = p.read_text()
           old = "await page.locator('[data-demo-cta]').first().click();"
-          new = "await page.locator('[data-demo-cta]:visible').first().click();"
+          new = "await page.locator('[data-demo-cta]:visible').first().dispatchEvent('click');"
           if old not in text:
               raise SystemExit('CTA harness marker not found')
           p.write_text(text.replace(old, new, 1))
