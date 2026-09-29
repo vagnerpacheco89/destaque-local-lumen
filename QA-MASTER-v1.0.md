@@ -125,3 +125,37 @@ O harness foi endurecido para esperar assets/layout, usar interações estáveis
 **Todos os gates obrigatórios da finalização técnica passaram no artefato publicado.**
 
 Não existem pendências técnicas ou visuais bloqueando o MASTER v1.0. O demo permanece deliberadamente não indexável; ativação de dados reais, indexação e publicação de cliente seguem o kit canônico de implementação do nicho e ocorrem em repo próprio do cliente.
+
+
+## Patch pós-release — qualidade da imagem da Hero — 2026-09-29
+
+Correção técnica solicitada pelo Founder, sem redesign.
+
+### Diagnóstico
+
+- original fornecida para auditoria: PNG 1536 × 1024, 2.892.527 bytes;
+- asset anteriormente servida na Hero: `assets/hd/asset-01-hero-quadro-hd.avif`, AVIF 1024 × 683, 21.679 bytes;
+- a derivada anterior foi reproduzida byte a byte como resize Lanczos para 1024 × 683 + AVIF quality 45; o Git blob SHA reproduzido foi `266b256a909da1bb0897856d636345c398c37edc`, igual ao blob do repositório;
+- o CSS de finalização mantinha o `<img>` com `opacity: 0` e exibia a mesma asset por `.hero-card::before` como `background-image`, portanto `srcset`/responsive image não participavam da imagem visível;
+- em desktop de 1180 px de largura, a fonte de 1024 px precisava de upscale mesmo em DPR 1 e era insuficiente para telas de alta densidade.
+
+### Correção
+
+- `assets/hd/asset-01-hero-quadro-hd.avif`: AVIF 1536 × 1024, quality 90, 215.080 bytes;
+- `assets/hd/asset-01-hero-quadro-1024.avif`: AVIF 1024 × 683, quality 80, 69.545 bytes;
+- `index.html` ganhou `srcset` + `sizes` coerentes com o container real do LUMEN;
+- a imagem real voltou a ser o `<img>` responsivo;
+- o pseudo-elemento de background deixou de carregar a foto;
+- `object-fit: cover`, enquadramentos desktop/tablet/mobile, overlays, copy, dimensões, estrutura e comportamento foram preservados.
+
+### QA pós-patch
+
+- commit do site auditado: `ee38428f760cb577c0b685f3aaef16012644326c`;
+- GitHub Pages run: `36632318443` — **PASS**;
+- workflow `LUMEN MASTER post-consolidation QA`, run `36632317999`, attempt 2 — **PASS**;
+- artifact: `11062619727`;
+- artifact digest: `sha256:66413b7927f387db871df1362a07571e85db7ed6d438d8d39be83c75b711b8d0`;
+- viewports auditados: 320 × 780, 390 × 844, 768 × 900, 1024 × 900 e 1440 × 1000;
+- sem overflow, imagens quebradas, erro de console/página ou regressão funcional bloqueante.
+
+O patch altera exclusivamente a entrega/qualidade da fotografia da Hero e sua seleção responsiva. A referência visual congelada e todas as demais seções do LUMEN MASTER permanecem preservadas.
