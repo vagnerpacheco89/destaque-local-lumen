@@ -108,7 +108,7 @@ body {
   z-index: 0;
   pointer-events: none;
   border-radius: inherit;
-  background-image: url("./assets/hd/asset-01-hero-quadro-hd.avif?v=sharp-clean");
+  background: none;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 58% center;
@@ -137,8 +137,10 @@ body {
 }
 
 .hero-card__image {
-  opacity: 0;
+  z-index: 0;
+  opacity: 1;
   filter: none;
+  object-position: 58% center;
 }
 
 .hero-card__shade {
@@ -372,8 +374,8 @@ body {
     min-height: 600px;
   }
 
-  .hero-card::before {
-    background-position: calc(50% + 80px) center;
+  .hero-card__image {
+    object-position: calc(50% + 80px) center;
   }
 
   .hero-card::after {
@@ -423,8 +425,8 @@ body {
     border-radius: 22px;
   }
 
-  .hero-card::before {
-    background-position: 58% center;
+  .hero-card__image {
+    object-position: 58% center;
   }
 
   .hero-card::after {
@@ -520,8 +522,8 @@ body {
 }
 
 @media (min-width: 981px) {
-  .hero-card::before {
-    background-position: calc(50% + 185px) center;
+  .hero-card__image {
+    object-position: calc(50% + 185px) center;
   }
 
   .hero-card__shade {
