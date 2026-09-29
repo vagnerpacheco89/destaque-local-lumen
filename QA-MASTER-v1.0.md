@@ -125,3 +125,37 @@ O harness foi endurecido para esperar assets/layout, usar interações estáveis
 **Todos os gates obrigatórios da finalização técnica passaram no artefato publicado.**
 
 Não existem pendências técnicas ou visuais bloqueando o MASTER v1.0. O demo permanece deliberadamente não indexável; ativação de dados reais, indexação e publicação de cliente seguem o kit canônico de implementação do nicho e ocorrem em repo próprio do cliente.
+
+
+## Patch pós-release — qualidade da imagem da Hero — 2026-09-29
+
+Correção técnica solicitada pelo Founder, sem redesign.
+
+### Diagnóstico
+
+- original fornecida para auditoria: PNG 1536 × 1024, 2.892.527 bytes;
+- asset anteriormente servida na Hero: `assets/hd/asset-01-hero-quadro-hd.avif`, AVIF 1024 × 683, 21.679 bytes;
+- a derivada anterior foi reproduzida byte a byte como resize Lanczos para 1024 × 683 + AVIF quality 45; o Git blob SHA reproduzido foi `266b256a909da1bb0897856d636345c398c37edc`, igual ao blob do repositório;
+- o CSS mantinha o `<img>` com `opacity: 0` e exibia a foto por `.hero-card::before`, impedindo a imagem visível de usar seleção responsiva.
+
+### Correção
+
+- `assets/hd/asset-01-hero-quadro-hd.avif`: AVIF 1536 × 1024, quality 90, 215.080 bytes;
+- `assets/hd/asset-01-hero-quadro-1024.avif`: AVIF 1024 × 683, quality 80, 69.545 bytes;
+- `srcset` + `sizes` adicionados ao `<img>`;
+- pseudo-elemento deixou de carregar a fotografia;
+- `object-fit: cover` e os enquadramentos existentes por breakpoint foram preservados no `<img>`;
+- overlays, copy, layout, dimensões e comportamento não foram alterados.
+
+### QA
+
+A mesma alteração de Hero foi auditada em `main` no commit `ee38428f760cb577c0b685f3aaef16012644326c`:
+- GitHub Pages run `36632318443` — **PASS**;
+- workflow `LUMEN MASTER post-consolidation QA`, run `36632317999`, attempt 2 — **PASS**;
+- artifact `11062619727`;
+- artifact digest `sha256:66413b7927f387db871df1362a07571e85db7ed6d438d8d39be83c75b711b8d0`;
+- viewports: 320 × 780, 390 × 844, 768 × 900, 1024 × 900 e 1440 × 1000.
+
+A branch canônica `release/lumen-master-v1.0` recebeu o mesmo patch de imagem/CSS no commit `443d01e2313eb29af470f662b3471efe29d39a2a`, preservando suas alterações próprias de domínio/metadata. As assets e o CSS de Hero são os mesmos blobs auditados em `main`.
+
+O LUMEN MASTER v1.0 continua congelado em todo o restante.
