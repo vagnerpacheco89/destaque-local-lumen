@@ -1,7 +1,7 @@
 .faq-section {
   padding-top: 58px;
   padding-bottom: 76px;
-  background: #fffdf8;
+  background: var(--neutral-surface-warm);
 }
 
 .faq-card {
@@ -10,10 +10,10 @@
   gap: 18px;
   align-items: stretch;
   padding: 18px;
-  border: 1px solid rgba(16, 68, 47, .10);
+  border: 1px solid color-mix(in srgb, var(--primary-deep) 10%, transparent);
   border-radius: 30px;
-  background: #eef4ef;
-  box-shadow: 0 18px 44px rgba(16, 68, 47, .07);
+  background: var(--primary-soft);
+  box-shadow: 0 18px 44px color-mix(in srgb, var(--primary-deep) 7%, transparent);
 }
 
 .faq-media {
@@ -21,7 +21,7 @@
   overflow: hidden;
   min-height: 570px;
   border-radius: 24px;
-  background: #153f30;
+  background: var(--primary-deeper);
 }
 
 .faq-media::after {
@@ -29,7 +29,7 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(9, 46, 33, .08) 18%, rgba(9, 46, 33, .28) 48%, rgba(9, 46, 33, .92) 100%);
+    linear-gradient(180deg, color-mix(in srgb, var(--primary-darkest) 8%, transparent) 18%, color-mix(in srgb, var(--primary-darkest) 28%, transparent) 48%, color-mix(in srgb, var(--primary-darkest) 92%, transparent) 100%);
   pointer-events: none;
 }
 
@@ -48,12 +48,12 @@
   left: 34px;
   right: 34px;
   bottom: 34px;
-  color: #fff;
+  color: var(--neutral-white);
 }
 
 .faq-media__copy .eyebrow {
   margin-bottom: 13px;
-  color: #f5bf25;
+  color: var(--secondary-deep);
 }
 
 .faq-media__copy h2 {
@@ -66,7 +66,7 @@
 .faq-media__copy h2::after {
   content: "Algumas dúvidas antes de me chamar.";
   display: block;
-  color: #fff;
+  color: var(--neutral-white);
   font-size: clamp(30px, 3vw, 43px);
   line-height: 1.06;
   letter-spacing: -.045em;
@@ -93,24 +93,24 @@
   align-content: start;
   gap: 12px;
   padding: 12px;
-  border: 1px solid rgba(16, 68, 47, .07);
+  border: 1px solid color-mix(in srgb, var(--primary-deep) 7%, transparent);
   border-radius: 24px;
-  background: rgba(255, 253, 248, .72);
+  background: color-mix(in srgb, var(--neutral-surface-warm) 72%, transparent);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, .72),
-    0 8px 24px rgba(16, 68, 47, .035);
+    0 8px 24px color-mix(in srgb, var(--primary-deep) 3.5%, transparent);
 }
 
 .faq-list details {
   position: relative;
   margin: 0;
   overflow: hidden;
-  border: 1px solid rgba(16, 68, 47, .10);
+  border: 1px solid color-mix(in srgb, var(--primary-deep) 10%, transparent);
   border-radius: 18px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, .96) 0%, rgba(255, 254, 250, .94) 100%);
+    linear-gradient(180deg, rgba(255, 255, 255, .96) 0%, color-mix(in srgb, var(--neutral-surface) 94%, transparent) 100%);
   box-shadow:
-    0 7px 18px rgba(16, 68, 47, .035),
+    0 7px 18px color-mix(in srgb, var(--primary-deep) 3.5%, transparent),
     inset 0 1px 0 rgba(255, 255, 255, .90);
   transition:
     transform .2s ease,
@@ -121,9 +121,9 @@
 
 .faq-list details:hover {
   transform: translateY(-1px);
-  border-color: rgba(16, 81, 59, .19);
+  border-color: color-mix(in srgb, var(--primary-strong) 19%, transparent);
   box-shadow:
-    0 12px 24px rgba(16, 68, 47, .065),
+    0 12px 24px color-mix(in srgb, var(--primary-deep) 6.5%, transparent),
     inset 0 1px 0 rgba(255, 255, 255, .95);
 }
 
@@ -147,19 +147,19 @@
 }
 
 .faq-list details[open] {
-  border-color: rgba(245, 191, 37, .52);
+  border-color: color-mix(in srgb, var(--secondary-deep) 52%, transparent);
   background:
-    linear-gradient(180deg, #fffefa 0%, #fffaf0 100%);
+    linear-gradient(180deg, var(--neutral-surface) 0%, var(--secondary-soft) 100%);
   box-shadow:
-    0 16px 32px rgba(16, 68, 47, .08),
-    0 0 0 3px rgba(245, 191, 37, .09),
+    0 16px 32px color-mix(in srgb, var(--primary-deep) 8%, transparent),
+    0 0 0 3px color-mix(in srgb, var(--secondary-deep) 9%, transparent),
     inset 0 1px 0 rgba(255, 255, 255, .96);
 }
 
 .faq-list details[open]::after {
   top: 0;
   bottom: 0;
-  background: linear-gradient(180deg, #f5bf25 0%, #f7cf55 58%, #176b4b 100%);
+  background: linear-gradient(180deg, var(--secondary-deep) 0%, var(--secondary-hover) 58%, var(--brand-primary) 100%);
 }
 
 .faq-list summary {
@@ -170,7 +170,7 @@
   min-height: 70px;
   padding: 15px 16px 15px 18px;
   list-style: none;
-  color: #10442f;
+  color: var(--primary-deep);
   font-size: 15px;
   font-weight: 800;
   line-height: 1.35;
@@ -185,7 +185,7 @@
 
 .faq-list summary:focus-visible {
   border-radius: 16px;
-  box-shadow: inset 0 0 0 2px rgba(23, 107, 75, .42);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--brand-primary) 42%, transparent);
 }
 
 .faq-list summary span {
@@ -194,12 +194,12 @@
   display: grid;
   place-items: center;
   justify-self: end;
-  border: 1px solid rgba(16, 68, 47, .13);
+  border: 1px solid color-mix(in srgb, var(--primary-deep) 13%, transparent);
   border-radius: 50%;
   background: rgba(255, 255, 255, .92);
-  color: #14513b;
+  color: var(--primary-deep);
   box-shadow:
-    0 5px 12px rgba(16, 68, 47, .045),
+    0 5px 12px color-mix(in srgb, var(--primary-deep) 4.5%, transparent),
     inset 0 1px 0 rgba(255, 255, 255, .92);
   font-size: 20px;
   font-weight: 500;
@@ -213,20 +213,20 @@
 }
 
 .faq-list details:hover summary span {
-  border-color: rgba(23, 107, 75, .24);
-  background: #f5f8f4;
+  border-color: color-mix(in srgb, var(--brand-primary) 24%, transparent);
+  background: var(--neutral-surface-soft);
   box-shadow:
-    0 7px 15px rgba(16, 68, 47, .07),
+    0 7px 15px color-mix(in srgb, var(--primary-deep) 7%, transparent),
     inset 0 1px 0 rgba(255, 255, 255, .95);
 }
 
 .faq-list details[open] summary span {
   transform: rotate(45deg);
-  border-color: rgba(245, 191, 37, .72);
-  background: linear-gradient(180deg, #ffdd68 0%, #f5bf25 100%);
-  color: #10442f;
+  border-color: color-mix(in srgb, var(--secondary-deep) 72%, transparent);
+  background: linear-gradient(180deg, var(--secondary-lighter) 0%, var(--secondary-deep) 100%);
+  color: var(--primary-deep);
   box-shadow:
-    0 8px 18px rgba(245, 191, 37, .22),
+    0 8px 18px color-mix(in srgb, var(--secondary-deep) 22%, transparent),
     inset 0 1px 0 rgba(255, 255, 255, .65);
 }
 
@@ -234,8 +234,8 @@
   max-width: 650px;
   margin: -1px 58px 20px 18px;
   padding-top: 15px;
-  border-top: 1px solid rgba(16, 68, 47, .08);
-  color: #697a72;
+  border-top: 1px solid color-mix(in srgb, var(--primary-deep) 8%, transparent);
+  color: var(--primary-muted);
   font-size: 13px;
   line-height: 1.72;
 }
@@ -266,7 +266,7 @@
 .faq-list details:nth-child(9) summary::before,
 .faq-list details:nth-child(10) summary::before {
   display: block;
-  color: #10442f;
+  color: var(--primary-deep);
   font-size: 15px;
   font-weight: 800;
   line-height: 1.35;
@@ -280,7 +280,7 @@
 .faq-list details:nth-child(9) > p::before,
 .faq-list details:nth-child(10) > p::before {
   display: block;
-  color: #61736a;
+  color: var(--primary-muted);
   font-size: 13px;
   line-height: 1.72;
 }
