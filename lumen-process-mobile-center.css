@@ -44,7 +44,7 @@
   }
 
   .process-step:not(:last-child)::before {
-    background: #b7c9bf;
+    background: var(--primary-line-strong);
     opacity: .92;
     transition: opacity .18s ease;
   }
@@ -53,7 +53,7 @@
   .process-step:not(:last-child)::after {
     background: var(--yellow);
     opacity: 0;
-    box-shadow: 0 0 8px rgba(245, 191, 37, .34);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--secondary-deep) 34%, transparent);
     transition: opacity .18s ease;
   }
 
