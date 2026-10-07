@@ -167,7 +167,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 0 22px;
   margin-bottom: 30px;
-  border-bottom: 1px solid rgba(16, 61, 44, .12);
+  border-bottom: 1px solid color-mix(in srgb, var(--primary-deeper) 12%, transparent);
 }
 
 .service-links article {
@@ -178,7 +178,7 @@
   gap: 12px;
   min-height: 86px;
   padding: 15px 8px 15px 0;
-  border-top: 1px solid rgba(16, 61, 44, .12);
+  border-top: 1px solid color-mix(in srgb, var(--primary-deeper) 12%, transparent);
   transition: padding .2s ease, background .2s ease, border-color .2s ease;
 }
 
