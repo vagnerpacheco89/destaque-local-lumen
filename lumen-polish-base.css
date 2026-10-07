@@ -6,7 +6,7 @@
   --bg: var(--tertiary-bg);
   --surface: var(--neutral-surface);
   --soft: var(--primary-soft);
-  --soft-2: #e8f0ea;
+  --soft-2: var(--primary-soft-2);
   --text: var(--primary-deeper);
   --muted: var(--primary-muted);
   --line: var(--primary-line);
