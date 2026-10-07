@@ -49,11 +49,11 @@
   gap: 8px !important;
   min-height: 50px !important;
   padding: 5px 10px 5px 5px !important;
-  border: 1px solid rgba(255, 210, 63, .28) !important;
+  border: 1px solid color-mix(in srgb, var(--brand-secondary) 28%, transparent) !important;
   border-radius: 999px !important;
   background:
     linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.045)),
-    rgba(2,48,34,.38) !important;
+    color-mix(in srgb, var(--primary-darkest) 38%, transparent) !important;
   color: rgba(255,255,255,.96) !important;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 8px 22px rgba(0,0,0,.10) !important;
   font-size: 11.5px !important;
@@ -72,14 +72,14 @@
   height: 34px;
   padding: 7px;
   border-radius: 50%;
-  background: linear-gradient(180deg, #ffdc5b 0%, var(--yellow) 100%);
-  color: #0d4b36;
+  background: linear-gradient(180deg, var(--secondary-light) 0%, var(--yellow) 100%);
+  color: var(--primary-deep);
   stroke: currentColor;
   fill: none;
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
-  box-shadow: 0 5px 14px rgba(255,199,43,.22), inset 0 1px 0 rgba(255,255,255,.44);
+  box-shadow: 0 5px 14px color-mix(in srgb, var(--secondary-hover) 22%, transparent), inset 0 1px 0 rgba(255,255,255,.44);
 }
 
 /* Navigation — exact frozen floating light bar. */
@@ -99,9 +99,9 @@
   gap: 18px !important;
   border: 1px solid rgba(16, 61, 44, .10);
   border-radius: 20px;
-  background: rgba(255, 254, 249, .94);
+  background: color-mix(in srgb, var(--neutral-surface) 94%, transparent);
   box-shadow:
-    0 16px 38px rgba(18, 91, 64, .10),
+    0 16px 38px color-mix(in srgb, var(--primary-hover) 10%, transparent),
     inset 0 1px 0 rgba(255,255,255,.88);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
@@ -115,18 +115,18 @@
 .site-header .brand__mark {
   width: 42px !important;
   height: 42px !important;
-  background: linear-gradient(180deg, #1b7955 0%, #0f563c 100%) !important;
-  color: #fff !important;
+  background: linear-gradient(180deg, var(--primary-bright) 0%, var(--primary-hover) 100%) !important;
+  color: var(--neutral-white) !important;
   font-size: 13px !important;
   box-shadow:
-    0 0 0 2px rgba(255,254,249,.98),
-    0 0 0 3px rgba(255,210,63,.96),
-    0 8px 18px rgba(13, 73, 52, .18) !important;
+    0 0 0 2px color-mix(in srgb, var(--neutral-surface) 98%, transparent),
+    0 0 0 3px color-mix(in srgb, var(--brand-secondary) 96%, transparent),
+    0 8px 18px color-mix(in srgb, var(--primary-deep) 18%, transparent) !important;
   transition: width .22s ease, height .22s ease, font-size .22s ease;
 }
 
 .site-header .brand__text strong {
-  color: #123e2f;
+  color: var(--primary-deeper);
   font-size: 15px !important;
   font-weight: 800;
   letter-spacing: -.025em;
@@ -135,7 +135,7 @@
 
 .site-header .brand__text small {
   margin-top: 5px !important;
-  color: #75857d;
+  color: var(--primary-muted);
   font-size: 9.5px !important;
   font-weight: 700;
   letter-spacing: .19em !important;
@@ -145,10 +145,10 @@
 .site-header .nav-demo-tag {
   min-height: 26px !important;
   padding: 0 10px !important;
-  border: 1px solid rgba(255, 199, 43, .52) !important;
+  border: 1px solid color-mix(in srgb, var(--secondary-hover) 52%, transparent) !important;
   border-radius: 999px !important;
-  background: rgba(255, 210, 63, .17) !important;
-  color: #15523c !important;
+  background: color-mix(in srgb, var(--brand-secondary) 17%, transparent) !important;
+  color: var(--primary-deep) !important;
   box-shadow: none !important;
   font-size: 9.5px !important;
   font-weight: 850 !important;
@@ -163,7 +163,7 @@
 .site-header .desktop-nav a {
   position: relative;
   padding: 24px 0 22px;
-  color: #425c51 !important;
+  color: var(--primary-muted-strong) !important;
   font-size: 12.5px !important;
   font-weight: 750 !important;
   letter-spacing: .045em;
@@ -180,14 +180,14 @@
   height: 2px;
   border-radius: 999px;
   background: var(--yellow);
-  box-shadow: 0 0 10px rgba(255, 210, 63, .28);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--brand-secondary) 28%, transparent);
   transform: translateX(-50%);
   transition: width .18s ease, bottom .22s ease;
 }
 
 .site-header .desktop-nav a:hover,
 .site-header .desktop-nav a:focus-visible {
-  color: #0f563c !important;
+  color: var(--primary-hover) !important;
 }
 
 .site-header .desktop-nav a:hover::after,
@@ -198,12 +198,12 @@
 .site-header .nav-cta {
   min-height: 46px !important;
   padding: 0 17px 0 19px !important;
-  border: 1px solid rgba(255, 183, 20, .44) !important;
+  border: 1px solid color-mix(in srgb, var(--secondary-deep) 44%, transparent) !important;
   border-radius: 14px !important;
-  background: linear-gradient(180deg, #ffdc55 0%, var(--yellow) 100%) !important;
-  color: #103d2c !important;
+  background: linear-gradient(180deg, var(--secondary-light) 0%, var(--yellow) 100%) !important;
+  color: var(--primary-deeper) !important;
   box-shadow:
-    0 11px 24px rgba(255, 199, 43, .24),
+    0 11px 24px color-mix(in srgb, var(--secondary-hover) 24%, transparent),
     inset 0 1px 0 rgba(255,255,255,.48) !important;
   font-size: 12.5px !important;
   font-weight: 900 !important;
@@ -222,8 +222,8 @@
 }
 
 .site-header .nav-cta:hover {
-  background: linear-gradient(180deg, #ffe370 0%, #ffd23f 100%) !important;
-  box-shadow: 0 14px 30px rgba(255, 199, 43, .30) !important;
+  background: linear-gradient(180deg, var(--secondary-lighter) 0%, var(--brand-secondary) 100%) !important;
+  box-shadow: 0 14px 30px color-mix(in srgb, var(--secondary-hover) 30%, transparent) !important;
   transform: translateY(-1px);
 }
 
@@ -240,7 +240,7 @@
   padding-inline: 15px !important;
   border-radius: 17px;
   box-shadow:
-    0 14px 34px rgba(12, 73, 52, .14),
+    0 14px 34px color-mix(in srgb, var(--primary-deep) 14%, transparent),
     inset 0 1px 0 rgba(255,255,255,.90);
 }
 
@@ -285,8 +285,8 @@
   overflow: hidden;
   border: 1px solid rgba(16, 61, 44, .10) !important;
   border-radius: 16px;
-  background: rgba(255,254,249,.98) !important;
-  box-shadow: 0 18px 42px rgba(18,91,64,.12);
+  background: color-mix(in srgb, var(--neutral-surface) 98%, transparent) !important;
+  box-shadow: 0 18px 42px color-mix(in srgb, var(--primary-hover) 12%, transparent);
 }
 
 .mobile-menu__inner {
@@ -294,7 +294,7 @@
 }
 
 .mobile-menu__inner a {
-  color: #315548;
+  color: var(--primary-muted-strong);
   border-bottom-color: rgba(16,61,44,.10) !important;
   font-size: 13px;
   font-weight: 750;
@@ -321,7 +321,7 @@
 .diagnostic-card__head h2 {
   max-width: 1100px !important;
   margin: 0 !important;
-  color: #103d2c !important;
+  color: var(--primary-deeper) !important;
   font-size: clamp(38px, 3.7vw, 54px) !important;
   font-weight: 800 !important;
   line-height: 1.02 !important;
@@ -330,7 +330,7 @@
 .diagnostic-card__head h2::before { content: none !important; display: none !important; }
 
 .diagnostic-features article:nth-child(4) strong {
-  color: #123e2f !important;
+  color: var(--primary-deeper) !important;
   font-size: 16px !important;!important;
   font-weight: 800 !important;
   line-height: 1.22 !important;
@@ -342,7 +342,7 @@
   display: none !important;
 }
 .diagnostic-features article:nth-child(4) small {
-  color: #708078 !important;
+  color: var(--primary-muted) !important;
   font-size: 13px !important;
   line-height: 1.5 !important;
 }
@@ -351,7 +351,7 @@
 .area-card__intro h2 {
   margin: 0 0 18px !important;
   max-width: 470px !important;
-  color: #fff !important;
+  color: var(--neutral-white) !important;
   font-size: clamp(34px, 3.45vw, 52px) !important;
   line-height: 1.03 !important;
   letter-spacing: -.045em !important;
@@ -370,7 +370,7 @@
 .faq-media__copy h2 {
   margin: 0 !important;
   max-width: 390px !important;
-  color: #fff !important;
+  color: var(--neutral-white) !important;
   font-size: clamp(30px, 3vw, 43px) !important;
   line-height: 1.06 !important;
   letter-spacing: -.045em !important;
@@ -407,7 +407,7 @@
 /* Final CTA copy is semantic/static; this only preserves the frozen visual treatment. */
 .final-cta__content .eyebrow {
   margin-bottom: 15px !important;
-  color: #f7cb43 !important;
+  color: var(--secondary-hover) !important;
   font-size: 10px !important;
   font-weight: 800 !important;
   letter-spacing: .14em !important;
@@ -417,7 +417,7 @@
 .final-cta__content h2 {
   max-width: 690px !important;
   margin-bottom: 18px !important;
-  color: #fff !important;
+  color: var(--neutral-white) !important;
   font-size: clamp(38px, 4vw, 58px) !important;
   line-height: 1.02 !important;
   letter-spacing: -.05em !important;
@@ -459,11 +459,11 @@
   right: 24px;
   bottom: 24px;
   padding: 10px 14px 10px 31px;
-  border: 1px solid rgba(245,191,37,.92);
+  border: 1px solid color-mix(in srgb, var(--secondary-deep) 92%, transparent);
   border-radius: 999px;
-  background: #f5bf25;
-  color: #10442f;
-  box-shadow: 0 10px 24px rgba(245,191,37,.22);
+  background: var(--secondary-deep);
+  color: var(--primary-deep);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--secondary-deep) 22%, transparent);
   font-size: 9px;
   font-weight: 800;
   letter-spacing: .035em;
