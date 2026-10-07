@@ -33,7 +33,7 @@
 
   .process-route::after {
     opacity: 0;
-    filter: drop-shadow(0 0 6px rgba(245, 191, 37, .38));
+    filter: drop-shadow(0 0 6px color-mix(in srgb, var(--secondary-deep) 38%, transparent));
     transition: opacity .18s ease;
     background-image: none;
   }
