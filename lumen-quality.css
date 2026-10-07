@@ -3,7 +3,7 @@
 .quality-section {
   position: relative;
   overflow: hidden;
-  background: #fffdf8;
+  background: var(--neutral-surface-warm);
   padding-top: 78px;
   padding-bottom: 82px;
 }
@@ -15,7 +15,7 @@
   height: 300px;
   right: -145px;
   bottom: -150px;
-  border: 44px solid rgba(243, 207, 86, .12);
+  border: 44px solid color-mix(in srgb, var(--secondary-light) 12%, transparent);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -90,7 +90,7 @@
   border-radius: 50%;
   background: var(--yellow);
   color: var(--green-deep);
-  box-shadow: 0 8px 20px rgba(243, 207, 86, .16);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--secondary-light) 16%, transparent);
 }
 
 .quality-item__icon svg {
@@ -128,7 +128,7 @@
 }
 
 .quality-item:hover .quality-item__icon {
-  box-shadow: 0 12px 24px rgba(243, 207, 86, .22);
+  box-shadow: 0 12px 24px color-mix(in srgb, var(--secondary-light) 22%, transparent);
 }
 
 @media (max-width: 900px) {
