@@ -1,4 +1,7 @@
 (() => {
+  const brandPrimary = getComputedStyle(document.documentElement).getPropertyValue('--brand-primary').trim();
+  if (brandPrimary) document.querySelector('meta[name="theme-color"]')?.setAttribute('content', brandPrimary);
+
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   const siteHeader = document.querySelector('.site-header');
