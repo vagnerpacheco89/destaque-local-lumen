@@ -159,3 +159,78 @@ A mesma alteração de Hero foi auditada em `main` no commit `ee38428f760cb577c0
 A branch canônica `release/lumen-master-v1.0` recebeu o mesmo patch de imagem/CSS no commit `443d01e2313eb29af470f662b3471efe29d39a2a`, preservando suas alterações próprias de domínio/metadata. As assets e o CSS de Hero são os mesmos blobs auditados em `main`.
 
 O LUMEN MASTER v1.0 continua congelado em todo o restante.
+
+
+## Refactor cromático pós-release — 2026-10-07
+
+Refactor técnico motivado por evidência real na adaptação do Cliente 02 / Emmanuel. O objetivo foi centralizar a identidade cromática sem redesenhar o LUMEN.
+
+### Baseline e escopo
+
+- baseline imediatamente anterior ao refactor: `22150aff1a54490f7b4837d2ba17961ab0d27f25`;
+- commit de código final auditado: `5f2ee7421f63d14a909fb3c824dec2e92f3f8569`;
+- branch canônica: `release/lumen-master-v1.0`;
+- nenhuma alteração intencional de copy, layout, tipografia, arquitetura de seções, enquadramento ou comportamento visual.
+
+### Sistema de identidade
+
+Input configurável do cliente em `lumen-theme.css`:
+
+- `--brand-primary: #176b4b`;
+- `--brand-secondary: #ffd23f`;
+- `--brand-tertiary: #f7f3e8`.
+
+A partir deles são derivados estados `deep`, `hover`, `soft`, linhas, superfícies e variações necessárias. Neutros estáveis ficam separados. Aliases legados continuam existindo apenas como compatibilidade interna e apontam para os novos tokens; não são inputs de configuração.
+
+### Auditoria de hardcodes
+
+No baseline havia **342 ocorrências de HEX** espalhadas pelo CSS de runtime. Após o refactor restaram **15 ocorrências intencionais**:
+
+- 3 inputs de marca + 7 neutros estáveis, todos centralizados em `lumen-theme.css`;
+- 5 cores externas no Footer: Instagram (`#ff7a00`, `#ff0069`, `#d300c5`), Facebook (`#1877f2`) e WhatsApp (`#25d366`).
+
+Os demais módulos de componentes não mantêm HEX locais de identidade. O `theme-color` do navegador também passou a sincronizar com `--brand-primary` em runtime, sem fallback verde hardcoded no HTML.
+
+### Contraste
+
+O derivado `--primary-muted` foi calibrado para preservar a leitura do MASTER e atingir o alvo de contraste em texto normal:
+
+`color-mix(in srgb, var(--brand-primary) 25%, var(--neutral-gray) 75%)`.
+
+Na paleta oficial, o resultado fica aproximadamente em `#5f746c`, com contraste de ~4,51:1 contra o canvas claro oficial.
+
+### QA oficial
+
+Workflow: `LUMEN MASTER post-consolidation QA`.
+
+- run final: `37698475926` — **PASS**;
+- artifact: `11516726167`;
+- digest: `sha256:687209e6e6c89a328414470d7b58d91497bd114e7dbd2ee699829c118cdba041`;
+- Cloudflare Pages do commit auditado: **success**;
+- preview técnico do commit: `https://75ee9c39.destaque-local-lumen.pages.dev`;
+- viewports cobertos: 320×780, 390×844, 768×900, 1024×900 e 1440×1000.
+
+Um run intermediário falhou no timeout já conhecido do harness ao estabilizar o FAQ; o rerun passou sem patch visual. O run final acima passou diretamente após a calibração definitiva de contraste.
+
+### Smoke test de paleta radicalmente diferente
+
+Em branch isolada, a identidade foi temporariamente alterada **somente pelos três tokens-base** para:
+
+- primária: `#111111`;
+- secundária: `#ebae10`;
+- terciária: `#f7f2e8`.
+
+Resultado:
+
+- run final: `37698491176` — **PASS**;
+- head temporário: `f5a350722f10ac812f5994965826c4b524cc53e6`;
+- artifact: `11516292117`;
+- digest: `sha256:583889ecf3029f6ccc5ec2a2fde53f44dd0890ee759f63d34cdbc5b041086e11`;
+- não foram encontrados resíduos visuais evidentes da paleta verde/amarela original nos componentes;
+- layout, responsividade e interações permaneceram válidos.
+
+Após o teste, a branch temporária foi restaurada para o estado oficial do LUMEN; nenhuma paleta Emmanuel permanece no MASTER.
+
+### Resultado
+
+**PASS — refactor técnico sem redesign.** A identidade oficial do LUMEN permanece visualmente equivalente, e uma implementação de cliente pode partir da troca dos três tokens-base + revisão de contraste/QA. O Cliente 02 / Emmanuel pode retornar à adaptação usando essa nova camada cromática, em codebase própria.
