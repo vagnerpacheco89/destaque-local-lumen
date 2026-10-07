@@ -10,7 +10,7 @@
   align-items: center !important;
   min-height: 122px !important;
   padding: 12px !important;
-  background: linear-gradient(180deg, rgba(255, 254, 250, .98) 0%, rgba(255, 255, 255, .88) 100%) !important;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--neutral-surface) 98%, transparent) 0%, rgba(255, 255, 255, .88) 100%) !important;
 }
 
 .diagnostic-features article::before {
@@ -25,13 +25,13 @@
   margin: 0 !important;
   align-self: center !important;
   overflow: hidden !important;
-  border: 1px solid rgba(20, 83, 59, .10) !important;
+  border: 1px solid color-mix(in srgb, var(--primary-strong) 10%, transparent) !important;
   border-radius: 16px !important;
-  background-color: #e7ece7 !important;
+  background-color: var(--primary-line) !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
   background-size: cover !important;
-  box-shadow: 0 8px 18px rgba(18, 80, 57, .09) !important;
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--primary-strong) 9%, transparent) !important;
   color: transparent !important;
   font-size: 0 !important;
   line-height: 0 !important;
@@ -84,7 +84,7 @@
 .diagnostic-features article:nth-child(4) strong::before {
   content: "Chuveiro queimado";
   display: block;
-  color: #123e2f;
+  color: var(--primary-deeper);
   font-size: 16px;
   font-weight: 800;
   line-height: 1.22;
@@ -108,17 +108,17 @@
   background: linear-gradient(
     110deg,
     transparent 34%,
-    rgba(23, 107, 75, 0) 40%,
-    #176b4b 48%,
-    #176b4b 54%,
-    rgba(23, 107, 75, 0) 62%,
+    color-mix(in srgb, var(--brand-primary) 0%, transparent) 40%,
+    var(--brand-primary) 48%,
+    var(--brand-primary) 54%,
+    color-mix(in srgb, var(--brand-primary) 0%, transparent) 62%,
     transparent 68%
   );
   background-size: 300% 100%;
   background-position: 100% 0;
   -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
+    linear-gradient(var(--neutral-black) 0 0) content-box,
+    linear-gradient(var(--neutral-black) 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 }
@@ -136,7 +136,7 @@
 @media (prefers-reduced-motion: reduce) {
   .diagnostic-features article:hover::after {
     animation: none;
-    background: #176b4b;
+    background: var(--brand-primary);
     opacity: .9;
   }
 }
