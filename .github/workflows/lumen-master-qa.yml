@@ -2,10 +2,11 @@ name: LUMEN MASTER post-consolidation QA
 
 on:
   push:
-    branches: [main]
+    branches: [main, release/lumen-master-v1.0]
     paths:
       - 'index.html'
       - 'styles.css'
+      - 'lumen-theme.css'
       - 'lumen-*.css'
       - 'script.js'
       - 'robots.txt'
@@ -20,6 +21,8 @@ permissions:
 jobs:
   qa:
     runs-on: ubuntu-latest
+    env:
+      QA_BASE_URL: ${{ github.ref_name == 'release/lumen-master-v1.0' && 'https://lumen.destaquelocal.com.br/' || 'https://vagnerpacheco89.github.io/destaque-local-lumen/' }}
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
