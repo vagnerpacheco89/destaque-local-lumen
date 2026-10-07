@@ -18,12 +18,13 @@
   --neutral-border: #ddd;
 
   /* PRIMARY DERIVATIONS */
-  --primary-bright: color-mix(in srgb, var(--brand-primary) 96%, var(--neutral-white) 4%);
-  --primary-hover: color-mix(in srgb, var(--brand-primary) 82%, var(--neutral-black) 18%);
-  --primary-strong: color-mix(in srgb, var(--brand-primary) 77%, var(--neutral-black) 23%);
-  --primary-deep: color-mix(in srgb, var(--brand-primary) 70%, var(--neutral-black) 30%);
-  --primary-deeper: color-mix(in srgb, var(--brand-primary) 59%, var(--neutral-black) 41%);
-  --primary-darkest: color-mix(in srgb, var(--brand-primary) 52%, var(--neutral-black) 48%);
+  --primary-bright: hsl(from var(--brand-primary) h s calc(l * 1.09));
+  --primary-vivid: hsl(from var(--brand-primary) h s calc(l * 1.28));
+  --primary-hover: hsl(from var(--brand-primary) h calc(s * 1.08) calc(l * .80));
+  --primary-strong: hsl(from var(--brand-primary) h calc(s * 1.06) calc(l * .76));
+  --primary-deep: hsl(from var(--brand-primary) h calc(s * 1.04) calc(l * .66));
+  --primary-deeper: hsl(from var(--brand-primary) h s calc(l * .57));
+  --primary-darkest: hsl(from var(--brand-primary) h s calc(l * .52));
   --primary-soft: color-mix(in srgb, var(--brand-primary) 8%, var(--neutral-white) 92%);
   --primary-soft-2: color-mix(in srgb, var(--brand-primary) 12%, var(--neutral-white) 88%);
   --primary-soft-3: color-mix(in srgb, var(--brand-primary) 18%, var(--neutral-white) 82%);
@@ -33,8 +34,8 @@
   --primary-muted-strong: color-mix(in srgb, var(--brand-primary) 35%, var(--neutral-gray) 65%);
 
   /* SECONDARY DERIVATIONS */
-  --secondary-hover: color-mix(in hsl, var(--brand-secondary) 94%, var(--neutral-black) 6%);
-  --secondary-deep: color-mix(in hsl, var(--brand-secondary) 89%, var(--neutral-black) 11%);
+  --secondary-hover: hsl(from var(--brand-secondary) h s calc(l * .94));
+  --secondary-deep: hsl(from var(--brand-secondary) h calc(s * .91) calc(l * .887));
   --secondary-light: color-mix(in srgb, var(--brand-secondary) 88%, var(--neutral-white) 12%);
   --secondary-lighter: color-mix(in srgb, var(--brand-secondary) 76%, var(--neutral-white) 24%);
   --secondary-pale: color-mix(in srgb, var(--brand-secondary) 38%, var(--neutral-white) 62%);
