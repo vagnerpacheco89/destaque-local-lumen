@@ -1,7 +1,7 @@
 import { chromium } from 'playwright';
 import fs from 'node:fs';
 
-const baseUrl = 'https://vagnerpacheco89.github.io/destaque-local-lumen/';
+const baseUrl = process.env.QA_BASE_URL || 'https://vagnerpacheco89.github.io/destaque-local-lumen/';
 const outDir = 'qa-artifacts';
 fs.mkdirSync(outDir, { recursive: true });
 
