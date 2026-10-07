@@ -59,3 +59,20 @@ O processo comercial e de publicação não é duplicado neste README; a fonte c
 A finalização MASTER cobre o deploy real de 320px a 1440px, funcionalidade, assets, HTML/semântica, SEO técnico, modo demo e `prefers-reduced-motion`.
 
 Consulte `QA-MASTER-v1.0.md` para o registro da auditoria final, evidências e commit de release.
+
+
+## Sistema cromático para adaptação de cliente
+
+A identidade cromática do LUMEN é configurada em `lumen-theme.css`. Para uma implementação de cliente, o input de marca deve normalmente se limitar a três tokens:
+
+```css
+--brand-primary: #176b4b;
+--brand-secondary: #ffd23f;
+--brand-tertiary: #f7f3e8;
+```
+
+As variações de profundidade, hover, superfícies suaves, linhas e estados são derivadas desses valores. Os neutros do sistema permanecem estáveis e separados.
+
+**Regra de implementação:** trocar os três tokens, revisar contraste e executar QA responsivo. Não caçar HEX por seção e não editar os derivados manualmente salvo exceção técnica comprovada.
+
+Cores de marcas externas permanecem independentes da identidade do cliente, incluindo WhatsApp, Facebook e o gradiente oficial do Instagram.
