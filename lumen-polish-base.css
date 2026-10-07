@@ -3,19 +3,19 @@
 
 /* COLOR SYSTEM — fresher, clearer and more saturated without turning LUMEN into VOLT. */
 :root {
-  --bg: #f7f2e8;
-  --surface: #fffef9;
-  --soft: #eef4ef;
+  --bg: var(--tertiary-bg);
+  --surface: var(--neutral-surface);
+  --soft: var(--primary-soft);
   --soft-2: #e8f0ea;
-  --text: #103d2c;
-  --muted: #607169;
-  --line: #d7e0d9;
-  --green: #176b4b;
-  --green-deep: #0c4934;
-  --green-soft: #e2f0e7;
-  --yellow: #ffd23f;
-  --yellow-2: #ffc72b;
-  --shadow: 0 18px 42px rgba(18, 91, 64, .10);
+  --text: var(--primary-deeper);
+  --muted: var(--primary-muted);
+  --line: var(--primary-line);
+  --green: var(--brand-primary);
+  --green-deep: var(--primary-deep);
+  --green-soft: var(--primary-soft-2);
+  --yellow: var(--brand-secondary);
+  --yellow-2: var(--secondary-hover);
+  --shadow: 0 18px 42px color-mix(in srgb, var(--primary-hover) 10%, transparent);
 }
 
 body {
@@ -23,24 +23,24 @@ body {
 }
 
 .site-header {
-  background: rgba(249, 246, 237, .985);
+  background: color-mix(in srgb, var(--tertiary-lift) 98.5%, transparent);
   backdrop-filter: none;
-  border-bottom-color: rgba(23, 107, 75, .10);
+  border-bottom-color: color-mix(in srgb, var(--brand-primary) 10%, transparent);
 }
 
 .brand__mark {
   background: var(--green);
-  box-shadow: inset 0 0 0 4px rgba(255, 210, 63, .24);
+  box-shadow: inset 0 0 0 4px color-mix(in srgb, var(--brand-secondary) 24%, transparent);
 }
 
 .desktop-nav a {
-  color: #4c6259;
+  color: var(--primary-muted-strong);
 }
 
 .btn--yellow {
   background: var(--yellow);
-  color: #103d2c;
-  box-shadow: 0 11px 24px rgba(255, 196, 30, .22);
+  color: var(--primary-deeper);
+  box-shadow: 0 11px 24px color-mix(in srgb, var(--secondary-hover) 22%, transparent);
 }
 
 .btn--yellow:hover {
@@ -52,17 +52,17 @@ body {
 }
 
 .eyebrow--light {
-  color: #ffd94f;
+  color: var(--secondary-light);
 }
 
 .services-section,
 .quality-section,
 .about-wrap {
-  background: #fffdf8;
+  background: var(--neutral-surface-warm);
 }
 
 .process-section {
-  background: #edf3ee;
+  background: var(--primary-soft);
 }
 
 .nav {
@@ -75,11 +75,11 @@ body {
   justify-content: center;
   min-height: 27px;
   padding: 0 10px;
-  border: 1px solid rgba(12, 73, 52, .16);
+  border: 1px solid color-mix(in srgb, var(--primary-deep) 16%, transparent);
   border-radius: 8px;
   background: var(--yellow);
   color: var(--green-deep);
-  box-shadow: 0 6px 14px rgba(255, 199, 43, .13);
+  box-shadow: 0 6px 14px color-mix(in srgb, var(--secondary-hover) 13%, transparent);
   font-size: 8px;
   font-weight: 800;
   letter-spacing: .09em;
@@ -97,7 +97,7 @@ body {
   overflow: visible;
   border-radius: 28px;
   background: var(--green-deep);
-  box-shadow: 0 22px 54px rgba(12, 73, 52, .16);
+  box-shadow: 0 22px 54px color-mix(in srgb, var(--primary-deep) 16%, transparent);
 }
 
 /* Hero image: use the sharpest existing dedicated LUMEN asset, without CSS filters that soften it. */
@@ -126,8 +126,8 @@ body {
   pointer-events: none;
   border-radius: 28px 0 0 28px;
   background:
-    linear-gradient(132deg, transparent 0 24%, rgba(255, 210, 63, .78) 24.15% 24.32%, transparent 24.48%),
-    linear-gradient(132deg, rgba(2, 49, 35, .22) 0 34%, transparent 34.2%);
+    linear-gradient(132deg, transparent 0 24%, color-mix(in srgb, var(--brand-secondary) 78%, transparent) 24.15% 24.32%, transparent 24.48%),
+    linear-gradient(132deg, color-mix(in srgb, var(--primary-darkest) 22%, transparent) 0 34%, transparent 34.2%);
   opacity: .72;
 }
 
@@ -147,13 +147,13 @@ body {
   z-index: 1;
   background:
     linear-gradient(90deg,
-      rgba(3, 57, 41, .96) 0%,
-      rgba(4, 70, 50, .92) 22%,
-      rgba(5, 78, 55, .76) 43%,
-      rgba(6, 76, 54, .34) 60%,
-      rgba(6, 76, 54, .08) 72%,
-      rgba(6, 76, 54, 0) 82%),
-    linear-gradient(180deg, rgba(4, 39, 28, .06), rgba(4, 39, 28, .14));
+      color-mix(in srgb, var(--primary-darkest) 96%, transparent) 0%,
+      color-mix(in srgb, var(--primary-deep) 92%, transparent) 22%,
+      color-mix(in srgb, var(--primary-deep) 76%, transparent) 43%,
+      color-mix(in srgb, var(--primary-deep) 34%, transparent) 60%,
+      color-mix(in srgb, var(--primary-deep) 8%, transparent) 72%,
+      color-mix(in srgb, var(--primary-deep) 0%, transparent) 82%),
+    linear-gradient(180deg, color-mix(in srgb, var(--primary-darkest) 6%, transparent), color-mix(in srgb, var(--primary-darkest) 14%, transparent));
 }
 
 .hero-card__content {
@@ -175,7 +175,7 @@ body {
   flex: 0 0 42px;
   border-radius: 999px;
   background: var(--yellow);
-  box-shadow: 0 0 14px rgba(255, 210, 63, .24);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--brand-secondary) 24%, transparent);
 }
 
 .hero-card__content h1 {
@@ -189,7 +189,7 @@ body {
 }
 
 .hero-card__content h1::first-line {
-  color: #fff;
+  color: var(--neutral-white);
 }
 
 .hero-card__lead {
@@ -212,12 +212,12 @@ body {
 }
 
 .hero-card__actions .btn--yellow {
-  box-shadow: 0 12px 28px rgba(255, 199, 43, .30);
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--secondary-hover) 30%, transparent);
 }
 
 .hero-card__actions .btn--glass {
-  background: rgba(3, 53, 38, .70);
-  border-color: rgba(255, 210, 63, .78);
+  background: color-mix(in srgb, var(--primary-darkest) 70%, transparent);
+  border-color: color-mix(in srgb, var(--brand-secondary) 78%, transparent);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .04);
 }
 
@@ -236,11 +236,11 @@ body {
   min-height: 54px;
   max-width: none;
   padding: 6px 16px 6px 7px;
-  border: 1px solid rgba(255, 210, 63, .24);
+  border: 1px solid color-mix(in srgb, var(--brand-secondary) 24%, transparent);
   border-radius: 999px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, .10), rgba(255, 255, 255, .045)),
-    rgba(2, 48, 34, .36);
+    color-mix(in srgb, var(--primary-darkest) 36%, transparent);
   backdrop-filter: blur(8px);
   color: rgba(255, 255, 255, .94);
   box-shadow:
@@ -260,10 +260,10 @@ body {
   height: 38px;
   border: 0;
   border-radius: 50%;
-  background: linear-gradient(180deg, #ffda4f, var(--yellow));
-  color: #0d4b36;
+  background: linear-gradient(180deg, var(--secondary-light), var(--yellow));
+  color: var(--primary-deep);
   box-shadow:
-    0 5px 14px rgba(255, 199, 43, .22),
+    0 5px 14px color-mix(in srgb, var(--secondary-hover) 22%, transparent),
     inset 0 1px 0 rgba(255, 255, 255, .42);
   font-size: 13px;
   font-weight: 900;
@@ -285,7 +285,7 @@ body {
   border-radius: 16px;
   background: var(--yellow);
   color: var(--text);
-  box-shadow: 0 18px 42px rgba(14, 75, 53, .20), 0 8px 18px rgba(255, 199, 43, .12);
+  box-shadow: 0 18px 42px color-mix(in srgb, var(--primary-deep) 20%, transparent), 0 8px 18px color-mix(in srgb, var(--secondary-hover) 12%, transparent);
 }
 
 .hero-contact__kicker {
@@ -316,13 +316,13 @@ body {
   border: 0;
   border-radius: 14px;
   background: var(--surface);
-  box-shadow: 0 10px 30px rgba(18, 91, 64, .06);
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--primary-hover) 6%, transparent);
 }
 
 .trust-strip article {
   min-height: 94px;
   padding: 19px 21px;
-  border-right-color: rgba(23, 107, 75, .11);
+  border-right-color: color-mix(in srgb, var(--brand-primary) 11%, transparent);
   align-items: center;
 }
 
@@ -330,7 +330,7 @@ body {
   width: 30px;
   height: 30px;
   flex-basis: 30px;
-  border: 1px solid rgba(23, 107, 75, .15);
+  border: 1px solid color-mix(in srgb, var(--brand-primary) 15%, transparent);
   border-radius: 9px;
   background: var(--green-soft);
   color: var(--green);
@@ -436,11 +436,11 @@ body {
   .hero-card__shade {
     background:
       linear-gradient(180deg,
-        rgba(4, 64, 45, .86) 0%,
-        rgba(5, 72, 51, .64) 42%,
-        rgba(5, 72, 51, .26) 72%,
-        rgba(5, 72, 51, .10) 100%),
-      linear-gradient(90deg, rgba(4, 57, 41, .12), transparent 76%);
+        color-mix(in srgb, var(--primary-deep) 86%, transparent) 0%,
+        color-mix(in srgb, var(--primary-deep) 64%, transparent) 42%,
+        color-mix(in srgb, var(--primary-deep) 26%, transparent) 72%,
+        color-mix(in srgb, var(--primary-deep) 10%, transparent) 100%),
+      linear-gradient(90deg, color-mix(in srgb, var(--primary-darkest) 12%, transparent), transparent 76%);
   }
 
   .hero-card__content {
@@ -529,13 +529,13 @@ body {
   .hero-card__shade {
     background:
       linear-gradient(90deg,
-        rgba(3, 55, 39, .97) 0%,
-        rgba(4, 68, 48, .94) 20%,
-        rgba(5, 79, 56, .78) 42%,
-        rgba(5, 78, 55, .35) 59%,
-        rgba(5, 78, 55, .08) 71%,
-        rgba(5, 78, 55, 0) 82%),
-      linear-gradient(180deg, rgba(4, 38, 27, .04), rgba(4, 38, 27, .13));
+        color-mix(in srgb, var(--primary-darkest) 97%, transparent) 0%,
+        color-mix(in srgb, var(--primary-deep) 94%, transparent) 20%,
+        color-mix(in srgb, var(--primary-deep) 78%, transparent) 42%,
+        color-mix(in srgb, var(--primary-deep) 35%, transparent) 59%,
+        color-mix(in srgb, var(--primary-deep) 8%, transparent) 71%,
+        color-mix(in srgb, var(--primary-deep) 0%, transparent) 82%),
+      linear-gradient(180deg, color-mix(in srgb, var(--primary-darkest) 4%, transparent), color-mix(in srgb, var(--primary-darkest) 13%, transparent));
   }
 }
 
@@ -548,13 +548,13 @@ body {
   min-height: 158px;
   overflow: hidden;
   padding: 22px 22px 18px 82px;
-  border: 1px solid rgba(255, 210, 63, .58);
+  border: 1px solid color-mix(in srgb, var(--brand-secondary) 58%, transparent);
   border-radius: 22px;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, .985) 0%, rgba(255, 253, 245, .985) 60%, rgba(255, 246, 214, .985) 100%);
+    linear-gradient(135deg, rgba(255, 255, 255, .985) 0%, color-mix(in srgb, var(--neutral-surface-warm) 98.5%, transparent) 60%, color-mix(in srgb, var(--secondary-soft) 98.5%, transparent) 100%);
   color: var(--text);
   box-shadow:
-    0 22px 52px rgba(6, 49, 35, .22),
+    0 22px 52px color-mix(in srgb, var(--primary-darkest) 22%, transparent),
     0 8px 20px rgba(0, 0, 0, .08),
     inset 0 1px 0 rgba(255, 255, 255, .82);
 }
@@ -571,10 +571,10 @@ body {
   height: 46px;
   border: 3px solid rgba(255, 255, 255, .96);
   border-radius: 50%;
-  background: linear-gradient(180deg, #1c8a5d 0%, #106a49 100%);
-  color: #fff;
+  background: linear-gradient(180deg, var(--primary-vivid) 0%, var(--primary-strong) 100%);
+  color: var(--neutral-white);
   box-shadow:
-    0 9px 20px rgba(16, 106, 73, .24),
+    0 9px 20px color-mix(in srgb, var(--primary-strong) 24%, transparent),
     inset 0 1px 0 rgba(255, 255, 255, .22);
   font-size: 20px;
   font-weight: 900;
@@ -591,7 +591,7 @@ body {
   height: 210px;
   pointer-events: none;
   background:
-    linear-gradient(136deg, transparent 0 38%, rgba(255, 210, 63, .12) 38.2% 62%, transparent 62.2%);
+    linear-gradient(136deg, transparent 0 38%, color-mix(in srgb, var(--brand-secondary) 12%, transparent) 38.2% 62%, transparent 62.2%);
   transform: rotate(7deg);
 }
 
@@ -599,7 +599,7 @@ body {
   position: relative;
   z-index: 1;
   margin-bottom: 7px;
-  color: #176b4b;
+  color: var(--brand-primary);
   font-size: 8px;
   font-weight: 850;
   letter-spacing: .145em;
@@ -610,7 +610,7 @@ body {
   z-index: 1;
   max-width: 214px;
   margin-bottom: 14px;
-  color: #0d3528;
+  color: var(--primary-darkest);
   font-size: 18px;
   line-height: 1.22;
   letter-spacing: -.03em;
@@ -626,12 +626,12 @@ body {
   min-height: 42px;
   margin-left: -60px;
   padding: 0 16px;
-  border: 1px solid rgba(12, 73, 52, .10);
+  border: 1px solid color-mix(in srgb, var(--primary-deep) 10%, transparent);
   border-radius: 12px;
-  background: linear-gradient(180deg, #ffda4f 0%, var(--yellow) 100%);
-  color: #0d4935;
+  background: linear-gradient(180deg, var(--secondary-light) 0%, var(--yellow) 100%);
+  color: var(--primary-deep);
   box-shadow:
-    0 8px 20px rgba(255, 199, 43, .20),
+    0 8px 20px color-mix(in srgb, var(--secondary-hover) 20%, transparent),
     inset 0 1px 0 rgba(255, 255, 255, .44);
   font-size: 10.5px;
   font-weight: 900;
@@ -639,7 +639,7 @@ body {
 }
 
 .hero-contact .text-link:hover {
-  background: linear-gradient(180deg, #ffe06a 0%, #ffd23f 100%);
+  background: linear-gradient(180deg, var(--secondary-lighter) 0%, var(--brand-secondary) 100%);
   transform: translateY(-1px);
 }
 
