@@ -1,0 +1,63 @@
+/* LUMEN color system — client identity input.
+   Client adaptations should normally edit only the three --brand-* values below,
+   then run contrast/responsive QA. All other color tokens are derived or stable neutrals. */
+
+:root {
+  /* CLIENT IDENTITY — configuration input */
+  --brand-primary: #176b4b;
+  --brand-secondary: #ffd23f;
+  --brand-tertiary: #f7f3e8;
+
+  /* STABLE SYSTEM NEUTRALS */
+  --neutral-white: #fff;
+  --neutral-black: #000;
+  --neutral-surface: #fffef9;
+  --neutral-surface-warm: #fffdf8;
+  --neutral-surface-soft: #f7f8f5;
+  --neutral-gray: #777;
+  --neutral-border: #ddd;
+
+  /* PRIMARY DERIVATIONS */
+  --primary-bright: color-mix(in srgb, var(--brand-primary) 96%, var(--neutral-white) 4%);
+  --primary-hover: color-mix(in srgb, var(--brand-primary) 82%, var(--neutral-black) 18%);
+  --primary-strong: color-mix(in srgb, var(--brand-primary) 77%, var(--neutral-black) 23%);
+  --primary-deep: color-mix(in srgb, var(--brand-primary) 70%, var(--neutral-black) 30%);
+  --primary-deeper: color-mix(in srgb, var(--brand-primary) 59%, var(--neutral-black) 41%);
+  --primary-darkest: color-mix(in srgb, var(--brand-primary) 52%, var(--neutral-black) 48%);
+  --primary-soft: color-mix(in srgb, var(--brand-primary) 8%, var(--neutral-white) 92%);
+  --primary-soft-2: color-mix(in srgb, var(--brand-primary) 12%, var(--neutral-white) 88%);
+  --primary-soft-3: color-mix(in srgb, var(--brand-primary) 18%, var(--neutral-white) 82%);
+  --primary-line: color-mix(in srgb, var(--brand-primary) 14%, var(--neutral-white) 86%);
+  --primary-line-strong: color-mix(in srgb, var(--brand-primary) 30%, var(--neutral-white) 70%);
+  --primary-muted: color-mix(in srgb, var(--brand-primary) 18%, var(--neutral-gray) 82%);
+  --primary-muted-strong: color-mix(in srgb, var(--brand-primary) 35%, var(--neutral-gray) 65%);
+
+  /* SECONDARY DERIVATIONS */
+  --secondary-hover: color-mix(in hsl, var(--brand-secondary) 94%, var(--neutral-black) 6%);
+  --secondary-deep: color-mix(in hsl, var(--brand-secondary) 89%, var(--neutral-black) 11%);
+  --secondary-light: color-mix(in srgb, var(--brand-secondary) 88%, var(--neutral-white) 12%);
+  --secondary-lighter: color-mix(in srgb, var(--brand-secondary) 76%, var(--neutral-white) 24%);
+  --secondary-pale: color-mix(in srgb, var(--brand-secondary) 38%, var(--neutral-white) 62%);
+  --secondary-soft: color-mix(in srgb, var(--brand-secondary) 18%, var(--neutral-white) 82%);
+
+  /* TERTIARY / CANVAS DERIVATIONS */
+  --tertiary-bg: var(--brand-tertiary);
+  --tertiary-lift: color-mix(in srgb, var(--brand-tertiary) 90%, var(--neutral-white) 10%);
+  --tertiary-soft: color-mix(in srgb, var(--brand-tertiary) 70%, var(--neutral-white) 30%);
+
+  /* SEMANTIC SYSTEM TOKENS */
+  --text: var(--primary-deeper);
+  --muted: var(--primary-muted);
+  --line: var(--primary-line);
+  --bg: var(--tertiary-bg);
+  --surface: var(--neutral-surface);
+  --soft: var(--primary-soft);
+  --soft-2: var(--primary-soft-2);
+
+  /* LEGACY ALIASES — not configuration inputs */
+  --green: var(--brand-primary);
+  --green-deep: var(--primary-deep);
+  --green-soft: var(--primary-soft-2);
+  --yellow: var(--brand-secondary);
+  --yellow-2: var(--secondary-light);
+}
