@@ -1,7 +1,7 @@
 .area-section {
   padding-top: 40px;
   padding-bottom: 74px;
-  background: #fffdf8;
+  background: var(--neutral-surface-warm);
 }
 
 .area-card {
@@ -14,9 +14,9 @@
   padding: clamp(46px, 5vw, 66px);
   padding-bottom: 38px;
   border-radius: 32px 32px 0 0;
-  background: #10442f;
-  color: #fff;
-  box-shadow: 0 12px 36px rgba(16, 68, 47, .08);
+  background: var(--primary-deep);
+  color: var(--neutral-white);
+  box-shadow: 0 12px 36px color-mix(in srgb, var(--primary-deep) 8%, transparent);
 }
 
 .area-card::before {
@@ -58,7 +58,7 @@
   font-size: clamp(34px, 3.45vw, 52px);
   line-height: 1.03;
   letter-spacing: -.045em;
-  color: #fff;
+  color: var(--neutral-white);
 }
 
 .area-card__intro > p:last-child {
@@ -96,8 +96,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #f5bf25;
-  box-shadow: 0 0 0 5px rgba(245, 191, 37, .10);
+  background: var(--secondary-deep);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--secondary-deep) 10%, transparent);
 }
 
 .area-cities article > span {
@@ -106,7 +106,7 @@
 
 .area-cities h3 {
   margin: 0 0 7px;
-  color: #fff;
+  color: var(--neutral-white);
   font-size: 18px;
   line-height: 1.2;
   letter-spacing: -.025em;
@@ -125,8 +125,8 @@
   margin-top: -1px;
   padding: 0 clamp(46px, 5vw, 66px) clamp(46px, 5vw, 66px);
   border-radius: 0 0 32px 32px;
-  background: #10442f;
-  box-shadow: 0 22px 54px rgba(16, 68, 47, .12);
+  background: var(--primary-deep);
+  box-shadow: 0 22px 54px color-mix(in srgb, var(--primary-deep) 12%, transparent);
 }
 
 .area-map-wrap::after {
@@ -137,7 +137,7 @@
   left: clamp(46px, 5vw, 66px);
   bottom: 0;
   border-radius: 8px 8px 0 0;
-  background: #f5bf25;
+  background: var(--secondary-deep);
   pointer-events: none;
 }
 
@@ -157,12 +157,12 @@
   font-weight: 800;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: #f5bf25;
+  color: var(--secondary-deep);
 }
 
 .area-map-head h3 {
   margin: 0;
-  color: #fff;
+  color: var(--neutral-white);
   font-size: clamp(20px, 2vw, 27px);
   line-height: 1.15;
   letter-spacing: -.03em;
@@ -183,7 +183,7 @@
   height: 330px;
   border: 1px solid rgba(255, 255, 255, .18);
   border-radius: 24px;
-  background: #edf1ed;
+  background: var(--primary-soft);
   box-shadow: 0 18px 42px rgba(0, 0, 0, .12);
 }
 
