@@ -97,16 +97,16 @@
 
 .footer-social:hover {
   transform: translateY(-2px) !important;
-  border-color: rgba(245, 191, 37, .34) !important;
+  border-color: color-mix(in srgb, var(--secondary-deep) 34%, transparent) !important;
   background: linear-gradient(180deg, rgba(255, 255, 255, .12) 0%, rgba(255, 255, 255, .06) 100%) !important;
-  color: #fff !important;
+  color: var(--neutral-white) !important;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, .14),
     0 14px 24px rgba(0, 0, 0, .14) !important;
 }
 
 .footer-social:focus-visible {
-  outline: 2px solid #ffd23f;
+  outline: 2px solid var(--brand-secondary);
   outline-offset: 4px;
 }
 
