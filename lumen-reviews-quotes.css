@@ -12,7 +12,7 @@
   display:inline;
   position:relative;
   top:2px;
-  color:rgba(243,190,34,.9);
+  color:color-mix(in srgb, var(--secondary-deep) 90%, transparent);
   font-family:Georgia,serif;
   font-size:22px;
   line-height:1;
