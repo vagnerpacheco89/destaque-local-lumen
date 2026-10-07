@@ -74,9 +74,9 @@
   flex: 0 0 42px !important;
   width: 42px !important;
   height: 42px !important;
-  border: 2px solid #f3cf56 !important;
+  border: 2px solid var(--secondary-light) !important;
   background: var(--green) !important;
-  color: #fff !important;
+  color: var(--neutral-white) !important;
   box-shadow: none !important;
 }
 
