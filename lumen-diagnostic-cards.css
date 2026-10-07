@@ -24,12 +24,12 @@
   min-height: 124px !important;
   padding: 19px 20px !important;
   overflow: hidden !important;
-  border: 1px solid rgba(20, 83, 59, .10) !important;
+  border: 1px solid color-mix(in srgb, var(--primary-strong) 10%, transparent) !important;
   border-radius: 22px !important;
   background:
-    radial-gradient(circle at 8% 0%, rgba(255, 210, 63, .10), transparent 34%),
-    linear-gradient(180deg, rgba(255, 254, 250, .98) 0%, rgba(255, 255, 255, .86) 100%) !important;
-  box-shadow: 0 10px 24px rgba(18, 80, 57, .05) !important;
+    radial-gradient(circle at 8% 0%, color-mix(in srgb, var(--brand-secondary) 10%, transparent), transparent 34%),
+    linear-gradient(180deg, color-mix(in srgb, var(--neutral-surface) 98%, transparent) 0%, rgba(255, 255, 255, .86) 100%) !important;
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--primary-strong) 5%, transparent) !important;
   transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease !important;
 }
 
@@ -42,14 +42,14 @@
   height: 2px !important;
   inset: auto auto 15px 20px !important;
   border-radius: 999px !important;
-  background: rgba(255, 199, 43, .72) !important;
+  background: color-mix(in srgb, var(--secondary-hover) 72%, transparent) !important;
   pointer-events: none !important;
 }
 
 .diagnostic-features article:hover {
   transform: translateY(-2px) !important;
-  border-color: rgba(255, 199, 43, .30) !important;
-  box-shadow: 0 15px 30px rgba(18, 80, 57, .08) !important;
+  border-color: color-mix(in srgb, var(--secondary-hover) 30%, transparent) !important;
+  box-shadow: 0 15px 30px color-mix(in srgb, var(--primary-strong) 8%, transparent) !important;
 }
 
 .diagnostic-features span {
@@ -70,7 +70,7 @@
   display: block !important;
   min-width: 0 !important;
   margin: 1px 0 0 !important;
-  color: #123e2f !important;
+  color: var(--primary-deeper) !important;
   font-size: 16px !important;
   font-weight: 800 !important;
   line-height: 1.2 !important;
@@ -87,7 +87,7 @@
   max-width: none !important;
   min-width: 0 !important;
   margin: 0 !important;
-  color: #708078 !important;
+  color: var(--primary-muted) !important;
   white-space: normal !important;
   word-break: normal !important;
   overflow-wrap: normal !important;
@@ -97,7 +97,7 @@
   display: block !important;
   width: 100% !important;
   max-width: none !important;
-  color: #708078 !important;
+  color: var(--primary-muted) !important;
   font-size: 13px !important;
   line-height: 1.5 !important;
   white-space: normal !important;
