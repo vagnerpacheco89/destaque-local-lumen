@@ -20,7 +20,7 @@
   overflow: hidden;
   color: var(--neutral-white);
   position: relative;
-  box-shadow: 0 24px 58px rgba(18, 66, 48, .10);
+  box-shadow: 0 24px 58px color-mix(in srgb, var(--primary-deep) 10%, transparent);
 }
 
 .about-panel::after {
