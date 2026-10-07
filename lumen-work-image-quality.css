@@ -33,9 +33,9 @@
 .work-carousel-card__shade {
   background: linear-gradient(
     180deg,
-    rgba(4,30,21,0) 18%,
-    rgba(4,30,21,.035) 45%,
-    rgba(4,30,21,.76) 100%
+    color-mix(in srgb, var(--primary-darkest) 0%, transparent) 18%,
+    color-mix(in srgb, var(--primary-darkest) 3.5%, transparent) 45%,
+    color-mix(in srgb, var(--primary-darkest) 76%, transparent) 100%
   ) !important;
 }
 
