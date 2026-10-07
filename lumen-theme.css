@@ -30,7 +30,7 @@
   --primary-soft-3: color-mix(in srgb, var(--brand-primary) 18%, var(--neutral-white) 82%);
   --primary-line: color-mix(in srgb, var(--brand-primary) 14%, var(--neutral-white) 86%);
   --primary-line-strong: color-mix(in srgb, var(--brand-primary) 30%, var(--neutral-white) 70%);
-  --primary-muted: color-mix(in srgb, var(--brand-primary) 24%, var(--neutral-gray) 76%);
+  --primary-muted: color-mix(in srgb, var(--brand-primary) 25%, var(--neutral-gray) 75%);
   --primary-muted-strong: color-mix(in srgb, var(--brand-primary) 35%, var(--neutral-gray) 65%);
 
   /* SECONDARY DERIVATIONS */
